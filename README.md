@@ -1,2 +1,2 @@
 # Self-web
-A webpage for recording oneself
+A webpage for recording myself
