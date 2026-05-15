@@ -71,7 +71,7 @@ function createTextTexture(text, font, size, color, fontWeight = "100") {
     const aspectCorrection = canvasWidth / canvasHeight;
 
     ctx.setTransform(
-        scakeFactor,
+        scaleFactor,
         0,
         0,
         scaleFactor * aspectCorrection,
