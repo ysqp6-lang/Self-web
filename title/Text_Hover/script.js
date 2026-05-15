@@ -71,7 +71,7 @@ function createTextTexture(text, font, size, color, fontWeight = "100") {
     const aspectCorrection = canvasWidth / canvasHeight;
 
     ctx.setTransform(
-        scakeFactor,
+        scaleFactor,
         0,
         0,
         scaleFactor * aspectCorrection,
@@ -132,7 +132,7 @@ function initializeScene(texture){
 function reloadTexture(){
     const newTexture = createTextTexture(
         "Kysoul",
-        "Arial",
+        "Blanquotey",
         null,
         "#ffffff",
         "100"
@@ -142,7 +142,7 @@ function reloadTexture(){
 }
 
 initializeScene(
-    createTextTexture("Kysoul", "Arial", null, "#ffffff", "100")
+    createTextTexture("Kysoul", "Blanquotey", null, "#ffffff", "100")
 );
 
 function animateScene(){
