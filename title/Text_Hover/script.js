@@ -67,7 +67,7 @@ function createTextTexture(text, font, size, color, fontWeight = "100") {
     const textMetrics = ctx.measureText(text);
     const textWidth = textMetrics.width;
 
-    const scaleFactor = Math.min(1, (canvasWidth * 0.3) / textWidth);
+    const scaleFactor = Math.min(1, (canvasWidth * 0.5) / textWidth);
     const aspectCorrection = canvasWidth / canvasHeight;
 
     ctx.setTransform(
