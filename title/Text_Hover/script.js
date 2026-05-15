@@ -67,14 +67,14 @@ function createTextTexture(text, font, size, color, fontWeight = "100") {
     const textMetrics = ctx.measureText(text);
     const textWidth = textMetrics.width;
 
-    const scaleFactor = Math.min(1, (canvasWidth * 1) / textWidth);
+    const scaleFactor = Math.min(1, (canvasWidth * 0.3) / textWidth);
     const aspectCorrection = canvasWidth / canvasHeight;
 
     ctx.setTransform(
         scaleFactor,
         0,
         0,
-        scaleFactor * aspectCorrection,
+        scaleFactor,
         canvasWidth / 2,
         canvasHeight / 2
     );
@@ -97,8 +97,8 @@ function initializeScene(texture){
     camera = new THREE.OrthographicCamera(
         -1,
         1,
-        1 / aspectRatio,
-        -1 / aspectRatio,
+        1,
+        -1,
         0.1,
         1000
     );
@@ -148,8 +148,8 @@ initializeScene(
 function animateScene(){
     requestAnimationFrame(animateScene);
 
-    targetMousePosition.x += (mousePosition.x - targetMousePosition.x) * easeFactor;
-    targetMousePosition.y += (mousePosition.y - targetMousePosition.y) * easeFactor;
+    mousePosition.x += (targetMousePosition.x - mousePosition.x) * easeFactor;
+    mousePosition.y += (targetMousePosition.y - mousePosition.y) * easeFactor;
 
     planeMesh.material.uniforms.u_mouse.value.set(
         mousePosition.x,
@@ -196,8 +196,8 @@ function onWindowResize(){
     const aspectRation = window.innerWidth / window.innerHeight;
     camera.left = -1;
     camera.right = 1;
-    camera.top = 1 / aspectRation;
-    camera.bottom = -1 / aspectRation;
+    camera.top = 1;
+    camera.bottom = -1;
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
