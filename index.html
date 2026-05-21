@@ -18,8 +18,59 @@
 
   </head>
   <body>
+
+    <!--<img src="/photo/background/fujim.png" alt="背景" class="bg-image">-->
+    <header class="site-header">
+    <a href="index.html" style="color:#000; text-decoration:none;">
+      <p class="logo-text">Kysoul</p>
+    </a>
+    
+    
+    </header>
     <div id="textContainer"></div>
+    
+  
+  <svg class="navigation-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999 !important;">
+    <defs>
+      <path id="curve-under-s" fill="none" stroke="red" stroke-width="2" /><!-- about -->
+      <path id="curve-under-o" fill="none" stroke="red" stroke-width="2" /><!-- resume -->
+      <path id="curve-under-y" fill="none" stroke="red" stroke-width="2" /><!-- contact -->
+      <path id="curve-under-u" fill="none" stroke="red" stroke-width="2" /><!-- work -->
+    </defs>
+
+    
+    <text id="nav-text-about" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-s" startOffset="50%" text-anchor="middle">
+          A B O U T
+      </textPath>
+    </text>
+    </a>
+
+    <text id="nav-text-resume" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-o" startOffset="50%" text-anchor="middle">
+          R E S U M E
+      </textPath>
+    </text>
+    </a>
+
+    <text id="nav-text-contact" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-y" startOffset="50%" text-anchor="middle">
+          C O N T A C T
+      </textPath>
+    </text>
+    </a>
+
+    <text id="nav-text-work" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-u" startOffset="50%" text-anchor="middle">
+          W O R K
+      </textPath>
+    </text>
+    </a>
+
+  </svg>
+
     <div style="position: relative; z-index: 10; padding: 20px;"></div>
+
     <!--
     <center><h1>欢迎来到祈溯的专属网站</h1></center>
     <center><p>qwq</p></center>
@@ -29,11 +80,10 @@
     <p>看来还是得倒角，角落太直了</p>  
     </div>
     -->
-    
-    
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
     <script src="title/Text_Hover/script.js"></script>
+    
     
     
   </body>
