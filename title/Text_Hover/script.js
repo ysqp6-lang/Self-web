@@ -63,6 +63,8 @@ Promise.all([
         );
         // B. 场景和 3D 画布都建好了，最后拧开车钥匙启动动画循环！
         animateScene();
+        // C. 通知 eclipse-loader:场景已真正就绪,可以日全食+淡出了
+        document.dispatchEvent(new CustomEvent("site-ready"));
     };
 
     // 🌟 4. 这里加上报错检测，如果路径不对，直接弹窗报错，免得你干等！
