@@ -1,5 +1,22 @@
-@import url("https://fonts.cdnfonts.com/css/blanquotey");
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/* Blanquotey 本地自托管(方案A):不再依赖 fonts.cdnfonts.com */
+@font-face {
+    font-family: "Blanquotey";
+    font-style: normal;
+    font-weight: 400;
+    src: url("fonts/Blanquotey.woff") format("woff");
+    font-display: block;
+}
+/* 脚本以字重 100 请求(如 ctx.font = "100 ...px Blanquotey"),
+   补一个指向同一文件的 100 别名脸,确保各浏览器匹配一致 */
+@font-face {
+    font-family: "Blanquotey";
+    font-style: normal;
+    font-weight: 100;
+    src: url("fonts/Blanquotey.woff") format("woff");
+    font-display: block;
+}
 
 html, body {
   margin: 0;
