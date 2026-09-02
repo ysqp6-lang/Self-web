@@ -2,7 +2,7 @@
    eclipse-loader.js · kysoul.me 全屏日食加载动画
    - 网站打开时全屏日食随真实资源加载进度推进
    - 三个关键资源：three.js / 网站字体 / 背景图
-   - 加载完成 = 恰好进入日全食，保留 1 秒后淡出进入网站
+   - 加载完成 = 恰好进入日全食，保留 1 秒后光圈炸开扩散，进入网站
    - 最短展示 2.5s + 超时兜底 120s（防止卡住）
    ============================================================ */
 (function () {
@@ -277,14 +277,64 @@
 
   let progress = 0;          // 当前进度（平滑）
   let p = 0;                 // 日食进度（目标 = progress×0.5）
-  let done = false, holdStart = 0, fading = false, startT = performance.now();
+  let done = false, holdStart = 0, burst = false, burstStart = 0, startT = performance.now();
   let lastT = performance.now();
+  const BURST_MS = 1150; // 光爆时长
 
-  function fadeOut() {
-    if (fading) return;
-    fading = true;
-    ov.style.opacity = "0";
-    setTimeout(() => { if (ov.parentNode) ov.parentNode.removeChild(ov); }, 1400);
+  /* 结束动画 v3:细亮白圈"炸开"(更震撼)
+     - 起爆瞬间中心闪光;细亮环(强光晕)以 easeOutQuart 飞速扩散
+     - 环内实时挖空漏出网页;暗空背景单独渐隐(保留渐隐,但不淡化光圈)
+     - 光圈一路扩到飞出屏幕外(完全看不见)才移除遮罩 */
+  function frameBurst(now) {
+    const t = Math.min(1, (now - burstStart) / BURST_MS);
+    // 暗空渐隐:只淡背景画布,光圈保持明亮
+    bgEl.style.opacity = String(1 - Math.pow(t, 1.5));
+    if (t >= 1) {
+      if (ov.parentNode) ov.parentNode.removeChild(ov);
+      return;
+    }
+
+    const corner = Math.hypot(W / 2, H / 2); // 屏幕最远角到中心的距离
+    const rStart = R * 2.8;                  // 从日冕光晕边缘起爆
+    const rEnd = corner * 1.12 + 40;         // 终点在屏幕外:光圈完全看不见
+    const e = 1 - Math.pow(1 - t, 4);        // easeOutQuart: 起爆更快更炸
+    const r = rStart + (rEnd - rStart) * e;
+
+    // 1) 环内挖空:网页从光圈中间直接漏出(只挖洞,不填白)
+    for (const [el, cx2] of [[bgEl, bgCtx], [cvEl, cv]]) {
+      cx2.save();
+      cx2.globalCompositeOperation = "destination-out";
+      cx2.fillStyle = "#000";
+      cx2.beginPath(); cx2.arc(CX, CY, r, 0, 7); cx2.fill();
+      cx2.restore();
+    }
+
+    // 2) 起爆闪光:前 22% 时间中心闪亮一下(短促,不是白坨)
+    if (t < 0.22) {
+      const fa = (1 - t / 0.22) * 0.85;
+      const fr = r * 0.55;
+      const fg = cv.createRadialGradient(CX, CY, 0, CX, CY, fr);
+      fg.addColorStop(0, `rgba(255,255,255,${fa})`);
+      fg.addColorStop(0.6, `rgba(255,250,236,${fa * 0.5})`);
+      fg.addColorStop(1, "rgba(255,248,230,0)");
+      cv.fillStyle = fg;
+      cv.beginPath(); cv.arc(CX, CY, fr, 0, 7); cv.fill();
+    }
+
+    // 3) 细白色光圈:淡柔光底 + 强发光细环(无内部填充)
+    cv.save();
+    cv.lineCap = "round";
+    cv.strokeStyle = "rgba(255,246,220,0.18)";
+    cv.lineWidth = Math.max(2, r * 0.018);
+    cv.beginPath(); cv.arc(CX, CY, r, 0, 7); cv.stroke();
+    cv.shadowColor = "rgba(255,253,244,0.95)";
+    cv.shadowBlur = Math.max(12, r * 0.04);
+    cv.strokeStyle = "rgba(255,255,255,0.98)";
+    cv.lineWidth = Math.max(1.5, r * 0.004);
+    cv.beginPath(); cv.arc(CX, CY, r, 0, 7); cv.stroke();
+    cv.restore();
+
+    requestAnimationFrame(frameBurst);
   }
 
   function frame(now) {
@@ -303,13 +353,18 @@
     p += (pTarget - p) * Math.min(1, dt * 2.5);
     if (Math.abs(pTarget - p) < 0.0002) p = pTarget;
 
-    // 完成判定：资源全好、场景已就绪且进度到位 → 全食保留 1 秒后淡出
+    // 完成判定：资源全好、场景已就绪且进度到位 → 全食保留 1 秒后光爆扩散
     if (!done && resP >= 0.999 && progress >= 0.995 && siteReady) {
       done = true;
       holdStart = now;
     }
-    if (done && !fading && now - holdStart > 1000) fadeOut();
-    if (fading) { requestAnimationFrame(frame); return; }
+    if (done && !burst && now - holdStart > 1000) {
+      burst = true;
+      burstStart = now;
+      ov.style.backgroundColor = "transparent"; // 环内挖空后露出的是网页而非白底
+      requestAnimationFrame(frameBurst);
+      return;
+    }
 
     const x = moonOffsetX(p);
     const info = phaseInfo(x, p);
