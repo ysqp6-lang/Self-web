@@ -414,6 +414,10 @@ function handleMouseLeave(){
 window.addEventListener("resize", onWindowResize, false);
 
 function onWindowResize(){
+    // 场景未初始化(背景图还没加载完)时,camera/renderer 还是 undefined,
+    // 直接跳过,避免 "Cannot set properties of undefined (setting 'left')"
+    if (!camera || !renderer) return;
+
     const aspectRation = window.innerWidth / window.innerHeight;
     camera.left = -1;
     camera.right = 1;
