@@ -15,8 +15,8 @@
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
     
     <!-- 预加载自托管字体(方案A),保证画布文字用真实 Blanquotey -->
-    <link rel="preload" href="title/Text_Hover/fonts/Blanquotey.woff" as="font" type="font/woff" crossorigin />
-    <link rel="stylesheet" href="title/Text_Hover/styles.css" />
+    <link rel="preload" href="fonts/Blanquotey.woff" as="font" type="font/woff" crossorigin />
+    <link rel="stylesheet" href="css/styles.css" />
 
   </head>
   <body>
@@ -84,9 +84,14 @@
     -->
 
     <!-- 全屏日食加载动画(必须先于 three.js 加载,覆盖其下载窗口) -->
-    <script src="eclipse-loader.js"></script>
+    <script src="js/eclipse-loader.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
-    <script src="title/Text_Hover/script.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/shaders.js"></script>
+    <script src="js/texture.js"></script>
+    <script src="js/svg-nav.js"></script>
+    <script src="js/scene.js"></script>
+    <script src="js/main.js"></script>
     
     
     
