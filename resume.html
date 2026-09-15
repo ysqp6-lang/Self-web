@@ -2,8 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume | Kysoul</title>
-    <link rel="stylesheet" href="css/styles.css" /> 
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/pages.css" />
 
     <!-- 基础图标 -->
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
@@ -13,21 +15,110 @@
     <!-- 苹果设备高清图标 -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
-    
-    </head>
+</head>
 <body>
     <header class="site-header">
-        <p class="logo-text"><a href="index.html" style="color:#000; text-decoration:none;">Kysoul</a></p>
+        <a href="index.html" style="color:#000; text-decoration:none;">
+            <p class="logo-text">Kysoul</p>
+        </a>
     </header>
-    
-    <main style="padding: 100px 5vw; max-width: 800px; margin: 0 auto;">
-        <h1>关于我</h1>
-        <div class="shadow-image"> 
-            <img src="./photo/resume/ytf-resume-1.png" alt="简历" style="width: 100%; height: auto; margin-top: 20px; z-index: 2;">
-            <div class="rect-blur"></div>
+
+    <!-- ============================================================
+         RESUME —— 独占轴:我经历过什么(可验证的硬信息)
+         改内容直接编辑本文件即可;排版会自动跟着走。
+         不要在这里写感想/兴趣(那是 ABOUT 的活),也不要展开项目细节(那是 WORK 的活)。
+         ============================================================ -->
+    <main class="page">
+        <div class="page-head">
+            <h1>Resume</h1>
+            <p class="sub">经历与技能</p>
+            <p class="meta">
+                最后更新 2026.09 ·
+                <a href="mailto:1613609692@qq.com">1613609692@qq.com</a> ·
+                <a href="https://github.com/ysqp6-lang" target="_blank" rel="noopener">GitHub</a> ·
+                <a href="./photo/resume/ytf-resume-1.png" target="_blank" rel="noopener">简历图片版</a> ·
+                <a href="javascript:window.print()">打印 / 导出 PDF</a>
+            </p>
         </div>
-        
-        
+
+        <div class="section">
+            <h2>教育经历 / Education</h2>
+            <div class="entry">
+                <div class="entry-head">
+                    <span class="entry-title">重庆邮电大学 · 国际学院 · 软件工程</span>
+                    <span class="entry-when">本科在读</span>
+                </div>
+                <p class="entry-sub">核心课程:面向对象程序设计(C++ / Java)</p>
+                <!-- 若愿意公开成绩,可取消下一行注释:
+                <p class="entry-sub">GPA 2.63 · 专业排名 62</p>
+                -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>项目经历 / Projects</h2>
+            <div class="entry">
+                <div class="entry-head">
+                    <span class="entry-title">基于 WebGL / Three.js 的响应式个人作品集系统</span>
+                    <span class="entry-when">2025 – 至今</span>
+                </div>
+                <p class="entry-sub">独立设计与开发 · kysoul.me</p>
+                <ul>
+                    <li>手写 GLSL 片元着色器,实现像素化与涡流扭曲效果:由鼠标位移量、速度差与缓动因子(easeFactor)驱动,画面随指针实时流动</li>
+                    <li>自研全屏加载动画:把日食进度映射到真实资源加载进度,加载完成即日全食,结束时光圈炸开进场</li>
+                    <li>字体自托管与加载策略:脱离第三方字体 CDN,绘制文字纹理前显式等待字体就绪,保证首屏文字不回落为系统字体</li>
+                    <li>工程整理:目录分层(js / css / fonts)、拆分模块、压缩背景资源</li>
+                </ul>
+                <p class="keywords"><span>JavaScript</span><span>Three.js</span><span>WebGL</span><span>GLSL</span><span>CSS3 3D Transform</span></p>
+            </div>
+
+            <div class="entry">
+                <div class="entry-head">
+                    <span class="entry-title">独立游戏开发尝试 · Godot 引擎</span>
+                    <span class="entry-when">2026 – 至今</span>
+                </div>
+                <p class="entry-sub">自学 · 个人项目(起步阶段)</p>
+                <ul>
+                    <li>从零接触 Godot:学习节点 / 场景的组织方式与 GDScript 脚本,理解引擎如何驱动游戏循环</li>
+                    <li>目标:先独立完成一个可玩的小型游戏原型,把做网页动效时积累的交互与节奏感迁移到游戏里</li>
+                </ul>
+                <p class="keywords"><span>Godot</span><span>GDScript</span><span>游戏循环</span><span>交互设计</span></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>技能 / Skills</h2>
+            <div class="entry">
+                <ul>
+                    <li><b>前端</b>:HTML 基础扎实;正在系统学习 CSS 与 JavaScript;能用 Three.js / GLSL 完成三维场景与着色器效果</li>
+                    <li><b>游戏引擎</b>:正在学习 Godot 与 GDScript,能搭建基础场景 / 节点结构,独立往小型游戏原型推进</li>
+                    <li><b>设计</b>:Photoshop 较熟练;具备版式设计能力与色彩敏感度</li>
+                    <li><b>工作方式</b>:善用 AI 工具提升创作与排错效率,习惯边做项目边补基础</li>
+                </ul>
+                <p class="keywords"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Three.js</span><span>GLSL</span><span>Godot</span><span>Photoshop</span></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>其他 / Other</h2>
+            <div class="entry">
+                <ul>
+                    <li>语言:中文(母语)· 英语(可读写技术文档)</li>
+                    <li>古琴:九级</li>
+                    <li>兴趣:摄影、骑行</li>
+                </ul>
+            </div>
+        </div>
+
     </main>
+
+    <footer class="page-footer">
+        <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+    </footer>
 </body>
 </html>

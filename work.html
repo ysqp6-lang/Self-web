@@ -2,8 +2,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work | Kysoul</title>
-    <link rel="stylesheet" href="css/styles.css" /> 
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/pages.css" />
 
     <!-- 基础图标 -->
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
@@ -13,15 +15,52 @@
     <!-- 苹果设备高清图标 -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
-    </head>
+</head>
 <body>
     <header class="site-header">
-        <p class="logo-text"><a href="index.html" style="color:#000; text-decoration:none;">Kysoul</a></p>
+        <a href="index.html" style="color:#000; text-decoration:none;">
+            <p class="logo-text">Kysoul</p>
+        </a>
     </header>
-    
-    <main style="padding: 100px 5vw; max-width: 800px; margin: 0 auto;">
-        <h1>作品展示</h1>
-        <p></p>
+
+    <!-- ============================================================
+         WORK —— 独占轴:我做出了什么(成果与过程)
+         每张卡片固定六项:是什么 / 我的角色 / 时间 / 技术 / 成果 / 复盘
+         与 RESUME 的关系:同一项目在 RESUME 里只占一行,在这里展开成一整块
+         ============================================================ -->
+    <main class="page">
+        <div class="page-head">
+            <h1>Work</h1>
+            <p class="sub">做出来的东西,以及怎么做出来的</p>
+        </div>
+
+        <div class="card">
+            <h3>kysoul.me · 个人网站系统</h3>
+            <p class="card-sub">从零手写的个人站点:三维场景 + 着色器动效 + 全屏加载动画,没有使用任何框架或模板。</p>
+            <div class="card-meta">
+                <span>独立设计 &amp; 开发</span>
+                <span>2025 – 至今(持续迭代)</span>
+                <span>进行中</span>
+            </div>
+            <ul>
+                <li><b>涡流像素化着色器</b>:自定义 GLSL 片元着色器,基于鼠标位移量、速度差与缓动因子(easeFactor)驱动画面扭曲,指针移动时背景如流体般跟随</li>
+                <li><b>全屏日食加载动画</b>:把加载进度映射为日食进程——资源就绪的那一刻正好是日全食,停留 1 秒后白色光圈炸开扩散,穿过光圈直接看到网站</li>
+                <li><b>字体与首屏策略</b>:Blanquotey 自托管 + 预加载 + 绘制纹理前显式等待字体就绪,避免首屏文字回落成系统字体</li>
+                <li><b>工程整理</b>:JS 按职责拆分为 config / shaders / texture / svg-nav / scene / main,目录分层为 js / css / fonts</li>
+            </ul>
+            <p class="keywords"><span>Three.js</span><span>WebGL</span><span>GLSL</span><span>原生 JavaScript</span><span>CSS</span></p>
+            <a class="card-link" href="index.html">打开网站 →</a>
+        </div>
+
     </main>
+
+    <footer class="page-footer">
+        <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+    </footer>
 </body>
 </html>

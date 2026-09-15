@@ -2,9 +2,11 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Kysoul</title>
-    <link rel="stylesheet" href="css/styles.css" /> 
-    
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+
     <!-- 基础图标 -->
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
@@ -13,19 +15,89 @@
     <!-- 苹果设备高清图标 -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
-
 </head>
-
-    
-    
 <body>
     <header class="site-header">
-        <p class="logo-text"><a href="index.html" style="color:#000; text-decoration:none;">Kysoul</a></p>
+        <a href="index.html" style="color:#000; text-decoration:none;">
+            <p class="logo-text">Kysoul</p>
+        </a>
     </header>
-    
-    <main style="padding: 100px 5vw; max-width: 800px; margin: 0 auto;">
-        <h1>关于创作</h1>
-        <p></p>
+
+    <!-- ============================================================
+         ABOUT —— 独占轴:我是谁(身份与观点)
+         这一页不谈经历时间线(那是 RESUME 的活),不谈项目细节(那是 WORK 的活)
+         ============================================================ -->
+    <main class="page">
+        <div class="page-head">
+            <h1>About</h1>
+            <p class="sub">我是谁,以及我在做什么</p>
+        </div>
+
+        <p class="lead">
+            我是杨添富,重庆邮电大学国际学院软件工程专业在读学生。
+            我想尝试让网页脱离常规形式,尽可能创新。
+        </p>
+
+        <div class="section">
+            <h2>现在 / Now</h2>
+            <p>
+                正在系统补 CSS 与 JavaScript。我的学习方式比较直接:一边学一边把它用在
+                <a href="index.html">kysoul.me</a> 上——手写 Three.js 场景、写 GLSL 着色器、给加载过程做动画。
+                这个站不是作品展示的装饰,它本身就是我的练习场。最近又开始学 Godot,
+                想自己独立做出一个小游戏。
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>关注 / Focus</h2>
+            <p>
+                前端前沿视觉与 <b>WebGL / Three.js 三维交互</b>;着色器(GLSL)驱动的实时动效;
+                以及一个常被忽略的地方——<b>等待的体验</b>。网站加载要花时间,那这段时间就不该是白屏,
+                所以我做的第一件事是把加载过程变成一场日食。（因为我觉得这真的很帅！）
+            </p>
+            <p class="keywords"><span>WebGL</span><span>Three.js</span><span>GLSL 着色器</span><span>交互体验</span><span>版式与色彩</span></p>
+        </div>
+
+        <div class="section">
+            <h2>兴趣 / Interests</h2>
+            <p>
+                摄影和骑行是我看世界的方式。封面富士山是我亲手拍的哦～
+                此外古琴已过九级——练琴教会我的事情很直接:再复杂的段落,也是一句一句磨出来的。
+                这件事和我写代码的方式其实是一回事。
+            </p>
+            <p class="keywords"><span>摄影</span><span>骑行</span><span>古琴(九级)</span></p>
+        </div>
+
+        <div class="section">
+            <h2>这个网站 / This Site</h2>
+            <p>
+                从零搭建,没有用任何框架和模板。目前做到的部分:
+            </p>
+            <ul style="font-size:14px;line-height:1.95;color:#3a3a41;padding-left:18px;margin:0 0 18px;">
+                <li>全屏日食加载动画:与真实资源加载进度联动,加载完成的那一刻正好是日全食,结束时白色光圈炸开进场</li>
+                <li>鼠标驱动的涡流像素化着色器:读取位移量、速度差与缓动因子,让背景随鼠标实时扭曲</li>
+                <li>字体自托管与加载策略:不依赖第三方字体 CDN,并在绘制文字纹理前显式等待字体就绪,这样能避免其他人第一次打开时文字不是我的理想字体</li>
+                <li>目录分层(js / css / fonts)与资源体积优化</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>聊一聊 / Say Hi</h2>
+            <p>
+                对前端视觉、WebGL 或这个网站有任何想法,欢迎直接发邮件 ——
+                <a href="contact.html">去 CONTACT 页 →</a>
+            </p>
+        </div>
+
     </main>
+
+    <footer class="page-footer">
+        <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+    </footer>
 </body>
 </html>
