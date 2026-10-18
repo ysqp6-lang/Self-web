@@ -4,5 +4,7 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 Disallow: /resume-print.html
+# 2025 版首页存档（仅作展示，不与现行内容竞争索引）
+Disallow: /legacy/
 
 Sitemap: https://kysoul.me/sitemap.xml

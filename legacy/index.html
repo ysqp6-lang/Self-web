@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thy | Personal Portfolio</title>
+
+    <!-- 基础图标 -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <!-- 兼容性图标 -->
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico">
+    <!-- 苹果设备高清图标 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="./assets/favicon/site.webmanifest">
+    
+    <!-- 预加载自托管字体(方案A),保证画布文字用真实 Blanquotey -->
+    <link rel="preload" href="fonts/Blanquotey.woff" as="font" type="font/woff" crossorigin />
+    <link rel="stylesheet" href="css/styles.css" />
+
+  
+    <style>
+        /* 旧版存档页专用：一个不打扰旧封面的返回入口 */
+        .legacy-back {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 60000;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 0 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .22);
+            background: rgba(16, 16, 18, .72);
+            color: #fbfaf7;
+            font: 500 14px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", system-ui, sans-serif;
+            text-decoration: none;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+        }
+        .legacy-back:hover { background: rgba(16, 16, 18, .92); border-color: rgba(255, 255, 255, .5); }
+        .legacy-back:focus-visible { outline: 2px solid #f0a97c; outline-offset: 3px; }
+        @media print { .legacy-back { display: none; } }
+    </style>
+</head>
+  <body>
+
+    <!--<img src="/photo/background/fujim.png" alt="背景" class="bg-image">-->
+    <header class="site-header">
+    <a href="index.html" style="color:#000; text-decoration:none;">
+      <p class="logo-text">Kysoul</p>
+    </a>
+    
+    
+    </header>
+    <div id="textContainer"></div>
+    
+  
+  <svg class="navigation-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999 !important;">
+    <defs>
+      <path id="curve-under-s" fill="none" stroke="red" stroke-width="2" /><!-- about -->
+      <path id="curve-under-o" fill="none" stroke="red" stroke-width="2" /><!-- resume -->
+      <path id="curve-under-y" fill="none" stroke="red" stroke-width="2" /><!-- contact -->
+      <path id="curve-under-u" fill="none" stroke="red" stroke-width="2" /><!-- work -->
+    </defs>
+
+    
+    <text id="nav-text-about" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-s" startOffset="50%" text-anchor="middle">
+          A B O U T
+      </textPath>
+    </text>
+    </a>
+
+    <text id="nav-text-resume" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-o" startOffset="50%" text-anchor="middle">
+          R E S U M E
+      </textPath>
+    </text>
+    </a>
+
+    <text id="nav-text-contact" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-y" startOffset="50%" text-anchor="middle">
+          C O N T A C T
+      </textPath>
+    </text>
+    </a>
+
+    <text id="nav-text-work" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
+      <textPath href="#curve-under-u" startOffset="50%" text-anchor="middle">
+          W O R K
+      </textPath>
+    </text>
+    </a>
+
+  </svg>
+
+    <div style="position: relative; z-index: 10; padding: 20px;"></div>
+
+    <!--
+    <center><h1>欢迎来到祈溯的专属网站</h1></center>
+    <center><p>qwq</p></center>
+    <p>找网页logo找了半天，然后处理成了正方形，emmmmmm</p>
+    <p>但是感觉有点糊糊的</p>
+    <p>这玩意真好玩吧，还好之前学过html，上手挺快的</p><img src="/assets/memes/deyi.jpg" alt="表情包" style="max-width: 40px; border-radius: 8px;">
+    <p>看来还是得倒角，角落太直了</p>  
+    </div>
+    -->
+
+    <!-- 全屏日食加载动画(必须先于 three.js 加载,覆盖其下载窗口) -->
+    <script src="js/eclipse-loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/shaders.js"></script>
+    <script src="js/texture.js"></script>
+    <script src="js/svg-nav.js"></script>
+    <script src="js/scene.js"></script>
+    <script src="js/main.js"></script>
+    
+    
+    
+      <a class="legacy-back" href="../index.html">← 返回新版</a>
+</body>
+</html>

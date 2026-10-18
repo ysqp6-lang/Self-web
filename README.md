@@ -32,6 +32,7 @@ python3 -m http.server 4173 --bind 127.0.0.1
 | `/work/eclipse.html` | 两个原创特效的可选交互演示（日食加载动画、涡流着色器） |
 | `/contact.html` | 联系方式与联系用途 |
 | `/404.html` | 自定义 404 |
+| `/legacy/index.html` | **2025 版封面存档**：旧版的完整实现（日食加载、涡流着色器、曲线 SVG 导航），点进去才加载 |
 
 旧地址 `/about.html`、`/resume.html`、`/work.html`、`/contact.html` 保持原样可访问。
 
@@ -45,6 +46,7 @@ assets/photos/  响应式派生图（AVIF/WebP/JPEG，960/1600/2400 三档）+ O
 assets/resume/  简历图片派生图（900/1200/1400 三档）
 assets/favicon/ 图标与 site.webmanifest
 tools/          build-images.py：从站外原图生成上面的派生图
+legacy/         旧版封面存档（基线 5cee5de 原样导出；只把两张原图换成派生图，加 noindex 与返回入口）
 ```
 
 ## 图片派生
@@ -64,6 +66,9 @@ python3 tools/build-images.py --report            # 只打印尺寸清单，不�
 
 ## 设计原则（给未来的自己）
 
+- **封面是封面，内页是内页**：首页顶端纯黑渐隐到纸白（`--cover-gradient`，线性光插值 + smoothstep），
+  站头在首页常驻深色，与封面顶端同色，接缝不可见。
+- **旧版不删除**：旧站原样存进 `legacy/`，首页完全不引用它；想看旧版只有两个入口（页脚与特效页）。
 - **内容先行**：品牌、介绍、导航必须直接存在于 HTML，不依赖脚本或 WebGL 才可见。
 - **特效可选**：日食与涡流只在 `/work/eclipse.html` 里由点击触发，不进首屏、不阻塞阅读。
 - **图片按需**：所有照片走 `<picture>` + `srcset` + 明确的 `width/height`，非首屏一律 `loading="lazy"`。

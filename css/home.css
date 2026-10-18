@@ -5,7 +5,23 @@
    ============================================================ */
 
 .home-hero {
-    padding-block: clamp(var(--space-7), 10vh, var(--space-9)) var(--space-6);
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    min-height: clamp(32rem, 84vh, 50rem);
+    padding-block: clamp(var(--space-7), 10vh, var(--space-8)) clamp(var(--space-9), 24vh, var(--space-10));
+    color: var(--cover-ink);
+    background-color: var(--bg);
+    /* 两层：极淡的冷光（呼应日食的夜空），加最上面那条黑到纸白的渐变 */
+    background-image:
+        radial-gradient(38rem 18rem at 18% 4%, rgba(150, 175, 255, .07), transparent 68%),
+        var(--cover-gradient);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.home-hero-inner {
+    width: 100%;
 }
 
 .home-hero .display {
@@ -15,6 +31,7 @@
     line-height: .92;
     letter-spacing: -.01em;
     margin: 0;
+    color: var(--cover-ink);
     text-wrap: balance;
 }
 
@@ -23,7 +40,7 @@
     max-width: 38ch;
     font-size: var(--text-lg);
     line-height: 1.6;
-    color: var(--ink-2);
+    color: var(--cover-ink-2);
     text-wrap: pretty;
 }
 
@@ -33,7 +50,7 @@
     flex-wrap: wrap;
     gap: var(--space-2) var(--space-5);
     font-size: var(--text-sm);
-    color: var(--ink-muted);
+    color: var(--cover-ink-muted);
 }
 
 .home-hero .where li {
@@ -49,18 +66,77 @@
     gap: var(--space-3);
 }
 
+/* 封面上的次级按钮：深底必须反转成浅边框 + 浅字 */
+.home-hero .btn--ghost {
+    color: var(--cover-ink);
+    border-color: rgba(251, 250, 247, .34);
+    background: rgba(251, 250, 247, .04);
+}
+
+.home-hero .btn--ghost:hover {
+    background: rgba(251, 250, 247, .12);
+    border-color: rgba(251, 250, 247, .70);
+    color: #fff;
+}
+
 /* 一次编排好的入场：只作用于首屏文字，且从"几乎可见"的状态开始 */
 @media (prefers-reduced-motion: no-preference) {
-    .home-hero > * {
+    .home-hero-inner > * {
         animation: hero-rise 720ms var(--ease-out) both;
     }
-    .home-hero > :nth-child(2) { animation-delay: 60ms; }
-    .home-hero > :nth-child(3) { animation-delay: 110ms; }
-    .home-hero > :nth-child(4) { animation-delay: 160ms; }
+    .home-hero-inner > :nth-child(2) { animation-delay: 60ms; }
+    .home-hero-inner > :nth-child(3) { animation-delay: 110ms; }
+    .home-hero-inner > :nth-child(4) { animation-delay: 160ms; }
 
     @keyframes hero-rise {
         from { opacity: .001; transform: translateY(14px); }
         to   { opacity: 1; transform: none; }
+    }
+}
+
+@media (max-width: 34rem) {
+    /* 窄屏上文字占封面的比例更大：把黑色区拉长到 62%，保证按钮仍在深色上 */
+    .home-hero {
+        --cover-gradient: linear-gradient(180deg,
+            #050506 0%,
+            #050506 10%,
+            #050506 20%,
+            #050506 30%,
+            #050506 40%,
+            #050506 50%,
+            #050506 55%,
+            #050506 60%,
+            #252525 65%,
+            #5e5d5c 70%,
+            #8c8b8a 75%,
+            #b2b1af 80%,
+            #d0cfcd 85%,
+            #e7e6e3 90%,
+            #f6f5f2 95%,
+            var(--bg) 100%
+        );
+        min-height: clamp(28rem, 80vh, 42rem);
+        padding-block: var(--space-6) clamp(var(--space-8), 20vh, var(--space-9));
+    }
+    .home-hero .lede { max-width: none; }
+}
+
+@media (max-width: 34rem) and (prefers-color-scheme: dark) {
+    .home-hero {
+        --cover-gradient: linear-gradient(180deg,
+            #050506 0%,
+            #050506 20%,
+            #050506 40%,
+            #050506 60%,
+            #050506 65%,
+            #070707 70%,
+            #090909 75%,
+            #0b0b0b 80%,
+            #0d0d0d 85%,
+            #0f0f0f 90%,
+            var(--bg) 95%,
+            var(--bg) 100%
+        );
     }
 }
 

@@ -1,0 +1,225 @@
+/* ============================================================
+   pages.css —— 子页面(ABOUT / RESUME / WORK / CONTACT)专用样式
+   独立于 styles.css,只被这四个页面引用,不影响首页的 Three.js 场景与导航。
+
+   「微微类纸感」调节区(只改下面这几个变量即可):
+     --paper          纸底色(越接近 #fff 越干净)
+     --grain-opacity  颗粒强度(0 = 完全关闭;嫌明显就调到 0.02)
+     --ink / --muted  文字墨色与次要文字色
+     --line / --line-soft  分隔线颜色
+   ============================================================ */
+
+:root {
+    --paper: #f7f4ee;        /* 米色纸(用户选定) */
+    --grain-opacity: .05;    /* 类纸纹理强度:0 = 关闭;页面留白区可见 */
+
+    --card: #fffdf9;         /* 卡片:比纸底略亮 */
+    --ink: #1c1b18;
+    --ink-soft: #3d3a34;
+    --muted: #7c776e;
+    --faint: #a8a299;
+    --line: #e9e4db;
+    --line-soft: #f2efe9;
+}
+
+/* 纸张底色与纹理:只作用于四个子页面;首页(封面)保持纯白 */
+body {
+    background-color: var(--paper);
+    color: var(--ink);
+}
+
+/* 纸张纹理:双层内联 SVG(细颗粒 = 纤维感 + 低频不均匀 = 纸浆感)
+   固定在视口、pointer-events:none,不影响交互 */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: var(--grain-opacity);
+    background-image:
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='180'%20height='180'%3E%3Cfilter%20id='f'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.75'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='180'%20height='180'%20filter='url(%23f)'%20opacity='0.5'/%3E%3C/svg%3E"),
+        url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='420'%20height='420'%3E%3Cfilter%20id='m'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.012'%20numOctaves='3'%20stitchTiles='stitch'/%3E%3CfeColorMatrix%20type='saturate'%20values='0'/%3E%3C/filter%3E%3Crect%20width='420'%20height='420'%20filter='url(%23m)'%20opacity='0.35'/%3E%3C/svg%3E");
+    background-size: 180px 180px, 420px 420px;
+}
+
+/* ---------- 页面容器 ---------- */
+.page {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 132px 24px 40px; /* 顶部留白避开左上角 Kysoul 标识 */
+}
+
+/* ---------- 页头:英文大字 + 中文副标题 ---------- */
+.page-head { margin-bottom: 46px; }
+.page-head h1 {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 400;
+    font-size: clamp(26px, 4.2vw, 42px);
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+}
+.page-head .sub {
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: .02em;
+    margin: 0;
+}
+.page-head .meta {
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.9;
+}
+
+/* ---------- 正文段落 ---------- */
+.page p {
+    font-size: 15px;
+    line-height: 1.95;
+    color: var(--ink-soft);
+    margin: 0 0 18px;
+}
+.page p.lead { font-size: 16.5px; color: var(--ink); }
+.page a { color: inherit; text-decoration: none; border-bottom: 1px solid #d8d2c7; }
+.page a:hover { border-color: var(--ink); }
+.page ul { color: var(--ink-soft); }
+
+/* ---------- 区块 ---------- */
+.section { margin-top: 46px; }
+.section > h2 {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .3em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 18px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--line);
+}
+
+/* ---------- 时间线条目(简历) ---------- */
+.entry { margin-bottom: 26px; }
+.entry:last-child { margin-bottom: 0; }
+.entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.entry-title { font-size: 15.5px; font-weight: 600; }
+.entry-when { font-size: 12.5px; color: var(--muted); white-space: nowrap; letter-spacing: .04em; }
+.entry-sub { font-size: 13.5px; color: var(--muted); margin: 4px 0 0; }
+.entry ul { margin: 10px 0 0; padding-left: 18px; }
+.entry li { font-size: 14px; line-height: 1.9; color: var(--ink-soft); margin: 3px 0; }
+
+/* ---------- 关键词行(无框展示,替代原来的胶囊标签) ---------- */
+.keywords {
+    margin: 12px 0 0;
+    font-size: 13.5px;
+    letter-spacing: .05em;
+    color: var(--muted);
+    line-height: 1.9;
+}
+.keywords span + span::before {
+    content: "·";
+    color: #cdc5b6;
+    margin: 0 .7em;
+}
+
+/* ---------- 作品卡片 ---------- */
+.card {
+    position: relative;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 24px 22px;
+    margin-bottom: 18px;
+    background: var(--card);
+    box-shadow: 0 1px 0 rgba(120, 105, 80, .02), 0 8px 24px -18px rgba(90, 75, 50, .25);
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+.card:hover {
+    border-color: #d9d2c6;
+    box-shadow: 0 1px 0 rgba(120, 105, 80, .03), 0 12px 30px -18px rgba(90, 75, 50, .32);
+}
+.card h3 { font-size: 18px; font-weight: 600; margin: 0 0 6px; letter-spacing: .01em; color: var(--ink); }
+.card .card-sub { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+.card .card-meta {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    font-size: 12.5px; color: var(--faint); margin: 0 0 14px;
+}
+.card ul { margin: 0; padding-left: 18px; }
+.card li { font-size: 14px; line-height: 1.9; color: var(--ink-soft); margin: 3px 0; }
+.card .card-link { font-size: 13px; display: inline-block; margin-top: 14px; }
+.card.placeholder { border-style: dashed; background: transparent; box-shadow: none; }
+.card.placeholder h3 { color: var(--muted); }
+
+/* ---------- 邮箱大按钮(联系页) ---------- */
+.mail {
+    display: inline-block;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(18px, 3.2vw, 30px);
+    letter-spacing: .01em;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    margin: 4px 0 6px;
+}
+/* ---------- 键值行(联系方式等) ---------- */
+.rows { margin-top: 6px; }
+.row-item {
+    display: flex; gap: 18px; padding: 13px 0;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14px; line-height: 1.8;
+}
+.row-item .k { flex: 0 0 118px; color: var(--faint); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; padding-top: 2px; }
+.row-item .v { flex: 1; color: var(--ink-soft); }
+
+/* ---------- 页脚固定条 ---------- */
+.page-footer {
+    position: relative;
+    z-index: 1;
+    max-width: 860px;
+    margin: 60px auto 0;
+    padding: 22px 24px 46px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--faint);
+    display: flex; gap: 20px; flex-wrap: wrap;
+}
+.page-footer a { color: var(--faint); text-decoration: none; border-bottom: 1px solid transparent; }
+.page-footer a:hover { color: var(--ink); border-color: var(--ink); }
+
+/* ---------- 提示块(给作者看的填写说明;work 页仍在用) ---------- */
+.todo {
+    position: relative;
+    z-index: 1;
+    margin-top: 34px;
+    padding: 16px 18px;
+    border: 1px dashed var(--line);
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.85;
+    color: var(--faint);
+    background: rgba(255, 255, 255, .5);
+}
+.todo b { color: var(--muted); }
+
+/* ---------- 打印:回到纯白纸,不带屏幕颗粒 ---------- */
+@media print {
+    body { background: #fff; }
+    body::before { display: none; }
+    .site-header, .page-footer, .todo { display: none !important; }
+    .page { padding: 0; max-width: none; }
+    .card { background: #fff; box-shadow: none; border-color: #ddd; }
+}
+
+@media (max-width: 620px) {
+    .page { padding: 104px 18px 32px; }
+    .row-item { flex-direction: column; gap: 4px; }
+    .row-item .k { flex: none; }
+}
