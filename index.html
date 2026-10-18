@@ -1,99 +1,189 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thy | Personal Portfolio</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kysoul · 杨添富的个人网站</title>
+    <meta name="description" content="杨添富（Kysoul），重庆邮电大学国际学院软件工程在读。用 WebGL、着色器与版式做网页视觉，这里是我的作品、经历与联系方式。">
+    <link rel="canonical" href="https://kysoul.me/">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
 
-    <!-- 基础图标 -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kysoul">
+    <meta property="og:title" content="Kysoul · 杨添富的个人网站">
+    <meta property="og:description" content="用 WebGL、着色器与版式做网页视觉。作品、经历与联系方式。">
+    <meta property="og:url" content="https://kysoul.me/">
+    <meta property="og:image" content="https://kysoul.me/assets/photos/kysoul-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="自摄的富士山全景，山体在清晨侧光下呈现冷暖交界的层次。">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <!-- 兼容性图标 -->
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico">
-    <!-- 苹果设备高清图标 -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
-    
-    <!-- 预加载自托管字体(方案A),保证画布文字用真实 Blanquotey -->
-    <link rel="preload" href="fonts/Blanquotey.woff" as="font" type="font/woff" crossorigin />
-    <link rel="stylesheet" href="css/styles.css" />
 
-  </head>
-  <body>
+    <link rel="preload" href="./fonts/Blanquotey.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="./css/tokens.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/home.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">跳到正文</a>
 
-    <!--<img src="/photo/background/fujim.png" alt="背景" class="bg-image">-->
     <header class="site-header">
-    <a href="index.html" style="color:#000; text-decoration:none;">
-      <p class="logo-text">Kysoul</p>
-    </a>
-    
-    
+        <div class="shell header-inner">
+            <a class="wordmark" href="./index.html">Kysoul</a>
+            <nav class="site-nav" aria-label="主导航">
+                <a href="./about.html">About</a>
+                <a href="./resume.html">Resume</a>
+                <a href="./work.html">Work</a>
+                <a href="./contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
-    <div id="textContainer"></div>
-    
-  
-  <svg class="navigation-svg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999 !important;">
-    <defs>
-      <path id="curve-under-s" fill="none" stroke="red" stroke-width="2" /><!-- about -->
-      <path id="curve-under-o" fill="none" stroke="red" stroke-width="2" /><!-- resume -->
-      <path id="curve-under-y" fill="none" stroke="red" stroke-width="2" /><!-- contact -->
-      <path id="curve-under-u" fill="none" stroke="red" stroke-width="2" /><!-- work -->
-    </defs>
 
-    
-    <text id="nav-text-about" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
-      <textPath href="#curve-under-s" startOffset="50%" text-anchor="middle">
-          A B O U T
-      </textPath>
-    </text>
-    </a>
+    <main class="main" id="main" tabindex="-1">
+        <div class="shell">
+            <section class="home-hero" aria-labelledby="hero-title">
+                <h1 class="display" id="hero-title">Kysoul</h1>
+                <p class="lede">
+                    我是杨添富，重庆邮电大学国际学院软件工程在读。
+                    这个站是我用手写代码做的练习场——WebGL、着色器与版式，都在这儿试。
+                </p>
+                <ul class="where" aria-label="基本情况">
+                    <li>重庆 · GMT+8</li>
+                    <li>软件工程在读</li>
+                    <li>前端视觉 / WebGL</li>
+                </ul>
+                <div class="actions">
+                    <a class="btn" href="./work.html">查看作品</a>
+                    <a class="btn btn--ghost" href="./about.html">关于我</a>
+                </div>
+            </section>
+        </div>
 
-    <text id="nav-text-resume" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
-      <textPath href="#curve-under-o" startOffset="50%" text-anchor="middle">
-          R E S U M E
-      </textPath>
-    </text>
-    </a>
+        <figure class="photo-band">
+            <picture>
+                <source type="image/avif"
+                        srcset="./assets/photos/fujim-960.avif 960w,
+                                ./assets/photos/fujim-1600.avif 1600w,
+                                ./assets/photos/fujim-2400.avif 2400w"
+                        sizes="100vw">
+                <source type="image/webp"
+                        srcset="./assets/photos/fujim-960.webp 960w,
+                                ./assets/photos/fujim-1600.webp 1600w,
+                                ./assets/photos/fujim-2400.webp 2400w"
+                        sizes="100vw">
+                <img src="./assets/photos/fujim-1600.jpg"
+                     srcset="./assets/photos/fujim-960.jpg 960w,
+                             ./assets/photos/fujim-1600.jpg 1600w,
+                             ./assets/photos/fujim-2400.jpg 2400w"
+                     sizes="100vw"
+                     width="1600" height="548"
+                     fetchpriority="high" decoding="async"
+                     alt="自摄的富士山全景：山体占据画面下方，顶部是被风吹出的雪翼与薄云。">
+            </picture>
+            <figcaption>
+                <span>富士山 · 自摄</span>
+                <span>原图 87.3 MB，这里按 960 / 1600 / 2400 三档派生，单张 20–107 KB</span>
+            </figcaption>
+        </figure>
 
-    <text id="nav-text-contact" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
-      <textPath href="#curve-under-y" startOffset="50%" text-anchor="middle">
-          C O N T A C T
-      </textPath>
-    </text>
-    </a>
+        <div class="shell">
+            <section class="section" aria-labelledby="work-title">
+                <div class="section-head">
+                    <h2 id="work-title">精选作品</h2>
+                    <a class="more" href="./work.html">全部作品 →</a>
+                </div>
+                <ul class="work-list">
+                    <li class="work-item">
+                        <a href="./work.html">
+                            <span class="title">
+                                kysoul.me · 个人网站系统
+                                <span class="tag tag--progress">持续迭代</span>
+                            </span>
+                            <span class="year">2025 – 至今</span>
+                            <span class="desc">
+                                手写 Three.js 场景与 GLSL 涡流着色器，把加载进度映射成一场日食。
+                                本次改版把它重做成打开即可阅读的静态站，原来的特效保留为可选演示。
+                            </span>
+                        </a>
+                    </li>
+                    <li class="work-item">
+                        <a href="./work/eclipse.html">
+                            <span class="title">日食加载动画与涡流着色器</span>
+                            <span class="year">交互演示 →</span>
+                            <span class="desc">
+                                日食随真实资源加载推进，指针移动驱动背景像素涡流。
+                                只有你主动点播放时动画才会运行，不影响任何人在首页的阅读。
+                            </span>
+                        </a>
+                    </li>
+                    <li class="work-item">
+                        <a href="./work.html#godot">
+                            <span class="title">
+                                Godot 独立游戏尝试
+                                <span class="tag">起步阶段</span>
+                            </span>
+                            <span class="year">2026 – 至今</span>
+                            <span class="desc">
+                                正在学节点 / 场景的组织方式与 GDScript。目标是先独立做出一个可玩的小原型，
+                                目前还没有可展示的成品。
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
 
-    <text id="nav-text-work" font-family="Inter" font-size="16" fill="#000" font-weight="bold">
-      <textPath href="#curve-under-u" startOffset="50%" text-anchor="middle">
-          W O R K
-      </textPath>
-    </text>
-    </a>
+            <section class="section" aria-labelledby="about-title">
+                <div class="split">
+                    <h2 id="about-title">关于</h2>
+                    <div class="body">
+                        <p>
+                            我关注前端的前沿视觉、WebGL 三维交互，以及一个常被忽略的地方——等待的体验。
+                            网站加载要花时间，那段时间就不该是白屏，所以我做的第一件事是把加载过程变成一场日食。
+                        </p>
+                        <p>
+                            摄影和骑行是我看世界的方式，雪翼那张封面是我亲手拍的。
+                            古琴过了九级——练琴教会我的事很直接：再复杂的段落，也是一句一句磨出来的。
+                            这件事和我写代码的方式其实是同一回事。
+                        </p>
+                        <div class="link-row">
+                            <a class="btn btn--ghost" href="./about.html">关于我</a>
+                            <a class="btn btn--ghost" href="./resume.html">简历</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-  </svg>
+            <section class="contact-strip" aria-labelledby="contact-title">
+                <div>
+                    <h2 id="contact-title" class="visually-hidden">联系方式</h2>
+                    <a class="mail" href="mailto:1613609692@qq.com">1613609692@qq.com</a>
+                </div>
+                <p class="aside">
+                    对前端视觉、WebGL 或这个网站有想法，直接发邮件就行，我基本都会回。
+                </p>
+            </section>
+        </div>
+    </main>
 
-    <div style="position: relative; z-index: 10; padding: 20px;"></div>
-
-    <!--
-    <center><h1>欢迎来到祈溯的专属网站</h1></center>
-    <center><p>qwq</p></center>
-    <p>找网页logo找了半天，然后处理成了正方形，emmmmmm</p>
-    <p>但是感觉有点糊糊的</p>
-    <p>这玩意真好玩吧，还好之前学过html，上手挺快的</p><img src="/assets/memes/deyi.jpg" alt="表情包" style="max-width: 40px; border-radius: 8px;">
-    <p>看来还是得倒角，角落太直了</p>  
-    </div>
-    -->
-
-    <!-- 全屏日食加载动画(必须先于 three.js 加载,覆盖其下载窗口) -->
-    <script src="js/eclipse-loader.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.155.0/three.min.js"></script>
-    <script src="js/config.js"></script>
-    <script src="js/shaders.js"></script>
-    <script src="js/texture.js"></script>
-    <script src="js/svg-nav.js"></script>
-    <script src="js/scene.js"></script>
-    <script src="js/main.js"></script>
-    
-    
-    
-  </body>
+    <footer class="site-footer">
+        <div class="shell footer-inner">
+            <p>© 2026 Kysoul · 杨添富</p>
+            <ul class="footer-links">
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./resume.html">Resume</a></li>
+                <li><a href="./work.html">Work</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="https://github.com/ysqp6-lang" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
 </html>

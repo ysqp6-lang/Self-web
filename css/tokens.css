@@ -1,0 +1,141 @@
+/* ============================================================
+   tokens.css —— 设计变量（Kysoul 与 KyLina 共享同一套语言）
+   只放变量，不放任何选择器的样式规则。
+   两套主题：浅色（默认，暖白纸）与深色，跟随系统偏好。
+   ============================================================ */
+
+:root {
+    color-scheme: light dark;
+
+    /* ---------- 颜色：浅色 ---------- */
+    --bg: #fbfaf7;
+    --bg-elev: #ffffff;
+    --bg-sunken: #f4f1ea;
+    --ink: #191817;
+    --ink-2: #3d3a35;
+    --ink-muted: #6b665e;      /* 对比度 5.46:1 (bg) */
+    --line: #e6e1d7;
+    --line-strong: #d3ccbe;
+    --accent: #b4521f;
+    --accent-ink: #8f3f14;     /* 文字用强调色 6.96:1 */
+    --accent-wash: rgba(180, 82, 31, .09);
+    --focus: #8f3f14;
+    --selection: rgba(180, 82, 31, .18);
+    --scrim: rgba(25, 24, 23, .55);
+
+    /* 实心按钮：浅色主题是浅字深底（4.96:1），深色主题必须翻转成深字浅底，
+       否则白字压在 #e8804a 上只有 2.7:1。 */
+    --btn-bg: #b4521f;
+    --btn-ink: #fffdf9;
+    --btn-bg-hover: #8f3f14;
+    --btn-ink-hover: #fffdf9;
+
+    /* 摄影图像上的文字层：始终在照片上用白字 + 深色遮罩 */
+    --on-photo: #fffdf9;
+    --on-photo-muted: rgba(255, 253, 249, .82);
+
+    /* 阴影：都带 y 偏移与柔化模糊，不做零偏移光晕 */
+    --shadow-1: 0 1px 2px rgba(46, 36, 20, .05), 0 1px 1px rgba(46, 36, 20, .04);
+    --shadow-2: 0 2px 4px rgba(46, 36, 20, .04), 0 14px 30px -14px rgba(46, 36, 20, .22);
+    --shadow-3: 0 4px 10px rgba(46, 36, 20, .06), 0 34px 64px -28px rgba(46, 36, 20, .30);
+
+    /* ---------- 字体 ---------- */
+    /* 系统字体优先：Apple 风格的原生观感，且不产生第三方字体请求 */
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+        "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+    /* Blanquotey 只用于品牌字与作品标题（自托管，21 KB，见 design 文档的授权说明） */
+    --font-display: "Blanquotey", "Iowan Old Style", "Palatino Linotype",
+        "Times New Roman", serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    /* ---------- 字号阶梯 ---------- */
+    --text-xs: .8125rem;   /* 13px 辅助信息 */
+    --text-sm: .875rem;    /* 14px */
+    --text-md: 1rem;       /* 16px 正文 */
+    --text-lg: clamp(1.0625rem, 1rem + .35vw, 1.1875rem);
+    --text-xl: clamp(1.25rem, 1.1rem + .7vw, 1.5625rem);
+    --text-2xl: clamp(1.5rem, 1.25rem + 1.1vw, 2.125rem);
+    --text-3xl: clamp(1.875rem, 1.5rem + 1.8vw, 2.875rem);
+    --text-display: clamp(2.75rem, 1.4rem + 6vw, 6rem); /* 上限 6rem */
+
+    /* ---------- 间距（4px 基数） ---------- */
+    --space-1: .25rem;
+    --space-2: .5rem;
+    --space-3: .75rem;
+    --space-4: 1rem;
+    --space-5: 1.5rem;
+    --space-6: 2rem;
+    --space-7: 3rem;
+    --space-8: 4rem;
+    --space-9: 6rem;
+    --space-10: 8rem;
+
+    /* ---------- 版式测量 ---------- */
+    --container: 74rem;
+    --container-narrow: 48rem;
+    --measure: 68ch;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+
+    /* ---------- 形状与动效 ---------- */
+    --radius-1: 8px;
+    --radius-2: 14px;
+    --radius-3: 20px;
+    --radius-pill: 999px;
+    --duration-1: 150ms;
+    --duration-2: 240ms;
+    --duration-3: 320ms;
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
+    --ease-in-out: cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ---------- 颜色：深色 ---------- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #111110;
+        --bg-elev: #1a1a19;
+        --bg-sunken: #0c0c0b;
+        --ink: #f4f2ec;
+        --ink-2: #cfcbc2;
+        --ink-muted: #a09a90;   /* 对比度 6.77:1 */
+        --line: #2b2a27;
+        --line-strong: #3b3934;
+        --accent: #e8804a;
+        --accent-ink: #f09a6a;  /* 8.58:1 */
+        --accent-wash: rgba(232, 128, 74, .12);
+        --focus: #f09a6a;
+        --selection: rgba(232, 128, 74, .28);
+        --scrim: rgba(0, 0, 0, .62);
+        --btn-bg: #e8804a;
+        --btn-ink: #191817;
+        --btn-bg-hover: #f09a6a;
+        --btn-ink-hover: #191817;
+        --shadow-1: 0 1px 2px rgba(0, 0, 0, .5);
+        --shadow-2: 0 2px 4px rgba(0, 0, 0, .4), 0 16px 32px -16px rgba(0, 0, 0, .7);
+        --shadow-3: 0 4px 10px rgba(0, 0, 0, .45), 0 36px 68px -30px rgba(0, 0, 0, .8);
+    }
+}
+
+/* ---------- 减少动态效果 ---------- */
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --duration-1: 1ms;
+        --duration-2: 1ms;
+        --duration-3: 1ms;
+    }
+}
+
+/* ---------- 提高对比度偏好 ---------- */
+@media (prefers-contrast: more) {
+    :root {
+        --ink-muted: #4a453d;
+        --line: #cdc6b8;
+        --line-strong: #a9a294;
+    }
+}
+@media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+    :root {
+        --ink-muted: #c9c3b9;
+        --line: #4d4a44;
+        --line-strong: #6d6961;
+    }
+}

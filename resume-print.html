@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>简历（打印版）· Kysoul</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="color-scheme" content="light">
+    <link rel="canonical" href="https://kysoul.me/resume-print.html">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="stylesheet" href="./css/tokens.css">
+    <style>
+        /* 打印版是一张独立的白纸：不带头尾导航，不引用站点其他样式 */
+        :root {
+            --bg: #fff;
+            --ink: #111;
+            --ink-2: #222;
+            --ink-muted: #555;
+            --line: #dcdcdc;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: #f4f1ea;
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+                "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        .sheet {
+            max-width: 21cm;
+            margin: 24px auto;
+            background: #fff;
+            padding: 20mm 18mm;
+            box-shadow: 0 2px 6px rgba(0,0,0,.08), 0 24px 48px -28px rgba(0,0,0,.35);
+        }
+        .hint {
+            max-width: 21cm;
+            margin: 24px auto -8px;
+            padding: 12px 16px;
+            background: #fff8e6;
+            border: 1px solid #e8d9a8;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #5a4a1e;
+        }
+        .hint a { color: #8f3f14; }
+        h1 { font-size: 26px; letter-spacing: 2px; margin: 0 0 4px; }
+        .role { color: var(--ink-muted); margin: 0 0 2px; }
+        .contact { color: var(--ink-muted); font-size: 13px; margin: 0 0 18px; }
+        .contact span + span::before { content: " · "; color: #bbb; }
+        h2 {
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 6px;
+            margin: 22px 0 12px;
+        }
+        h3 { font-size: 15px; margin: 0 0 2px; }
+        .entry-sub { color: var(--ink-muted); font-size: 13px; margin: 0 0 6px; }
+        .entry + .entry { margin-top: 14px; }
+        ul { margin: 0; padding-left: 18px; }
+        li { margin: 2px 0; }
+        .when { float: right; color: var(--ink-muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+        .keywords { color: var(--ink-muted); font-size: 12.5px; margin: 4px 0 0; }
+        .back { max-width: 21cm; margin: 8px auto 40px; font-size: 13px; }
+        .back a { color: #8f3f14; }
+        @media print {
+            body { background: #fff; }
+            .sheet { margin: 0; max-width: none; padding: 0; box-shadow: none; }
+            .hint, .back { display: none; }
+            @page { margin: 16mm 15mm; }
+        }
+    </style>
+</head>
+<body>
+    <p class="hint">
+        这是打印 / 导出 PDF 用的干净版本：按 <b>⌘P</b>（macOS）或 <b>Ctrl+P</b>（Windows）后选择「另存为 PDF」即可。
+        网页版在 <a href="./resume.html">/resume.html</a>。
+    </p>
+
+    <div class="sheet">
+        <h1>杨添富 / Yang TianFu</h1>
+        <p class="role">重庆邮电大学 · 国际学院 · 软件工程（本科在读）</p>
+        <p class="contact">
+            <span><a href="mailto:1613609692@qq.com">1613609692@qq.com</a></span>
+            <span><a href="https://github.com/ysqp6-lang">github.com/ysqp6-lang</a></span>
+            <span><a href="https://kysoul.me">kysoul.me</a></span>
+            <span>重庆 · GMT+8</span>
+        </p>
+
+        <h2>教育经历</h2>
+        <div class="entry">
+            <h3>重庆邮电大学 · 国际学院 · 软件工程 <span class="when">本科在读</span></h3>
+            <p class="entry-sub">核心课程：面向对象程序设计（C++ / Java）</p>
+        </div>
+
+        <h2>项目经历</h2>
+        <div class="entry">
+            <h3>基于 WebGL / Three.js 的响应式个人作品集系统 <span class="when">2025 – 至今</span></h3>
+            <p class="entry-sub">独立设计与开发 · kysoul.me</p>
+            <ul>
+                <li>手写 GLSL 片元着色器实现像素化与涡流扭曲：由鼠标位移量、速度差与缓动因子驱动，画面随指针实时流动</li>
+                <li>自研全屏加载动画：把日食进度映射到真实资源加载进度，加载完成即日全食，结束时光圈炸开进场</li>
+                <li>字体自托管与加载策略：脱离第三方字体 CDN，绘制文字纹理前显式等待字体就绪</li>
+                <li>2026.10 改版：特效改为可选演示、内容静态可读，背景摄影从 87.3 MB 原图改为 20–107 KB 响应式派生图</li>
+            </ul>
+            <p class="keywords">JavaScript · Three.js · WebGL · GLSL · CSS</p>
+        </div>
+        <div class="entry">
+            <h3>独立游戏开发尝试 · Godot 引擎 <span class="when">2026 – 至今</span></h3>
+            <p class="entry-sub">自学 · 个人项目（起步阶段）</p>
+            <ul>
+                <li>学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
+                <li>目标：先独立完成一个可玩的小型原型，把网页动效里积累的交互与节奏感迁移到游戏</li>
+            </ul>
+            <p class="keywords">Godot · GDScript · 游戏循环 · 交互设计</p>
+        </div>
+
+        <h2>技能</h2>
+        <ul>
+            <li><b>前端</b>：HTML 基础扎实；正在系统学习 CSS 与 JavaScript；能用 Three.js / GLSL 完成三维场景与着色器效果</li>
+            <li><b>游戏引擎</b>：正在学习 Godot 与 GDScript，能搭建基础场景 / 节点结构</li>
+            <li><b>设计</b>：Photoshop 较熟练；具备版式设计能力与色彩敏感度</li>
+            <li><b>工作方式</b>：善用 AI 工具提升创作与排错效率，习惯边做项目边补基础</li>
+        </ul>
+
+        <h2>其他</h2>
+        <ul>
+            <li>语言：中文（母语）· 英语（可读写技术文档）</li>
+            <li>古琴：九级</li>
+            <li>兴趣：摄影、骑行</li>
+        </ul>
+    </div>
+
+    <p class="back"><a href="./resume.html">← 返回网页版简历</a></p>
+</body>
+</html>

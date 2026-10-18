@@ -1,0 +1,12 @@
+# macOS 系统杂项
+.DS_Store
+._*
+
+# 图片派生脚本的原始素材（必须放在仓库外，不能进入发布目录）
+_materials/
+*.original.png
+
+# 本地预览与编辑器
+node_modules/
+.vscode/
+*.log

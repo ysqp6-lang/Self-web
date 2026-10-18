@@ -1,0 +1,424 @@
+/* ============================================================
+   page.css —— 内容页（关于 / 简历 / 作品 / 联系 / 404）
+   ============================================================ */
+
+.page {
+    padding-block: clamp(var(--space-7), 8vh, var(--space-9)) 0;
+}
+
+/* 站头是 sticky 的：锚点跳转要给它留出高度，否则目标标题会被盖住 */
+[id] { scroll-margin-top: calc(64px + var(--space-4)); }
+
+.page-head { margin-bottom: var(--space-6); }
+
+.page-head h1 {
+    font-size: var(--text-3xl);
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+.page-head .sub {
+    margin-top: var(--space-3);
+    font-size: var(--text-lg);
+    color: var(--ink-muted);
+    max-width: var(--measure);
+    text-wrap: pretty;
+}
+
+.page-head .meta-line {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+}
+
+.page-head .meta-line .sep {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--line-strong);
+}
+
+.page-head .meta-line a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+/* ---------- 正文 ---------- */
+.prose > p {
+    font-size: var(--text-md);
+    line-height: 1.85;
+    color: var(--ink-2);
+}
+
+.prose > p + p { margin-top: var(--space-4); }
+
+.prose > p.lead {
+    font-size: var(--text-lg);
+    color: var(--ink);
+    margin-bottom: var(--space-5);
+}
+
+.prose a { color: var(--accent-ink); }
+
+/* ---------- 区块 ---------- */
+.block { margin-top: var(--space-7); }
+
+.block > h2 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--space-5);
+}
+
+.block > h2 + p { margin-top: 0; }
+
+/* ---------- 段落列表 ---------- */
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: var(--measure);
+}
+
+.list li {
+    position: relative;
+    padding-left: var(--space-5);
+    color: var(--ink-2);
+    line-height: 1.8;
+}
+
+.list li + li { margin-top: var(--space-3); }
+
+.list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .72em;
+    width: 6px;
+    height: 1px;
+    background: var(--line-strong);
+}
+
+.list li b,
+.list li strong { color: var(--ink); font-weight: 600; }
+
+/* ---------- 经历条目 ---------- */
+.entry {
+    max-width: var(--measure);
+}
+
+.entry + .entry {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line);
+}
+
+.entry-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-4);
+}
+
+.entry-title {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: -.01em;
+}
+
+.entry-when {
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.entry-sub {
+    margin-top: var(--space-1);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+}
+
+.entry .list { margin-top: var(--space-3); }
+
+/* ---------- 关键词 ---------- */
+.keywords {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    list-style: none;
+    padding: 0;
+}
+
+.keywords li {
+    display: flex;
+    align-items: center;
+}
+
+.keywords li + li::before {
+    content: "·";
+    margin-inline-end: var(--space-3);
+    color: var(--line-strong);
+}
+
+/* ---------- 键值行（联系方式） ---------- */
+.rows {
+    margin-top: var(--space-2);
+    max-width: var(--measure);
+}
+
+.row-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-5);
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--line);
+    font-size: var(--text-md);
+    line-height: 1.7;
+}
+
+.row-item:first-child { border-top: 1px solid var(--line); }
+
+.row-item .k {
+    flex: 0 0 8rem;
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    letter-spacing: .04em;
+    padding-top: .18em;
+}
+
+.row-item .v { flex: 1 1 16rem; color: var(--ink-2); }
+
+@media (max-width: 40rem) {
+    .row-item .k { flex-basis: 100%; }
+}
+
+/* ---------- 大邮箱 ---------- */
+.mail-lg {
+    display: inline-block;
+    font-size: clamp(1.25rem, 1rem + 1.6vw, 2rem);
+    font-weight: 500;
+    letter-spacing: -.015em;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 3px;
+    overflow-wrap: anywhere;
+}
+
+.mail-lg:hover { color: var(--accent-ink); border-color: var(--accent); }
+
+/* ---------- 案例卡片（作品页只有一个，做成真正的整块） ---------- */
+.case {
+    margin-top: var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-3);
+    background: var(--bg-elev);
+    box-shadow: var(--shadow-1);
+    /* 注意：这里不能写 overflow: hidden —— 会成为滚动容器，
+       让 Chromium 忽略锚点上的 scroll-margin-top，跳转后被站头挡住。
+       圆角裁剪交给 .case-media 自己处理。 */
+}
+
+.case-body {
+    padding: clamp(var(--space-5), 3vw, var(--space-7));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5) var(--space-7);
+}
+
+.case-main { min-width: 0; }
+
+.case-main > * { max-width: var(--measure); }
+
+.case h2 {
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    letter-spacing: -.02em;
+    line-height: 1.2;
+    max-width: 40rem;
+}
+
+.case .case-sub {
+    margin-top: var(--space-2);
+    color: var(--ink-muted);
+    font-size: var(--text-md);
+}
+
+/* 事实栏：宽屏放到右栏，窄屏落回正文上方 */
+.case .case-facts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    align-content: start;
+}
+
+.case .case-facts li {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.case .case-facts .k {
+    color: var(--ink-muted);
+    white-space: nowrap;
+}
+
+.case .case-facts .v { color: var(--ink-2); }
+
+@media (min-width: 62rem) {
+    .case-body {
+        grid-template-columns: minmax(0, 1fr) 13rem;
+        align-items: start;
+    }
+    .case-body > h2,
+    .case-body > .case-sub,
+    .case-body > .case-main { grid-column: 1; }
+    .case .case-facts {
+        grid-column: 2;
+        grid-row: 1 / span 3;
+        flex-direction: column;
+        gap: var(--space-3);
+        padding-top: var(--space-1);
+    }
+    .case .case-facts li {
+        flex-direction: column;
+        gap: 2px;
+    }
+    .case .case-facts .k {
+        font-size: var(--text-xs);
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+}
+
+.case .case-section { margin-top: var(--space-6); }
+
+.case .case-section > h3 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-3);
+}
+
+.case .link-row {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.case-media {
+    border-top: 1px solid var(--line);
+    background: var(--bg-sunken);
+    overflow: hidden;
+    border-radius: 0 0 calc(var(--radius-3) - 1px) calc(var(--radius-3) - 1px);
+}
+
+.case-media img {
+    width: 100%;
+    aspect-ratio: 13004 / 4456;
+    object-fit: cover;
+    object-position: 50% 46%;
+}
+
+/* ---------- 占位块（未完成内容必须明确标出来） ---------- */
+.placeholder-note {
+    margin-top: var(--space-5);
+    padding: var(--space-5);
+    border: 1px dashed var(--line-strong);
+    border-radius: var(--radius-2);
+    background: transparent;
+    font-size: var(--text-sm);
+    line-height: 1.8;
+    color: var(--ink-muted);
+    max-width: var(--measure);
+}
+
+.placeholder-note strong { color: var(--ink-2); }
+
+/* ---------- 简历图片 ---------- */
+.resume-figure {
+    margin-top: var(--space-5);
+    max-width: 34rem;
+}
+
+.resume-figure picture { display: block; }
+
+.resume-figure img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-2);
+    box-shadow: var(--shadow-2);
+    background: var(--bg-elev);
+}
+
+.resume-figure figcaption {
+    margin-top: var(--space-3);
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+}
+
+/* ---------- 404 ---------- */
+.notfound {
+    padding-block: clamp(var(--space-8), 18vh, 12rem) 0;
+    max-width: 42rem;
+}
+
+.notfound .code {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 2rem + 6vw, 6rem);
+    line-height: 1;
+    color: var(--ink);
+}
+
+.notfound h1 {
+    margin-top: var(--space-3);
+    font-size: var(--text-xl);
+    font-weight: 600;
+}
+
+.notfound p {
+    margin-top: var(--space-3);
+    color: var(--ink-2);
+    max-width: var(--measure);
+}
+
+.notfound .link-row {
+    margin-top: var(--space-5);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+/* ---------- 打印 ---------- */
+@media print {
+    .page { padding-block: 0; }
+    .case { border-color: #ddd; box-shadow: none; }
+    .case-media { display: none; }
+    .resume-figure { display: none; }
+    .entry + .entry { padding-top: var(--space-4); }
+    .placeholder-note { display: none; }
+}
