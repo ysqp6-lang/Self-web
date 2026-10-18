@@ -239,6 +239,33 @@ a:hover { text-decoration-color: currentColor; }
     }
 }
 
+/* ---------- 首页封面：站头与封面顶端同色，接缝不可见 ---------- */
+.page-home .site-header {
+    background: var(--cover-header-bg);
+    border-bottom-color: rgba(251, 250, 247, .10);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+.page-home .wordmark { color: var(--cover-ink); }
+.page-home .wordmark:hover { color: #fff; }
+
+.page-home .site-nav a { color: var(--cover-ink-2); }
+.page-home .site-nav a:hover {
+    background: rgba(251, 250, 247, .10);
+    color: #fff;
+}
+.page-home .site-nav a[aria-current="page"] {
+    color: var(--cover-ink);
+    text-decoration-color: var(--accent);
+}
+
+/* 深色底上必须换成浅色焦点环，否则 --focus 的深棕几乎看不见 */
+.page-home .site-header :focus-visible,
+.page-home .home-hero :focus-visible {
+    outline-color: #f0a97c;
+}
+
 /* ---------- 页脚 ---------- */
 .site-footer {
     flex-shrink: 0;

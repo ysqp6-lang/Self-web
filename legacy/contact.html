@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="Kysoul 2025 版封面的存档页（旧版效果演示，不再作为正式首页）。">
+    <title>Contact | Kysoul</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+
+    <!-- 基础图标 -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
+    <!-- 兼容性图标 -->
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico">
+    <!-- 苹果设备高清图标 -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="./assets/favicon/site.webmanifest">
+
+    <style>
+        /* 旧版存档页专用：一个不打扰旧封面的返回入口 */
+        .legacy-back {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 60000;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 0 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .22);
+            background: rgba(16, 16, 18, .72);
+            color: #fbfaf7;
+            font: 500 14px/1 -apple-system, BlinkMacSystemFont, "PingFang SC", system-ui, sans-serif;
+            text-decoration: none;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+        }
+        .legacy-back:hover { background: rgba(16, 16, 18, .92); border-color: rgba(255, 255, 255, .5); }
+        .legacy-back:focus-visible { outline: 2px solid #f0a97c; outline-offset: 3px; }
+        @media print { .legacy-back { display: none; } }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <a href="index.html" style="color:#000; text-decoration:none;">
+            <p class="logo-text">Kysoul</p>
+        </a>
+    </header>
+
+    <!-- ============================================================
+         CONTACT —— 独占轴:怎么找到我(入口与去向)
+         不做表单:个人站的表单几乎没人填,还招垃圾信息。邮箱直接做大。
+         ============================================================ -->
+    <main class="page">
+        <div class="page-head">
+            <h1>Contact</h1>
+            <p class="sub">怎么找到我</p>
+        </div>
+
+        <p class="lead">最快的方式是邮件 —— 我基本都会回。</p>
+        <p>
+            <a class="mail" href="mailto:1613609692@qq.com">1613609692@qq.com</a>
+        </p>
+
+        <div class="section">
+            <h2>别处 / Elsewhere</h2>
+            <div class="rows">
+                <div class="row-item">
+                    <span class="k">GitHub</span>
+                    <span class="v"><a href="https://github.com/ysqp6-lang" target="_blank" rel="noopener">github.com/ysqp6-lang</a></span>
+                </div>
+                <div class="row-item">
+                    <span class="k">站点</span>
+                    <span class="v"><a href="https://kysoul.me">kysoul.me</a></span>
+                </div>
+                <div class="row-item">
+                    <span class="k">位置</span>
+                    <span class="v">重庆 · GMT+8</span>
+                </div>
+                <!-- 若愿意公开手机号,取消下一行注释:
+                <div class="row-item">
+                    <span class="k">电话</span>
+                    <span class="v">13677639888</span>
+                </div>
+                -->
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>欢迎联系我做什么 / What For</h2>
+            <div class="rows">
+                <div class="row-item">
+                    <span class="k">实习</span>
+                    <span class="v">前端 / 视觉方向的实习机会,可远程或看具体城市</span>
+                </div>
+                <div class="row-item">
+                    <span class="k">合作</span>
+                    <span class="v">网页视觉、动效、WebGL 相关的小项目</span>
+                </div>
+                <div class="row-item">
+                    <span class="k">交流</span>
+                    <span class="v">Three.js / 着色器 / 加载动效的技术讨论,或对我这个网站的任何建议</span>
+                </div>
+                <div class="row-item">
+                    <span class="k">回复</span>
+                    <span class="v">一般 1–2 天内回复;学期中可能稍慢,请见谅</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="page-footer">
+        <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="resume.html">Resume</a>
+        <a href="contact.html">Contact</a>
+    </footer>
+    <a class="legacy-back" href="../index.html">← 返回新版</a>
+</body>
+</html>
