@@ -38,9 +38,9 @@
        结构（从上到下）：纯黑 → 固定像素高度的黑到白渐隐带 → 纯白收尾 → 摄影带
        关键：渐隐带用**像素**定义，不随窗口高度缩放，所以在任何视口里都是同样的丝滑过渡。 */
     --cover-start: #050506;                    /* 顶端纯黑 */
-    --cover-fade-end: var(--bg);               /* 渐隐终点：纸白 */
+    --cover-fade-end: #ffffff;               /* 渐隐终点：纸白 */
     --cover-fade-h: clamp(150px, 21vh, 250px); /* 渐隐带高度（固定像素区间） */
-    --cover-white-h: clamp(48px, 7vh, 96px);   /* 渐隐结束后的纯白区 */
+    --cover-white-h: clamp(60px, calc(7vh + 12px), 108px); /* Pure-white tail extended 12px toward the photo. */
     --cover-ink: #fbfaf7;          /* 封面上主文字：19.5:1 */
     --cover-ink-2: #ded9d0;        /* 封面上正文：15.2:1 */
     --cover-ink-muted: #a09a90;    /* 封面上次要信息：7.6:1 */
@@ -118,8 +118,8 @@
         --selection: rgba(232, 128, 74, .28);
         --scrim: rgba(0, 0, 0, .62);
 
-        /* 深色主题：封面同样是纯黑起步，但渐隐终点落在页面底色上，不会闪白 */
-        --cover-fade-end: var(--bg);
+        /* Homepage cover always fades from black to white, including in dark mode. */
+        --cover-fade-end: #ffffff;
 
         --btn-bg: #e8804a;
         --btn-ink: #191817;

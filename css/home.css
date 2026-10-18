@@ -107,7 +107,7 @@
     /* 窄屏：渐隐带略短一点，避免手机上一屏里白色过多 */
     .home-hero {
         --cover-fade-h: clamp(120px, 18vh, 200px);
-        --cover-white-h: clamp(40px, 6vh, 72px);
+        --cover-white-h: clamp(52px, calc(6vh + 12px), 84px);
         padding-block: var(--space-5) calc(var(--cover-fade-h) + var(--cover-white-h));
     }
     .home-hero .lede { max-width: none; }
@@ -128,9 +128,20 @@
    窄屏裁成 4:3 的竖情绪切片，不把山体裁掉。 */
 .photo-band {
     margin: 0;
+    position: relative;
     /* 照片上方的纯白区已经在 .home-hero 的 --cover-white-h 里，这里不再重复加高 */
     padding-top: 0;
     background: var(--bg);
+}
+
+.photo-band::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    background: #fff;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .photo-band img {
