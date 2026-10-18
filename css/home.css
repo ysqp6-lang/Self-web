@@ -8,20 +8,29 @@
     position: relative;
     display: flex;
     align-items: flex-start;
-    min-height: clamp(23rem, 60vh, 38rem);
-    padding-block: clamp(2.5rem, 4.5vh, 3.25rem) clamp(2.5rem, 6vh, 4rem);
+    /* 结构：纯黑底 → 内容 → 固定高度的渐隐带 → 纯白收尾 → 摄影带
+       高度完全由内容 + 两个 padding 决定，不再用 vh 撑高，
+       所以按钮永远落在纯黑上，渐隐永远在按钮下方完整走完。 */
+    padding-block: clamp(2.5rem, 4.5vh, 3.25rem)
+        calc(var(--cover-fade-h) + var(--cover-white-h));
     color: var(--cover-ink);
-    background-color: var(--bg);
-    /* 两层：极淡的冷光（呼应日食的夜空），加最上面那条黑到纸白的渐变 */
-    background-image:
-        radial-gradient(38rem 18rem at 18% 4%, rgba(150, 175, 255, .07), transparent 68%),
-        var(--cover-gradient);
+    background-color: var(--cover-start);
+    /* 渐变层 = 渐隐带 + 白色收尾区，整体贴住封面底部。
+       色标用**像素**：前 8% 保持纯黑，到 --cover-fade-h 处变成白，之后一直是白。
+       这样无论窗口多高多窄，渐隐长度与白色宽度都恒定。 */
+    background-image: linear-gradient(180deg,
+        var(--cover-start) 0,
+        var(--cover-start) calc(var(--cover-fade-h) * 0.08),
+        var(--cover-fade-end) var(--cover-fade-h));
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-position: bottom left;
+    background-size: 100% calc(var(--cover-fade-h) + var(--cover-white-h));
 }
 
 .home-hero-inner {
     width: 100%;
+    /* 文字块与渐隐带之间留一点纯黑呼吸位，按钮不会贴到渐变边缘 */
+    padding-bottom: clamp(1.25rem, 3vh, 2.25rem);
 }
 
 .home-hero .display {
@@ -95,24 +104,11 @@
 }
 
 @media (max-width: 34rem) {
-    /* 窄屏上文字占封面的比例更大：把黑色区拉长到 62%，保证按钮仍在深色上 */
+    /* 窄屏：渐隐带略短一点，避免手机上一屏里白色过多 */
     .home-hero {
-        --cover-gradient: linear-gradient(180deg,
-            #050506 0%,
-            #050506 68%,
-            #2e2e2d 71%,
-            #565655 74%,
-            #7d7d7b 77%,
-            #a2a2a0 80%,
-            #c2c1bf 83%,
-            #dcdbd8 86%,
-            #eeedeb 89%,
-            #f7f6f3 92%,
-            #fbfaf7 94%,
-            #fbfaf7 100%
-        );
-        min-height: clamp(24rem, 58vh, 40rem);
-        padding-block: var(--space-5) clamp(1.75rem, 4.5vh, 2.75rem);
+        --cover-fade-h: clamp(120px, 18vh, 200px);
+        --cover-white-h: clamp(40px, 6vh, 72px);
+        padding-block: var(--space-5) calc(var(--cover-fade-h) + var(--cover-white-h));
     }
     .home-hero .lede { max-width: none; }
 }
@@ -120,44 +116,20 @@
 /* 320–344 这类极窄屏：一行中文只能放十来个字，文字块特别高，
    单独把黑区拉到 76%，保证按钮仍在深色上。 */
 @media (max-width: 21.5rem) {
+    /* 320 这类极窄屏：文字更高，给渐隐带留足空间，按钮仍在纯黑上 */
     .home-hero {
-        min-height: clamp(28rem, 72vh, 42rem);
-        --cover-gradient: linear-gradient(180deg,
-            #050506 0%,
-            #050506 76%,
-            #2b2b2a 79%,
-            #565655 82%,
-            #858583 85%,
-            #b0b0ae 88%,
-            #d6d5d3 91%,
-            #efeeec 94%,
-            #fbfaf7 97%,
-            #fbfaf7 100%
-        );
+        --cover-fade-h: clamp(110px, 17vh, 180px);
     }
 }
 
-@media (max-width: 34rem) and (prefers-color-scheme: dark) {
-    .home-hero {
-        --cover-gradient: linear-gradient(180deg,
-                #050506 0%,
-                #050506 74%,
-                #070707 80%,
-                #0b0b0b 86%,
-                #0f0f0e 91%,
-                var(--bg) 94%,
-                var(--bg) 100%
-            );
-    }
-}
 
 /* ---------- 摄影带 ----------
    全景照片是首页的视觉锚点：桌面保留 2.92:1 的原始构图，
    窄屏裁成 4:3 的竖情绪切片，不把山体裁掉。 */
 .photo-band {
     margin: 0;
-    /* 照片上方的白色平台：由这里的高度决定，和封面里的渐隐是两件事 */
-    padding-top: clamp(2.25rem, 6vh, 4.5rem);
+    /* 照片上方的纯白区已经在 .home-hero 的 --cover-white-h 里，这里不再重复加高 */
+    padding-top: 0;
     background: var(--bg);
 }
 
