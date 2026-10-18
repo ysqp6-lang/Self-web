@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>日食加载动画与涡流着色器 · Kysoul</title>
+    <meta name="description" content="Kysoul 的两个原创前端特效：把加载进度映射成日食的全屏加载动画，以及鼠标驱动的 GLSL 涡流像素化着色器。这里可以单独运行它们。">
+    <link rel="canonical" href="https://kysoul.me/work/eclipse.html">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Kysoul">
+    <meta property="og:title" content="日食加载动画与涡流着色器 · Kysoul">
+    <meta property="og:description" content="两个原创前端特效的可选演示。">
+    <meta property="og:url" content="https://kysoul.me/work/eclipse.html">
+    <meta property="og:image" content="https://kysoul.me/assets/photos/kysoul-cover.jpg">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon/favicon-16x16.png">
+    <link rel="shortcut icon" href="../assets/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../assets/favicon/site.webmanifest">
+
+    <link rel="preload" href="../fonts/Blanquotey.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="../css/tokens.css">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/page.css">
+    <link rel="stylesheet" href="../css/showcase.css">
+</head>
+<body>
+    <a class="skip-link" href="#main">跳到正文</a>
+
+    <header class="site-header">
+        <div class="shell header-inner">
+            <a class="wordmark" href="../index.html">Kysoul</a>
+            <nav class="site-nav" aria-label="主导航">
+                <a href="../about.html">About</a>
+                <a href="../resume.html">Resume</a>
+                <a href="../work.html" aria-current="page">Work</a>
+                <a href="../contact.html">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main" id="main" tabindex="-1">
+        <div class="shell">
+            <div class="page">
+                <div class="exhibit-head">
+                    <div class="page-head" style="margin-bottom: 0;">
+                        <h1>日食与涡流</h1>
+                        <p class="sub">
+                            2025 年首页封面的两个原创效果。现在它们不再挡在首屏前面，
+                            而是可以在你想看的时候单独运行。
+                        </p>
+                    </div>
+                    <a class="back" href="../work.html">← 返回作品列表</a>
+                </div>
+
+                <div class="stage" id="stage">
+                    <picture>
+                        <source type="image/avif"
+                                srcset="../assets/photos/fujim-960.avif 960w,
+                                        ../assets/photos/fujim-1600.avif 1600w,
+                                        ../assets/photos/fujim-2400.avif 2400w"
+                                sizes="(max-width: 74rem) 100vw, 74rem">
+                        <source type="image/webp"
+                                srcset="../assets/photos/fujim-960.webp 960w,
+                                        ../assets/photos/fujim-1600.webp 1600w,
+                                        ../assets/photos/fujim-2400.webp 2400w"
+                                sizes="(max-width: 74rem) 100vw, 74rem">
+                        <img class="stage-poster" id="stage-poster"
+                             src="../assets/photos/fujim-1600.jpg"
+                             srcset="../assets/photos/fujim-960.jpg 960w,
+                                     ../assets/photos/fujim-1600.jpg 1600w,
+                                     ../assets/photos/fujim-2400.jpg 2400w"
+                             sizes="(max-width: 74rem) 100vw, 74rem"
+                             width="1600" height="548"
+                             decoding="async"
+                             alt="富士山全景，涡流着色器演示的底图。">
+                    </picture>
+                    <p class="stage-notice" id="stage-notice" hidden></p>
+                </div>
+
+                <div class="stage-toolbar" id="stage-toolbar">
+                    <button class="btn" type="button" id="vortex-toggle" disabled>开启涡流</button>
+                    <button class="btn btn--ghost" type="button" id="eclipse-play" disabled>播放全屏日食</button>
+                    <p class="stage-status" id="stage-status" role="status" aria-live="polite">
+                        拖动指针到画面上，再点「开启涡流」。
+                    </p>
+                    <p class="meta" id="motion-hint" hidden>
+                        系统已开启「减少动态效果」：日食演示会自动缩短并省略光爆。
+                    </p>
+                </div>
+
+                <noscript>
+                    <p class="placeholder-note">
+                        <strong>JavaScript 已关闭。</strong>
+                        这两个演示是纯前端的交互效果，需要脚本才能运行；
+                        下面的说明文字、静态照片和其他页面都照常可用。
+                    </p>
+                </noscript>
+
+                <div class="prose" style="margin-top: var(--space-6);">
+                    <p>
+                        旧版首页把这两个效果放在进入网站之前：日食先铺满屏幕，
+                        等 Three.js、字体和 91.6 MB 的背景图都就绪才放人进来。
+                        创意很好，代价是任何人都要先等一遍。
+                    </p>
+                    <p>
+                        改版后它们被拆成独立的演示：日食的几何、天色渐变、日冕抖动与光爆都沿用原来的数值，
+                        涡流着色器则从 Three.js 改写成了原生 WebGL（去掉了一个第三方 CDN 依赖）。
+                    </p>
+                </div>
+
+                <div class="notes">
+                    <section>
+                        <h2>日食是怎么做的</h2>
+                        <ul>
+                            <li>月球的位移由进度 p 决定，p 只走到 0.5：加载完成的那一刻正好是食甚</li>
+                            <li>天色由 4 段色标插值，同时叠一层径向渐变压暗四周</li>
+                            <li>日冕是 26 个随机光斑随时间漂移、呼吸，再逐层叠柔和辉光</li>
+                            <li>结束时用 <code>destination-out</code> 挖出光圈，让网页从圈内露出来</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>涡流是怎么做的</h2>
+                        <ul>
+                            <li>屏幕上切成 40×40 的格子，每格取中心点算到指针的距离</li>
+                            <li>距离越近，采样偏移越强；偏移方向取指针位移的相反方向，于是像被推开的水面</li>
+                            <li>指针停下后偏移收敛为 0，渲染也随之停帧，不空转</li>
+                            <li>DPR 上限 2、纹理按 1.5 倍生成，避免高分屏上的无谓开销</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h2>这次改了什么</h2>
+                        <ul>
+                            <li>不再自动播放：两个效果都要你点一下才开始</li>
+                            <li>不再阻塞内容：首页第一屏是文字与导航，与特效无关</li>
+                            <li>尊重「减少动态效果」：日食缩短并省略光爆</li>
+                            <li>WebGL 不可用时回退成静态照片，说明文字照旧可读</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <p class="placeholder-note">
+                    <strong>说明：</strong>演示里的日食进度由本页时间轴驱动，
+                    不再是真实资源加载进度——旧版那套映射依赖 91.6 MB 的原图和 CDN，
+                    在这里按需下载的意义不大。想看原始实现，代码在
+                    <a href="https://github.com/ysqp6-lang/Self-web" target="_blank" rel="noopener noreferrer">仓库历史</a>里。
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell footer-inner">
+            <p>© 2026 Kysoul · 杨添富</p>
+            <ul class="footer-links">
+                <li><a href="../work.html">Work</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="mailto:1613609692@qq.com">1613609692@qq.com</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../js/showcase.js" defer></script>
+</body>
+</html>

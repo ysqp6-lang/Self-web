@@ -2,65 +2,174 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work | Kysoul</title>
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/pages.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>作品 · Kysoul</title>
+    <meta name="description" content="Kysoul 的作品：从零手写的个人网站系统（WebGL / GLSL / 全屏日食动画），以及仍在起步阶段的 Godot 游戏开发尝试。">
+    <link rel="canonical" href="https://kysoul.me/work.html">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Kysoul">
+    <meta property="og:title" content="作品 · Kysoul">
+    <meta property="og:description" content="做出来的东西，以及怎么做出来的。">
+    <meta property="og:url" content="https://kysoul.me/work.html">
+    <meta property="og:image" content="https://kysoul.me/assets/photos/kysoul-cover.jpg">
 
-    <!-- 基础图标 -->
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon/favicon-16x16.png">
-    <!-- 兼容性图标 -->
     <link rel="shortcut icon" href="./assets/favicon/favicon.ico">
-    <!-- 苹果设备高清图标 -->
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png">
     <link rel="manifest" href="./assets/favicon/site.webmanifest">
+
+    <link rel="preload" href="./fonts/Blanquotey.woff" as="font" type="font/woff" crossorigin>
+    <link rel="stylesheet" href="./css/tokens.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/page.css">
 </head>
 <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+
     <header class="site-header">
-        <a href="index.html" style="color:#000; text-decoration:none;">
-            <p class="logo-text">Kysoul</p>
-        </a>
+        <div class="shell header-inner">
+            <a class="wordmark" href="./index.html">Kysoul</a>
+            <nav class="site-nav" aria-label="主导航">
+                <a href="./about.html">About</a>
+                <a href="./resume.html">Resume</a>
+                <a href="./work.html" aria-current="page">Work</a>
+                <a href="./contact.html">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <!-- ============================================================
-         WORK —— 独占轴:我做出了什么(成果与过程)
-         每张卡片固定六项:是什么 / 我的角色 / 时间 / 技术 / 成果 / 复盘
-         与 RESUME 的关系:同一项目在 RESUME 里只占一行,在这里展开成一整块
-         ============================================================ -->
-    <main class="page">
-        <div class="page-head">
-            <h1>Work</h1>
-            <p class="sub">做出来的东西,以及怎么做出来的</p>
-        </div>
+    <main class="main" id="main" tabindex="-1">
+        <div class="shell">
+            <div class="page">
+                <div class="page-head">
+                    <h1>Work</h1>
+                    <p class="sub">做出来的东西，以及怎么做出来的</p>
+                </div>
 
-        <div class="card">
-            <h3>kysoul.me · 个人网站系统</h3>
-            <p class="card-sub">从零手写的个人站点:三维场景 + 着色器动效 + 全屏加载动画,没有使用任何框架或模板。</p>
-            <div class="card-meta">
-                <span>独立设计 &amp; 开发</span>
-                <span>2025 – 至今(持续迭代)</span>
-                <span>进行中</span>
+                <article class="case" aria-labelledby="case-kysoul">
+                    <div class="case-body">
+                        <h2 id="case-kysoul">kysoul.me · 个人网站系统</h2>
+                        <p class="case-sub">
+                            从零手写的个人站点：三维场景 + 着色器动效 + 全屏加载动画，没有使用任何框架或模板。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="case-original">
+                            <h3 id="case-original">原来的实现</h3>
+                            <ul class="list">
+                                <li><b>涡流像素化着色器</b>：自定义 GLSL 片元着色器，基于鼠标位移量、速度差与缓动因子（easeFactor）驱动画面扭曲，指针移动时背景如流体般跟随</li>
+                                <li><b>全屏日食加载动画</b>：把加载进度映射为日食进程——资源就绪的那一刻正好是日全食，停留 1 秒后白色光圈炸开扩散，穿过光圈直接看到网站</li>
+                                <li><b>字体与首屏策略</b>：Blanquotey 自托管 + 预加载 + 绘制纹理前显式等待字体就绪，避免首屏文字回落成系统字体</li>
+                                <li><b>工程整理</b>：JS 按职责拆分为 config / shaders / texture / nav / scene / main，目录分层为 js / css / fonts</li>
+                            </ul>
+                        </section>
+
+                        <section class="case-section" aria-labelledby="case-redesign">
+                            <h3 id="case-redesign">2026.10 改版做了什么</h3>
+                            <ul class="list">
+                                <li><b>内容先行</b>：品牌、介绍、导航全部写在 HTML 里，不再等 WebGL 或图片就绪；首屏没有遮罩、没有阻塞脚本</li>
+                                <li><b>特效改为可选</b>：日食与涡流保留在<a href="./work/eclipse.html">交互演示页</a>，只有主动点播放时才运行，并尊重「减少动态效果」偏好</li>
+                                <li><b>图片</b>：91.6 MB 的背景原图不再进入站点，改为 960 / 1600 / 2400 三档 AVIF / WebP / JPEG，单张 20–107 KB，带尺寸信息与懒加载</li>
+                                <li><b>可访问性</b>：原生链接导航（不再靠 SVG 点击）、字号下限、44px 点击区、键盘焦点、可见的深色主题、对比度全部 ≥ 4.5:1</li>
+                                <li><b>依赖</b>：去掉 Three.js CDN 与第三方字体请求，站点在断网 CDN 的情况下功能完全不受影响</li>
+                            </ul>
+                        </section>
+
+                        <ul class="keywords">
+                            <li>Three.js</li><li>WebGL</li><li>GLSL</li><li>原生 JavaScript</li><li>CSS</li>
+                        </ul>
+
+                        <div class="link-row">
+                            <a class="btn" href="./index.html">打开网站</a>
+                            <a class="btn btn--ghost" href="./work/eclipse.html">特效交互演示</a>
+                            <a class="btn btn--ghost" href="https://github.com/ysqp6-lang/Self-web" target="_blank" rel="noopener noreferrer">代码仓库</a>
+                        </div>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">独立设计 &amp; 开发</span></li>
+                            <li><span class="k">时间</span><span class="v">2025 – 至今</span></li>
+                            <li><span class="k">状态</span><span class="v">持续迭代</span></li>
+                        </ul>
+                    </div>
+                    <div class="case-media">
+                        <picture>
+                            <source type="image/avif"
+                                    srcset="./assets/photos/fujim-960.avif 960w,
+                                            ./assets/photos/fujim-1600.avif 1600w,
+                                            ./assets/photos/fujim-2400.avif 2400w"
+                                    sizes="(max-width: 74rem) 100vw, 74rem">
+                            <source type="image/webp"
+                                    srcset="./assets/photos/fujim-960.webp 960w,
+                                            ./assets/photos/fujim-1600.webp 1600w,
+                                            ./assets/photos/fujim-2400.webp 2400w"
+                                    sizes="(max-width: 74rem) 100vw, 74rem">
+                            <img src="./assets/photos/fujim-1600.jpg"
+                                 srcset="./assets/photos/fujim-960.jpg 960w,
+                                         ./assets/photos/fujim-1600.jpg 1600w,
+                                         ./assets/photos/fujim-2400.jpg 2400w"
+                                 sizes="(max-width: 74rem) 100vw, 74rem"
+                                 width="1600" height="548"
+                                 loading="lazy" decoding="async"
+                                 alt="自摄的富士山全景，作为网站封面的视觉来源。">
+                        </picture>
+                    </div>
+                </article>
+
+                <article class="case" id="godot" aria-labelledby="case-godot">
+                    <div class="case-body">
+                        <h2 id="case-godot">独立游戏开发尝试 · Godot</h2>
+                        <p class="case-sub">自学 · 个人项目，目前处在起步阶段。</p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="godot-what">
+                            <h3 id="godot-what">现在到哪一步</h3>
+                            <ul class="list">
+                                <li>从零接触 Godot：学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
+                                <li>目标：先独立完成一个可玩的小型游戏原型，把做网页动效时积累的交互与节奏感迁移到游戏里</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>Godot</li><li>GDScript</li><li>游戏循环</li><li>交互设计</li>
+                        </ul>
+                        <p class="placeholder-note">
+                            <strong>占位说明：</strong>这个项目还没有可以展示的成品，所以这里不放假截图、不写虚构进度。
+                            做出第一个可玩原型后会补上过程记录。
+                        </p>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">自学 / 个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026 – 至今</span></li>
+                            <li><span class="k">状态</span><span class="v">起步阶段</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <section class="block" aria-labelledby="future">
+                    <h2 id="future">还在准备 / Planned</h2>
+                    <p class="placeholder-note">
+                        <strong>Blog 与 Gallery 尚未开放。</strong>
+                        站内目前没有需要按时间线整理的文章，也没有成组的摄影作品可以公开展示，
+                        所以不先建空栏目。等内容真的攒够了，再按独立静态路径加进来。
+                    </p>
+                </section>
             </div>
-            <ul>
-                <li><b>涡流像素化着色器</b>:自定义 GLSL 片元着色器,基于鼠标位移量、速度差与缓动因子(easeFactor)驱动画面扭曲,指针移动时背景如流体般跟随</li>
-                <li><b>全屏日食加载动画</b>:把加载进度映射为日食进程——资源就绪的那一刻正好是日全食,停留 1 秒后白色光圈炸开扩散,穿过光圈直接看到网站</li>
-                <li><b>字体与首屏策略</b>:Blanquotey 自托管 + 预加载 + 绘制纹理前显式等待字体就绪,避免首屏文字回落成系统字体</li>
-                <li><b>工程整理</b>:JS 按职责拆分为 config / shaders / texture / svg-nav / scene / main,目录分层为 js / css / fonts</li>
-            </ul>
-            <p class="keywords"><span>Three.js</span><span>WebGL</span><span>GLSL</span><span>原生 JavaScript</span><span>CSS</span></p>
-            <a class="card-link" href="index.html">打开网站 →</a>
         </div>
-
     </main>
 
-    <footer class="page-footer">
-        <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="work.html">Work</a>
-        <a href="resume.html">Resume</a>
-        <a href="contact.html">Contact</a>
+    <footer class="site-footer">
+        <div class="shell footer-inner">
+            <p>© 2026 Kysoul · 杨添富</p>
+            <ul class="footer-links">
+                <li><a href="mailto:1613609692@qq.com">1613609692@qq.com</a></li>
+                <li><a href="./work/eclipse.html">特效演示</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </div>
     </footer>
 </body>
 </html>

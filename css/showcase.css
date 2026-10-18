@@ -1,0 +1,158 @@
+/* ============================================================
+   showcase.css —— 作品特效演示页（work/eclipse.html）
+   演示区是一块带框的画布：默认显示静态照片，脚本就绪后才接管为可交互画面。
+   ============================================================ */
+
+.exhibit-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-5);
+}
+
+.exhibit-head .back {
+    font-size: var(--text-sm);
+    text-decoration: none;
+    color: var(--ink-muted);
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+.exhibit-head .back:hover { color: var(--accent-ink); }
+
+/* ---------- 演示台 ---------- */
+.stage {
+    position: relative;
+    margin-top: var(--space-5);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-3);
+    background: var(--bg-sunken);
+    overflow: hidden;
+    box-shadow: var(--shadow-2);
+    isolation: isolate;
+}
+
+.stage-canvas,
+.stage-poster {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: 50% 46%;
+}
+
+.stage-canvas { touch-action: none; cursor: crosshair; }
+
+.stage-poster { user-select: none; }
+
+.stage-notice {
+    position: absolute;
+    inset: auto var(--space-4) var(--space-4) var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-2);
+    background: var(--bg-elev);
+    background: color-mix(in srgb, var(--bg-elev) 92%, transparent);
+    border: 1px solid var(--line-strong);
+    color: var(--ink-2);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    box-shadow: var(--shadow-1);
+}
+
+.stage-notice[hidden] { display: none; }
+
+@media (max-width: 40rem) {
+    .stage-canvas,
+    .stage-poster { aspect-ratio: 4 / 3; }
+}
+
+/* ---------- 控制条 ---------- */
+.stage-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: var(--space-4);
+}
+
+.stage-toolbar[hidden] { display: none; }
+
+.stage-status {
+    font-size: var(--text-sm);
+    color: var(--ink-muted);
+    min-height: 1.4em;
+}
+
+.stage-status b { color: var(--ink-2); font-weight: 600; }
+
+/* ---------- 说明网格 ---------- */
+.notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--space-5) var(--space-6);
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--line);
+}
+
+.notes h2 {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: var(--space-3);
+}
+
+.notes p,
+.notes li {
+    font-size: var(--text-sm);
+    line-height: 1.75;
+    color: var(--ink-2);
+}
+
+.notes ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.notes li {
+    position: relative;
+    padding-left: var(--space-4);
+}
+
+.notes li + li { margin-top: var(--space-2); }
+
+.notes li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: .66em;
+    width: 5px;
+    height: 1px;
+    background: var(--line-strong);
+}
+
+/* ---------- 全屏日食遮罩（由脚本创建，这里只定义不依赖内联样式的部分） ---------- */
+.eclipse-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: #fff;
+    transition: opacity 900ms var(--ease-in-out);
+}
+
+.eclipse-overlay canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .eclipse-overlay { transition: none; }
+}

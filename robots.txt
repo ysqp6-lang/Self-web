@@ -1,0 +1,8 @@
+# robots.txt —— Kysoul
+# 公开站点，允许抓取；404 页与打印页不需要被索引。
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /resume-print.html
+
+Sitemap: https://kysoul.me/sitemap.xml
