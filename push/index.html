@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>DSH 任务通知 · 订阅</title>
+    <meta name="description" content="订阅 DSH 任务完成、出错与待确认通知，直接推送到这台 iPhone。" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f7f4ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111110" media="(prefers-color-scheme: dark)" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="DSH 通知" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png" />
+
+    <style>
+      /* ============================================================
+         设计令牌 —— 沿用 kysoul.me 的语言（暖调纸感 + 赭橙强调）
+         只放变量，不放选择器规则。完整规范见 design/02 §5。
+         ============================================================ */
+      /* 站点品牌衬线（kysoul.me/fonts/Blanquotey.woff，相对 ../fonts 取用；
+         加载失败自动回退到 --font-display 里的 Iowan Old Style 等） */
+      @font-face {
+        font-family: "Blanquotey";
+        src: url("../fonts/Blanquotey.woff") format("woff");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: light dark;
+
+        /* ---------- 颜色：浅色（默认，暖白纸） ----------
+           2026-10-20 集成：直接取 kysoul.me 站点的纸感色板
+           (css/pages.css: --paper/--card/--ink/--line)，保证两站同色。
+           --ink-muted 保留原值：换成站点的 #7c776e 会掉到 4.06:1，
+           正文小字对比度不合格，故只对齐大面色。 ---------- */
+        --bg: #f7f4ee;               /* 站点 --paper */
+        --bg-elev: #fffdf9;          /* 站点 --card */
+        --bg-sunken: #f2efe9;        /* 站点 --line-soft */
+        --ink: #1c1b18;              /* 站点 --ink */
+        --ink-2: #3d3a34;            /* 站点 --ink-soft */
+        --ink-muted: #6b665e;        /* 对比度 5.22:1 (bg) */
+        --line: #e9e4db;             /* 站点 --line */
+        --line-strong: #d9d2c6;
+        --accent: #b4521f;
+        --accent-ink: #8f3f14;       /* 文字用强调色 6.96:1 */
+        --accent-wash: rgba(180, 82, 31, .09);
+        --focus: #8f3f14;
+        --selection: rgba(180, 82, 31, .18);
+
+        /* 实心按钮：浅色主题浅字深底（4.96:1） */
+        --btn-bg: #b4521f;
+        --btn-ink: #fffdf9;
+        --btn-bg-hover: #8f3f14;
+        --btn-ink-hover: #fffdf9;
+
+        /* 语义色（kysoul 未定义，按同一暖调体系推导，均满足 5:1+） */
+        --ok: #2f6b4f;               /* 5.4:1 */
+        --ok-wash: rgba(47, 107, 79, .10);
+        --warn: #8a5a12;             /* 5.3:1 */
+        --warn-wash: rgba(138, 90, 18, .10);
+        --err: #a33a2c;              /* 5.7:1 */
+        --err-wash: rgba(163, 58, 44, .10);
+
+        --shadow-1: 0 1px 2px rgba(46, 36, 20, .05), 0 1px 1px rgba(46, 36, 20, .04);
+        --shadow-2: 0 2px 4px rgba(46, 36, 20, .04), 0 14px 30px -14px rgba(46, 36, 20, .22);
+
+        /* ---------- 字体 ---------- */
+        --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+          "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+        /* 衬线只用于品牌字与大标题：Blanquotey 为 kysoul 自托管字体，
+           本页离线不加载，自动回退到 Apple 设备自带的 Iowan Old Style。 */
+        --font-display: "Blanquotey", "Iowan Old Style", "Palatino Linotype",
+          "Times New Roman", serif;
+        --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+        /* ---------- 字号阶梯 ---------- */
+        --text-xs: .8125rem;
+        --text-sm: .875rem;
+        --text-md: 1rem;
+        --text-lg: clamp(1.0625rem, 1rem + .35vw, 1.1875rem);
+        --text-xl: clamp(1.25rem, 1.1rem + .7vw, 1.5625rem);
+        --text-2xl: clamp(1.5rem, 1.25rem + 1.1vw, 2.125rem);
+
+        /* ---------- 间距（4px 基数） ---------- */
+        --space-1: .25rem;
+        --space-2: .5rem;
+        --space-3: .75rem;
+        --space-4: 1rem;
+        --space-5: 1.5rem;
+        --space-6: 2rem;
+        --space-7: 3rem;
+
+        /* ---------- 版式测量 ---------- */
+        --container: 34rem;
+        --measure: 68ch;
+        --gutter: clamp(1.25rem, 5vw, 2rem);
+
+        /* ---------- 形状与动效 ---------- */
+        --radius-1: 8px;
+        --radius-2: 14px;
+        --radius-3: 20px;
+        --radius-pill: 999px;
+        --duration-1: 150ms;
+        --duration-2: 240ms;
+        --duration-3: 320ms;
+        --ease-out: cubic-bezier(.16, 1, .3, 1);
+      }
+
+      /* ---------- 颜色：深色 ---------- */
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #111110;
+          --bg-elev: #1a1a19;
+          --bg-sunken: #0c0c0b;
+          --ink: #f4f2ec;
+          --ink-2: #cfcbc2;
+          --ink-muted: #a09a90;      /* 6.77:1 */
+          --line: #2b2a27;
+          --line-strong: #3b3934;
+          --accent: #e8804a;
+          --accent-ink: #f09a6a;     /* 8.58:1 */
+          --accent-wash: rgba(232, 128, 74, .12);
+          --focus: #f09a6a;
+          --selection: rgba(232, 128, 74, .28);
+
+          /* 深色主题必须翻转成深字浅底：白字压在 #e8804a 上只有 2.7:1 */
+          --btn-bg: #e8804a;
+          --btn-ink: #191817;
+          --btn-bg-hover: #f09a6a;
+          --btn-ink-hover: #191817;
+
+          --ok: #6cc08f;             /* 7.1:1 */
+          --ok-wash: rgba(108, 192, 143, .12);
+          --warn: #e0b061;           /* 9.0:1 */
+          --warn-wash: rgba(224, 176, 97, .12);
+          --err: #e8867a;            /* 7.4:1 */
+          --err-wash: rgba(232, 134, 122, .12);
+
+          --shadow-1: 0 1px 2px rgba(0, 0, 0, .5);
+          --shadow-2: 0 2px 4px rgba(0, 0, 0, .4), 0 16px 32px -16px rgba(0, 0, 0, .7);
+        }
+      }
+
+      /* ---------- 降低动态效果 ---------- */
+      @media (prefers-reduced-motion: reduce) {
+        :root {
+          --duration-1: 1ms;
+          --duration-2: 1ms;
+          --duration-3: 1ms;
+        }
+      }
+
+      /* ---------- 提高对比度 ---------- */
+      @media (prefers-contrast: more) {
+        :root {
+          --ink-muted: #4a453d;
+          --line: #cdc6b8;
+          --line-strong: #a9a294;
+        }
+      }
+      @media (prefers-contrast: more) and (prefers-color-scheme: dark) {
+        :root {
+          --ink-muted: #c9c3b9;
+          --line: #4d4a44;
+          --line-strong: #6d6961;
+        }
+      }
+
+      /* ============================================================
+         基础
+         ============================================================ */
+      *,
+      *::before,
+      *::after { box-sizing: border-box; }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font-sans);
+        font-size: var(--text-md);
+        line-height: 1.65;
+        font-synthesis-weight: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        accent-color: var(--accent);
+      }
+
+      /* UA 的 [hidden] 会被组件里的 display:block 覆盖，这里补回来 */
+      [hidden] { display: none !important; }
+
+      h1, h2, h3, p, dl, dd { margin: 0; }
+      ul, ol { margin: 0; padding: 0; }
+      button { font: inherit; color: inherit; }
+      svg { display: block; }
+
+      ::selection { background: var(--selection); color: var(--ink); }
+      :root { caret-color: var(--accent); }
+
+      :focus-visible {
+        outline: 2px solid var(--focus);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+
+      a {
+        color: var(--accent-ink);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: .22em;
+        text-decoration-color: color-mix(in srgb, var(--accent-ink) 40%, transparent);
+        transition: text-decoration-color var(--duration-1) var(--ease-out),
+                    color var(--duration-1) var(--ease-out);
+      }
+      a:hover { text-decoration-color: currentColor; }
+
+      .shell {
+        width: 100%;
+        max-width: var(--container);
+        margin-inline: auto;
+        padding-inline: var(--gutter);
+      }
+
+      .main { flex: 1 0 auto; }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px; height: 1px;
+        margin: -1px; padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: var(--space-4);
+        top: var(--space-2);
+        z-index: 100;
+        padding: var(--space-2) var(--space-4);
+        background: var(--bg-elev);
+        color: var(--ink);
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-1);
+        box-shadow: var(--shadow-2);
+        text-decoration: none;
+        transform: translateY(-200%);
+        transition: transform var(--duration-2) var(--ease-out);
+      }
+      .skip-link:focus-visible { transform: translateY(0); }
+
+      /* ============================================================
+         站点头
+         ============================================================ */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--bg);
+        background: color-mix(in srgb, var(--bg) 86%, transparent);
+        border-bottom: 1px solid var(--line);
+        -webkit-backdrop-filter: saturate(180%) blur(14px);
+        backdrop-filter: saturate(180%) blur(14px);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-4);
+        min-height: 56px;
+        padding-block: var(--space-2);
+      }
+
+      .wordmark {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: 1.375rem;
+        line-height: 1;
+        letter-spacing: .01em;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      /* ============================================================
+         Hero
+         ============================================================ */
+      .hero {
+        padding-block: clamp(1.75rem, 5vh, 3rem) var(--space-6);
+      }
+
+      .hero .display {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: var(--text-2xl);
+        line-height: 1.1;
+        letter-spacing: -.01em;
+        color: var(--ink);
+        text-wrap: balance;
+      }
+
+      .hero .lede {
+        margin-top: var(--space-3);
+        max-width: 34ch;
+        font-size: var(--text-md);
+        line-height: 1.6;
+        color: var(--ink-2);
+        text-wrap: pretty;
+      }
+
+      /* ============================================================
+         区块（发丝线分隔，不用卡片阵列）
+         ============================================================ */
+      .section { padding-block: var(--space-6) 0; }
+
+      .section-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--space-2) var(--space-4);
+        padding-bottom: var(--space-3);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section-head h2 {
+        font-size: var(--text-lg);
+        font-weight: 600;
+        letter-spacing: -.01em;
+      }
+
+      .section-head .aside {
+        font-size: var(--text-sm);
+        color: var(--ink-muted);
+      }
+
+      /* ---------- 自检列表：一行一项 ---------- */
+      .check-list { list-style: none; }
+
+      .check-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: baseline;
+        gap: var(--space-2) var(--space-4);
+        padding-block: var(--space-4);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .check-label {
+        font-size: var(--text-md);
+        font-weight: 500;
+      }
+
+      .check-fix {
+        grid-column: 1 / -1;
+        max-width: var(--measure);
+        margin-top: var(--space-1);
+        font-size: var(--text-sm);
+        color: var(--ink-muted);
+        line-height: 1.6;
+      }
+
+      /* ---------- 表单 ---------- */
+      .field {
+        display: block;
+        margin-top: var(--space-5);
+      }
+
+      .field > .label {
+        display: block;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--ink-2);
+        margin-bottom: var(--space-2);
+      }
+
+      .input-wrap {
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-2);
+        background: var(--bg-elev);
+        transition: border-color var(--duration-1) var(--ease-out);
+      }
+      .input-wrap:focus-within { border-color: var(--accent); }
+
+      .input-wrap input {
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 46px;
+        padding: 0 var(--space-4);
+        border: 0;
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        font-size: 1rem;        /* 16px 防 iOS 聚焦缩放 */
+      }
+      .input-wrap input:focus { outline: none; }
+
+      .input-wrap .eye {
+        flex: 0 0 auto;
+        width: 44px;
+        height: 44px;
+        margin-right: var(--space-1);
+        border: 0;
+        border-radius: var(--radius-1);
+        background: transparent;
+        color: var(--ink-muted);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transition: background-color var(--duration-1) var(--ease-out),
+                    color var(--duration-1) var(--ease-out);
+      }
+      .input-wrap .eye:hover { background: var(--accent-wash); color: var(--ink); }
+
+      .hint {
+        margin-top: var(--space-2);
+        font-size: var(--text-sm);
+        color: var(--ink-muted);
+      }
+
+      /* ---------- 按钮：胶囊 ---------- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-2);
+        min-height: 48px;
+        width: 100%;
+        padding: 0 var(--space-5);
+        border: 1px solid transparent;
+        border-radius: var(--radius-pill);
+        background: var(--btn-bg);
+        color: var(--btn-ink);
+        font-size: var(--text-md);
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform var(--duration-1) var(--ease-out),
+                    box-shadow var(--duration-1) var(--ease-out),
+                    background-color var(--duration-1) var(--ease-out);
+      }
+      .btn:hover {
+        background: var(--btn-bg-hover);
+        color: var(--btn-ink-hover);
+        box-shadow: var(--shadow-2);
+      }
+      .btn:active { transform: translateY(1px); }
+
+      .btn--ghost {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--line-strong);
+      }
+      .btn--ghost:hover {
+        background: var(--accent-wash);
+        border-color: var(--accent);
+        color: var(--ink);
+        box-shadow: none;
+      }
+
+      .btn:disabled {
+        opacity: .55;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .btn-row {
+        margin-top: var(--space-4);
+        display: grid;
+        gap: var(--space-3);
+      }
+
+      .spinner {
+        width: 15px;
+        height: 15px;
+        border: 2px solid color-mix(in srgb, currentColor 35%, transparent);
+        border-top-color: currentColor;
+        border-radius: 50%;
+        animation: spin .7s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      /* ---------- 标签（胶囊） ---------- */
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        height: 1.6rem;
+        padding: 0 var(--space-3);
+        border: 1px solid var(--line-strong);
+        border-radius: var(--radius-pill);
+        font-size: var(--text-xs);
+        font-weight: 500;
+        letter-spacing: .02em;
+        color: var(--ink-muted);
+        white-space: nowrap;
+      }
+      .tag--ok   { border-color: color-mix(in srgb, var(--ok) 45%, var(--line));   color: var(--ok);   background: var(--ok-wash); }
+      .tag--warn { border-color: color-mix(in srgb, var(--warn) 45%, var(--line)); color: var(--warn); background: var(--warn-wash); }
+      .tag--err  { border-color: color-mix(in srgb, var(--err) 45%, var(--line));  color: var(--err);  background: var(--err-wash); }
+
+      /* ---------- 状态条 ---------- */
+      .status {
+        display: flex;
+        gap: var(--space-3);
+        align-items: flex-start;
+        margin-top: var(--space-5);
+        padding: var(--space-4);
+        border-radius: var(--radius-2);
+        background: var(--bg-sunken);
+        border-left: 3px solid var(--line-strong);
+        font-size: var(--text-sm);
+        color: var(--ink-2);
+        line-height: 1.6;
+      }
+      .status:empty { display: none; }
+      .status[data-tone="ok"]   { border-left-color: var(--ok);   background: var(--ok-wash); }
+      .status[data-tone="warn"] { border-left-color: var(--warn); background: var(--warn-wash); }
+      .status[data-tone="err"]  { border-left-color: var(--err);  background: var(--err-wash); }
+
+      /* ---------- 已订阅信息 ---------- */
+      .kv-list { margin-top: var(--space-2); }
+      .kv {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-4);
+        padding-block: var(--space-3);
+        border-bottom: 1px solid var(--line);
+        font-size: var(--text-md);
+      }
+      .kv dt { color: var(--ink-muted); }
+      .kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+
+      /* ---------- 二次验证行（仅在缺少会话访问码时出现） ---------- */
+      .reauth {
+        margin-top: var(--space-4);
+        padding-top: var(--space-4);
+        border-top: 1px solid var(--line);
+      }
+      .reauth .label {
+        display: block;
+        font-size: var(--text-sm);
+        font-weight: 600;
+        color: var(--ink-2);
+        margin-bottom: var(--space-2);
+      }
+
+      /* ---------- 常见问题 ---------- */
+      .faq { border-bottom: 1px solid var(--line); }
+      .faq summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        min-height: 48px;
+        cursor: pointer;
+        font-size: var(--text-md);
+        font-weight: 500;
+        list-style: none;
+        transition: color var(--duration-1) var(--ease-out);
+      }
+      .faq summary::-webkit-details-marker { display: none; }
+      .faq summary::after {
+        content: "+";
+        color: var(--ink-muted);
+        font-weight: 400;
+      }
+      .faq[open] summary::after { content: "−"; }
+      .faq summary:hover { color: var(--accent-ink); }
+      .faq p {
+        max-width: var(--measure);
+        margin-bottom: var(--space-4);
+        font-size: var(--text-sm);
+        color: var(--ink-muted);
+        line-height: 1.7;
+      }
+
+      /* ---------- 页脚 ---------- */
+      .site-footer {
+        flex-shrink: 0;
+        margin-top: var(--space-7);
+        padding-block: var(--space-5) calc(var(--space-6) + env(safe-area-inset-bottom));
+        border-top: 1px solid var(--line);
+        font-size: var(--text-sm);
+        color: var(--ink-muted);
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">跳到正文</a>
+
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="wordmark" href="../" aria-label="返回 Kysoul 主页">Kysoul</a>
+        <span class="tag" id="headerTag">未订阅</span>
+      </div>
+    </header>
+
+    <main class="main" id="main" tabindex="-1">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="shell">
+          <h1 class="display">任务通知</h1>
+          <p class="lede">
+            任务结束、出错或需要你确认时，直接推送到这台 iPhone。
+          </p>
+        </div>
+      </section>
+
+      <div class="shell">
+        <!-- 环境自检：一行一项，发丝线分隔（02 §6 核心区块） -->
+        <section class="section" aria-labelledby="checks-title">
+          <div class="section-head">
+            <h2 id="checks-title">环境自检</h2>
+            <span class="aside" id="checkSummary"></span>
+          </div>
+          <ul class="check-list" id="checks"></ul>
+        </section>
+
+        <!-- 未订阅：开启表单 -->
+        <section class="section" id="panelForm" aria-labelledby="form-title">
+          <div class="section-head">
+            <h2 id="form-title">开启通知</h2>
+          </div>
+          <label class="field">
+            <span class="label">订阅访问码</span>
+            <span class="input-wrap">
+              <input
+                id="code"
+                type="password"
+                autocomplete="one-time-code"
+                spellcheck="false"
+                placeholder="服务器设置的 SUBSCRIBE_CODE"
+              />
+              <button class="eye" id="toggleCode" type="button" aria-label="显示访问码">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </button>
+            </span>
+          </label>
+          <p class="hint">只在本页临时使用，提交后立即清除，不会保存在浏览器里。</p>
+          <div class="btn-row">
+            <button class="btn" id="enable" type="button">开启 DSH 通知</button>
+          </div>
+        </section>
+
+        <!-- 已订阅 -->
+        <section class="section" id="panelSubscribed" hidden aria-labelledby="sub-title">
+          <div class="section-head">
+            <h2 id="sub-title">订阅状态</h2>
+            <span class="aside"><span class="tag tag--ok">已开启</span></span>
+          </div>
+          <dl class="kv-list">
+            <div class="kv"><dt>订阅时间</dt><dd id="metaCreated">—</dd></div>
+            <div class="kv"><dt>最近推送</dt><dd id="metaLast">—</dd></div>
+            <div class="kv"><dt>设备</dt><dd id="metaDevice">—</dd></div>
+          </dl>
+          <div class="btn-row">
+            <button class="btn btn--ghost" id="testPush" type="button">发送一条测试通知</button>
+            <button class="btn btn--ghost" id="disable" type="button">关闭这台设备的通知</button>
+          </div>
+
+          <!-- 会话内没有访问码时（例如从主屏幕重新打开），需要补输一次 -->
+          <div class="reauth" id="reauthRow" hidden>
+            <label class="field" for="reauthCode" style="margin-top:0">
+              <span class="label" id="reauthLabel">再次输入订阅访问码</span>
+              <span class="input-wrap">
+                <input
+                  id="reauthCode"
+                  type="password"
+                  autocomplete="one-time-code"
+                  spellcheck="false"
+                  placeholder="服务器设置的 SUBSCRIBE_CODE"
+                />
+              </span>
+            </label>
+            <div class="btn-row">
+              <button class="btn" id="reauthConfirm" type="button">确认</button>
+              <button class="btn btn--ghost" id="reauthCancel" type="button">取消</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 状态条 -->
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+
+        <!-- 常见问题 -->
+        <section class="section" aria-labelledby="faq-title">
+          <div class="section-head">
+            <h2 id="faq-title">常见问题</h2>
+          </div>
+          <details class="faq">
+            <summary>为什么必须「添加到主屏幕」？</summary>
+            <p>
+              iOS 上的网页推送只对已添加到主屏幕、并从主屏幕图标启动的网站开放。
+              在普通 Safari 标签页里无法申请通知权限。
+            </p>
+          </details>
+          <details class="faq">
+            <summary>收不到通知怎么办？</summary>
+            <p>
+              依次确认：① 已从主屏幕图标打开本页；② 系统设置中该网站的通知已允许；
+              ③ 运行推送服务的电脑处于开机联网状态。
+            </p>
+          </details>
+          <details class="faq">
+            <summary>更换 VAPID 密钥后要做什么？</summary>
+            <p>服务端重启后，需要在这台设备上先关闭通知，再重新开启一次。</p>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <p>通知内容仅包含任务名称与结束原因，不会包含密钥或完整代码。</p>
+        <p><a href="../">← 返回 Kysoul 主页</a></p>
+      </div>
+    </footer>
+
+    <script src="./push.js"></script>
+  </body>
+</html>
