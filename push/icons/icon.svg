@@ -3,7 +3,7 @@
        琥珀底 + 纸白：K 的竖笔＝鲸身，右侧两笔合并为一片鲸尾（V 形凹口分两瓣）。
        满幅、无圆角、无透明；主体落在中央约 70% 安全区内。 -->
   <rect width="512" height="512" fill="#b4521f"/>
-  <g transform="translate(256 256) scale(0.93) translate(-274 0) translate(-256 -256)">
+  <g transform="translate(256 256) scale(0.93) translate(-256 -256) translate(-18 0)">
     <path fill="#f7f4ee" d="
       M188 226
       C242 182 334 138 414 116
