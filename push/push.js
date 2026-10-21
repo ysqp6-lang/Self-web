@@ -574,17 +574,32 @@ function linkedMessageId() {
   return fromHash ? fromHash[1] : "";
 }
 
+// 高亮在本次会话内「粘住」：列表每次重渲染（切回前台刷新）都要重新打上去，
+// 否则一次刷新就把高亮抹掉了 —— 这正是「点通知看不出定位」的真实原因。
+let focusedMessageId = "";
+let focusScrolled = false;
+
 function focusLinkedMessage() {
   const id = linkedMessageId();
-  if (!id) return;
-  const node = el.msgsList.querySelector(`[data-message-id="${CSS.escape(id)}"]`);
+  if (id) {
+    focusedMessageId = id;
+    focusScrolled = false;
+    // 拿到参数就清掉，避免刷新时反复定位
+    history.replaceState(null, "", location.pathname);
+  }
+  if (!focusedMessageId) return;
+
+  const node = el.msgsList.querySelector(`[data-message-id="${CSS.escape(focusedMessageId)}"]`);
   if (!node) return;
   node.classList.add("is-focus");
+
   const details = node.querySelector("details");
   if (details) details.open = true;
-  node.scrollIntoView({ block: "center", behavior: "smooth" });
-  // 清掉 m 参数，避免 PWA 被反复拉到同一条
-  history.replaceState(null, "", location.pathname);
+
+  if (!focusScrolled) {
+    node.scrollIntoView({ block: "center", behavior: "smooth" });
+    focusScrolled = true;
+  }
 }
 
 // 切回前台时刷新（通知点开、从桌面图标回来都会走这里）
