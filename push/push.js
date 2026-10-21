@@ -138,7 +138,9 @@ function setState(next, message) {
 
   el.panelForm.hidden = subscribed;
   el.panelSubscribed.hidden = !subscribed;
-  el.panelMessages.hidden = !(subscribed && loadInboxKey());
+  // 只要本机还留着阅读凭证就显示消息面板：
+  // 浏览器订阅可能因重装/清缓存丢失，但历史消息仍值得能翻到
+  el.panelMessages.hidden = !loadInboxKey();
   if (!el.panelMessages.hidden) loadMessages().catch(() => {});
   el.code.disabled = blocked;
   el.enable.disabled = blocked;
