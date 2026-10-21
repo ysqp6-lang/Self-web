@@ -138,9 +138,8 @@ function setState(next, message) {
 
   el.panelForm.hidden = subscribed;
   el.panelSubscribed.hidden = !subscribed;
-  // 只要本机还留着阅读凭证就显示消息面板：
-  // 浏览器订阅可能因重装/清缓存丢失，但历史消息仍值得能翻到
-  el.panelMessages.hidden = !loadInboxKey();
+  // 消息面板：已订阅（老订阅会自证端点补发凭证）或本机已有凭证时都显示
+  el.panelMessages.hidden = !(subscribed || loadInboxKey());
   if (!el.panelMessages.hidden) loadMessages().catch(() => {});
   el.code.disabled = blocked;
   el.enable.disabled = blocked;
@@ -229,10 +228,11 @@ const ERROR_TEXT = {
   unsupported_media_type: "请求格式不被接受，请升级到最新版本。",
 };
 
-async function api(path, { method = "POST", code, body, inboxKey } = {}) {
+async function api(path, { method = "POST", code, body, inboxKey, endpoint } = {}) {
   const headers = { "Content-Type": "application/json" };
   if (code) headers["X-Subscribe-Code"] = code;
   if (inboxKey) headers["X-Inbox-Key"] = inboxKey;
+  if (endpoint) headers["X-Push-Endpoint"] = endpoint;
 
   const response = await fetch(`${PUSH_API_BASE}${path}`, {
     method,
@@ -533,10 +533,32 @@ function renderMessages(data) {
   }
 }
 
+/** 取本设备当前的推送端点（端点本身即不可猜的凭证，用于给老订阅补发阅读凭证）。 */
+async function currentPushEndpoint() {
+  try {
+    const registration =
+      (await navigator.serviceWorker.getRegistration(SW_URL)) ||
+      (await navigator.serviceWorker.getRegistration());
+    if (!registration) return "";
+    const subscription = await registration.pushManager.getSubscription();
+    return subscription?.endpoint || "";
+  } catch {
+    return "";
+  }
+}
+
 async function loadMessages() {
   const inboxKey = loadInboxKey();
-  if (!inboxKey) return;
-  const data = await api("/api/messages", { method: "GET", inboxKey });
+  let data;
+  if (inboxKey) {
+    data = await api("/api/messages", { method: "GET", inboxKey });
+  } else {
+    // 升级前订阅的设备没有 inboxKey：用推送端点自证身份，服务端会补发一枚
+    const endpoint = await currentPushEndpoint();
+    if (!endpoint) return;
+    data = await api("/api/messages", { method: "GET", endpoint });
+    if (data?.inboxKey) saveInboxKey(data.inboxKey);
+  }
   renderMessages(data);
   focusLinkedMessage();
 }
