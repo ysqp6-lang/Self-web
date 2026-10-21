@@ -16,7 +16,7 @@ const RESUBSCRIBE_THROTTLE_MS = 30_000;
 const SW_URL = "./sw.js";
 
 // 构建标记：显示在页脚，用来确认「设备上跑的是不是最新前端」
-const BUILD_STAMP = "2026-10-21.2";
+const BUILD_STAMP = "2026-10-21.3";
 
 const el = {
   checks: document.getElementById("checks"),
