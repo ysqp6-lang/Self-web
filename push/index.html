@@ -249,23 +249,6 @@
         border: 0;
       }
 
-      .skip-link {
-        position: absolute;
-        left: var(--space-4);
-        top: var(--space-2);
-        z-index: 100;
-        padding: var(--space-2) var(--space-4);
-        background: var(--bg-elev);
-        color: var(--ink);
-        border: 1px solid var(--line-strong);
-        border-radius: var(--radius-1);
-        box-shadow: var(--shadow-2);
-        text-decoration: none;
-        transform: translateY(-200%);
-        transition: transform var(--duration-2) var(--ease-out);
-      }
-      .skip-link:focus-visible { transform: translateY(0); }
-
       /* ============================================================
          站点头
          ============================================================ */
@@ -685,8 +668,6 @@
   </head>
 
   <body>
-    <a class="skip-link" href="#main">跳到正文</a>
-
     <header class="site-header">
       <div class="shell header-inner">
         <a class="wordmark" href="../" aria-label="返回 Kysoul 主页">Kysoul</a>
