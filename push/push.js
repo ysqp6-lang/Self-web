@@ -15,6 +15,9 @@ const RESUBSCRIBE_THROTTLE_MS = 30_000;
 
 const SW_URL = "./sw.js";
 
+// 构建标记：显示在页脚，用来确认「设备上跑的是不是最新前端」
+const BUILD_STAMP = "2026-10-21.2";
+
 const el = {
   checks: document.getElementById("checks"),
   checkSummary: document.getElementById("checkSummary"),
@@ -563,18 +566,25 @@ async function loadMessages() {
   focusLinkedMessage();
 }
 
-/** 通知点击会带上 #m=<id>：定位并高亮那一条 */
+/** 通知点击会带上 ?m=<id>（旧版是 #m=<id>）：定位并高亮那一条 */
+function linkedMessageId() {
+  const fromQuery = new URLSearchParams(location.search).get("m");
+  if (fromQuery) return fromQuery;
+  const fromHash = /(?:^|[#&])m=([A-Za-z0-9_]+)/.exec(location.hash || "");
+  return fromHash ? fromHash[1] : "";
+}
+
 function focusLinkedMessage() {
-  const match = /(?:^|[#&])m=([A-Za-z0-9_]+)/.exec(location.hash || "");
-  if (!match) return;
-  const node = el.msgsList.querySelector(`[data-message-id="${match[1]}"]`);
+  const id = linkedMessageId();
+  if (!id) return;
+  const node = el.msgsList.querySelector(`[data-message-id="${CSS.escape(id)}"]`);
   if (!node) return;
   node.classList.add("is-focus");
   const details = node.querySelector("details");
   if (details) details.open = true;
   node.scrollIntoView({ block: "center", behavior: "smooth" });
-  // 清掉 hash，避免 PWA 被反复拉到同一条
-  history.replaceState(null, "", location.pathname + location.search);
+  // 清掉 m 参数，避免 PWA 被反复拉到同一条
+  history.replaceState(null, "", location.pathname);
 }
 
 // 切回前台时刷新（通知点开、从桌面图标回来都会走这里）
@@ -676,6 +686,17 @@ async function refresh() {
     setState(STATE.IDLE, MESSAGES.idle);
   }
 }
+
+// 页脚留一行构建标记：出问题时能一眼确认设备跑的是哪一版
+(() => {
+  const footer = document.querySelector(".site-footer .shell");
+  if (!footer) return;
+  const mark = document.createElement("p");
+  mark.style.opacity = "0.55";
+  mark.style.fontSize = "0.75rem";
+  mark.textContent = `构建 ${BUILD_STAMP}`;
+  footer.append(mark);
+})();
 
 setState(STATE.CHECKING, MESSAGES.checking);
 refresh().catch((error) => {
