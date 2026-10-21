@@ -35,7 +35,14 @@ const el = {
   reauthCode: document.getElementById("reauthCode"),
   reauthConfirm: document.getElementById("reauthConfirm"),
   reauthCancel: document.getElementById("reauthCancel"),
+  panelMessages: document.getElementById("panelMessages"),
+  msgsList: document.getElementById("msgsList"),
+  msgsMeta: document.getElementById("msgsMeta"),
+  msgsHint: document.getElementById("msgsHint"),
 };
+
+// 阅读完整消息的凭证（订阅时服务端下发，只存在本机，不进订阅码）
+const INBOX_KEY_STORAGE = "dsh-push-inbox-key";
 
 // ---------------------------------------------------------------------------
 // 环境检测（01 §10.2）
@@ -131,6 +138,8 @@ function setState(next, message) {
 
   el.panelForm.hidden = subscribed;
   el.panelSubscribed.hidden = !subscribed;
+  el.panelMessages.hidden = !(subscribed && loadInboxKey());
+  if (!el.panelMessages.hidden) loadMessages().catch(() => {});
   el.code.disabled = blocked;
   el.enable.disabled = blocked;
   el.disable.disabled = busy;
@@ -218,9 +227,10 @@ const ERROR_TEXT = {
   unsupported_media_type: "请求格式不被接受，请升级到最新版本。",
 };
 
-async function api(path, { method = "POST", code, body } = {}) {
+async function api(path, { method = "POST", code, body, inboxKey } = {}) {
   const headers = { "Content-Type": "application/json" };
   if (code) headers["X-Subscribe-Code"] = code;
+  if (inboxKey) headers["X-Inbox-Key"] = inboxKey;
 
   const response = await fetch(`${PUSH_API_BASE}${path}`, {
     method,
@@ -328,7 +338,9 @@ async function runEnable(permissionPromise, code) {
           applicationServerKey: urlBase64ToUint8Array(publicKey),
         }));
 
-      await api("/api/subscribe", { code, body: { subscription } });
+      const subscribed = await api("/api/subscribe", { code, body: { subscription } });
+      // 服务端只在订阅响应里下发一次阅读凭证；存本机 localStorage，用来读完整消息
+      if (subscribed?.inboxKey) saveInboxKey(subscribed.inboxKey);
       lastSubscribeAt = Date.now();
     }
 
@@ -376,12 +388,180 @@ el.disable.addEventListener("click", async () => {
     }
     sessionCode = "";
     lastSubscribeAt = 0;
+    clearInboxKey();
     clearMeta();
     env = detectEnvironment();
     setState(STATE.IDLE, { text: "已关闭这台设备的 DSH 通知。", tone: "ok" });
   } catch (error) {
     setState(STATE.ERROR, { text: error.message || "关闭通知失败。", tone: "err" });
   }
+});
+
+// ---------------------------------------------------------------------------
+// 最近消息：点开通知进 PWA 后读完整正文
+// ---------------------------------------------------------------------------
+
+function saveInboxKey(value) {
+  try {
+    localStorage.setItem(INBOX_KEY_STORAGE, value);
+  } catch {
+    // 隐私模式下写不进去：只影响「看完整消息」，不影响收通知
+  }
+}
+
+function loadInboxKey() {
+  try {
+    return localStorage.getItem(INBOX_KEY_STORAGE) || "";
+  } catch {
+    return "";
+  }
+}
+
+function clearInboxKey() {
+  try {
+    localStorage.removeItem(INBOX_KEY_STORAGE);
+  } catch {
+    // 忽略
+  }
+}
+
+const REASON_LABELS = {
+  completed: "已完成",
+  error: "出错",
+  aborted: "已中止",
+  blocked: "待处理",
+  "max-tokens": "达上限",
+  interrupted: "被打断",
+  ended: "已结束",
+};
+
+function shortTime(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  const now = Date.now();
+  const diff = now - date.getTime();
+  if (diff < 60_000) return "刚刚";
+  if (diff < 3_600_000) return `${Math.floor(diff / 60_000)} 分钟前`;
+  if (diff < 86_400_000) return `${Math.floor(diff / 3_600_000)} 小时前`;
+  return date.toLocaleString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+}
+
+function messageCard(message) {
+  const item = document.createElement("div");
+  item.className = "msg-item";
+  item.dataset.messageId = message.id;
+
+  const head = document.createElement("div");
+  head.className = "msg-head";
+
+  const title = document.createElement("span");
+  title.className = "msg-title";
+  const label = REASON_LABELS[message.reason] || message.reason || "";
+  title.textContent = message.title || "DSH 任务通知";
+  if (label) {
+    const badge = document.createElement("span");
+    badge.className = "tag";
+    badge.style.marginLeft = "6px";
+    badge.textContent = label;
+    title.append(badge);
+  }
+
+  const time = document.createElement("span");
+  time.className = "msg-time";
+  time.textContent = shortTime(message.createdAt);
+  time.title = message.createdAt || "";
+
+  head.append(title, time);
+  item.append(head);
+
+  const body = document.createElement("p");
+  body.className = "msg-body";
+  body.textContent = message.body || "";
+  item.append(body);
+
+  // 完整正文只在和摘要不同的情况下才折叠展示，避免重复
+  const detail = message.detail || "";
+  if (detail && detail !== message.body) {
+    const wrap = document.createElement("details");
+    wrap.className = "msg-detail";
+    const summary = document.createElement("summary");
+    summary.textContent = "查看完整内容";
+    const text = document.createElement("div");
+    text.className = "msg-detail-body";
+    text.textContent = detail;
+    wrap.append(summary, text);
+    item.append(wrap);
+  }
+  return item;
+}
+
+function renderMessages(data) {
+  el.msgsList.textContent = "";
+  const topics = Array.isArray(data?.topics) ? data.topics : [];
+  const total = topics.reduce((sum, topic) => sum + (topic.messages?.length || 0), 0);
+
+  if (total === 0) {
+    const empty = document.createElement("p");
+    empty.className = "msg-empty";
+    empty.textContent = "还没有消息。DSH 任务结束时这里会出现完整内容。";
+    el.msgsList.append(empty);
+    el.msgsMeta.textContent = "";
+    return;
+  }
+
+  el.msgsMeta.textContent = `${total} 条 · 每话题最多 ${data.keepPerTopic ?? 2} 条`;
+  for (const topic of topics) {
+    const box = document.createElement("div");
+    box.className = "msg-topic";
+
+    const head = document.createElement("div");
+    head.className = "msg-topic-head";
+    const name = document.createElement("span");
+    name.className = "msg-topic-name";
+    name.textContent = topic.name || "未命名话题";
+    name.title = topic.name || "";
+    const when = document.createElement("span");
+    when.className = "msg-topic-time";
+    when.textContent = shortTime(topic.lastActivityAt);
+    head.append(name, when);
+    box.append(head);
+
+    for (const message of topic.messages || []) box.append(messageCard(message));
+    el.msgsList.append(box);
+  }
+}
+
+async function loadMessages() {
+  const inboxKey = loadInboxKey();
+  if (!inboxKey) return;
+  const data = await api("/api/messages", { method: "GET", inboxKey });
+  renderMessages(data);
+  focusLinkedMessage();
+}
+
+/** 通知点击会带上 #m=<id>：定位并高亮那一条 */
+function focusLinkedMessage() {
+  const match = /(?:^|[#&])m=([A-Za-z0-9_]+)/.exec(location.hash || "");
+  if (!match) return;
+  const node = el.msgsList.querySelector(`[data-message-id="${match[1]}"]`);
+  if (!node) return;
+  node.classList.add("is-focus");
+  const details = node.querySelector("details");
+  if (details) details.open = true;
+  node.scrollIntoView({ block: "center", behavior: "smooth" });
+  // 清掉 hash，避免 PWA 被反复拉到同一条
+  history.replaceState(null, "", location.pathname + location.search);
+}
+
+// 切回前台时刷新（通知点开、从桌面图标回来都会走这里）
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "visible") return;
+  if (el.panelMessages.hidden) return;
+  loadMessages().catch(() => {});
+});
+
+window.addEventListener("hashchange", () => {
+  if (!el.panelMessages.hidden) focusLinkedMessage();
 });
 
 // ---------------------------------------------------------------------------
