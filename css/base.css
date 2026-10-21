@@ -122,25 +122,6 @@ a:hover { text-decoration-color: currentColor; }
     max-width: var(--measure);
 }
 
-/* ---------- 跳转链接 ---------- */
-.skip-link {
-    position: absolute;
-    left: var(--space-4);
-    top: var(--space-2);
-    z-index: 100;
-    padding: var(--space-2) var(--space-4);
-    background: var(--bg-elev);
-    color: var(--ink);
-    border: 1px solid var(--line-strong);
-    border-radius: var(--radius-1);
-    box-shadow: var(--shadow-2);
-    text-decoration: none;
-    transform: translateY(-200%);
-    transition: transform var(--duration-2) var(--ease-out);
-}
-
-.skip-link:focus-visible { transform: translateY(0); }
-
 /* ---------- 站点头 ----------
    导航在任何宽度下都保持 ≥16px 字号、≥44px 点击高度；
    不依赖脚本，也不使用 SVG 点击区域。 */
@@ -404,7 +385,6 @@ code, kbd, samp {
     }
     .site-header,
     .site-footer,
-    .skip-link,
     .btn,
     .no-print { display: none !important; }
     body { background: #fff; }
