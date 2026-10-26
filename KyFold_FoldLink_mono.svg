@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 104" fill="none">
+  <title>KyFold FoldLink — 单色折叠对扣</title>
+  <g transform="translate(4 4)" stroke="#233252" stroke-width="11" stroke-linecap="butt" stroke-linejoin="round">
+    <path d="M65 24 52 11C46 5 37 5 31 11L11 31C5 37 5 46 11 52L24 65C30 71 39 71 45 65L61 49"/>
+    <path d="M63 72 76 85C82 91 91 91 97 85L117 65C123 59 123 50 117 44L104 31C98 25 89 25 83 31L68 46"/>
+  </g>
+</svg>
