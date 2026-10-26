@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 104" fill="none">
+  <title>KyFold FoldLink — 折叠对扣</title>
+  <desc>两段圆角折面相向扣合，中央连接处保留一道斜切断面。</desc>
+  <defs>
+    <linearGradient id="clasp-a" x1="14" y1="10" x2="66" y2="73" gradientUnits="userSpaceOnUse"><stop stop-color="#f1f7ff"/><stop offset=".42" stop-color="#c3d4ff"/><stop offset="1" stop-color="#6c96f6"/></linearGradient>
+    <linearGradient id="clasp-b" x1="73" y1="24" x2="120" y2="94" gradientUnits="userSpaceOnUse"><stop stop-color="#8cafff"/><stop offset=".5" stop-color="#597be8"/><stop offset="1" stop-color="#3050c4"/></linearGradient>
+    <linearGradient id="clasp-c" x1="48" y1="63" x2="81" y2="30" gradientUnits="userSpaceOnUse"><stop stop-color="#a2beff"/><stop offset="1" stop-color="#f0f6ff"/></linearGradient>
+  </defs>
+  <g transform="translate(4 4)" stroke-width="11" stroke-linecap="butt" stroke-linejoin="round">
+    <path d="M65 24 52 11C46 5 37 5 31 11L11 31C5 37 5 46 11 52L24 65C30 71 39 71 45 65L61 49" stroke="url(#clasp-a)"/>
+    <path d="M63 72 76 85C82 91 91 91 97 85L117 65C123 59 123 50 117 44L104 31C98 25 89 25 83 31L68 46" stroke="url(#clasp-b)"/>
+  </g>
+</svg>
