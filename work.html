@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>作品 · Kysoul</title>
-    <meta name="description" content="Kysoul 的作品：从零手写的个人网站系统（WebGL / GLSL / 全屏日食动画），以及仍在起步阶段的 Godot 游戏开发尝试。">
+    <meta name="description" content="Kysoul 的项目：iPad 课堂 AI、KyLyn、HomeHub / KyLina、AI Agent 工具链与 PSD 分层矢量化；以及 PCB 与 GhostBus 实验。">
     <link rel="canonical" href="https://kysoul.me/work.html">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
@@ -12,7 +12,7 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Kysoul">
     <meta property="og:title" content="作品 · Kysoul">
-    <meta property="og:description" content="做出来的东西，以及怎么做出来的。">
+    <meta property="og:description" content="项目、技术难点与验证进展。">
     <meta property="og:url" content="https://kysoul.me/work.html">
     <meta property="og:image" content="https://kysoul.me/assets/photos/kysoul-cover.jpg">
 
@@ -45,10 +45,205 @@
             <div class="page">
                 <div class="page-head">
                     <h1>Work</h1>
-                    <p class="sub">做出来的东西，以及怎么做出来的</p>
+                    <p class="sub">把真实问题做成工具，也记录它们的边界</p>
+                    <p class="meta-line">截至 2026.10.22 · 验证结果依据项目测试与运行记录，适用范围见各项目说明</p>
                 </div>
 
-                <article class="case" aria-labelledby="case-kysoul">
+                <article class="case" id="ipad-classroom" aria-labelledby="ipad-classroom-title">
+                    <div class="case-body">
+                        <h2 id="ipad-classroom-title">iPad 课堂 AI 助手</h2>
+                        <p class="case-sub">把实时转写、提问识别与 AI 辅助作答串成课堂工作流。</p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="ipad-classroom-0">
+                            <h3 id="ipad-classroom-0">解决的问题</h3>
+                            <ul class="list">
+                                <li>面向课堂中听不清、跟不上与回看困难的场景，开发实时转写、问题标记、录音与 AI 辅助作答；答案可靠性用分级提示呈现。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="ipad-classroom-1">
+                            <h3 id="ipad-classroom-1">技术难点与处理</h3>
+                            <ul class="list">
+                                <li>音频回调的线程隔离和转写对象复用导致启动崩溃：调整回调创建方式，每轮重建转写器，并明确停止与资源释放顺序。</li>
+                                <li>转写中间结果反复触发 AI：先合并语句、定稿后再判定，增加调用频率、次数和预算上限；超时与输出截断分别处理。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="ipad-classroom-2">
+                            <h3 id="ipad-classroom-2">已验证与下一步</h3>
+                            <ul class="list">
+                                <li>真机能力探针通过；S1 启停测试记录为 50/50 次成功，未出现崩溃或静默停止。这个结果只覆盖启停稳定性。</li>
+                                <li>60 分钟连续监听、课堂识别与答案质量的系统评测尚未完成；拍照补图重答、二次校验与标注集仍待补齐。音量启发式默认关闭，声纹识别尚未实现。</li>
+                            </ul>
+                        </section>
+                            <ul class="keywords">
+                                <li>Swift</li>
+                                <li>SwiftUI</li>
+                                <li>SpeechAnalyzer</li>
+                                <li>AVFoundation</li>
+                            </ul>
+                        </div>
+                        <ul class="case-facts">
+                            <li><span class="k">时间</span><span class="v">2026.10</span></li>
+                            <li><span class="k">状态</span><span class="v">真机迭代中</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="kylyn" aria-labelledby="kylyn-title">
+                    <div class="case-body">
+                        <h2 id="kylyn-title">KyLyn · 对话式 AI 助手</h2>
+                        <p class="case-sub">围绕消息可靠性、上下文记忆与可控工具调用，构建持续运行的对话服务。</p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="kylyn-0">
+                            <h3 id="kylyn-0">解决的问题</h3>
+                            <ul class="list">
+                                <li>用 Adapter 分离消息接入与业务逻辑，将记忆、任务、模型调用和发送队列组织成可追踪的服务；跨架构运行采用 Node.js 内置 SQLite。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="kylyn-1">
+                            <h3 id="kylyn-1">技术难点与处理</h3>
+                            <ul class="list">
+                                <li>断线补回与在途消息竞争会重复回复或遗漏：加入心跳探测、连接代次隔离、去重和 Outbox 状态机，检查已落库但未回复的消息。</li>
+                                <li>推理输出预算耗尽与结构化元数据缺失：分别诊断空正文、调整预算，并将元数据提取拆成独立调用；对外部动作增加显式确认与范围限制。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="kylyn-2">
+                            <h3 id="kylyn-2">已验证与下一步</h3>
+                            <ul class="list">
+                                <li>合并版本的测试记录包含 564 个用例；受控真实发送链路已验证文本、图片与原生表情。测试覆盖不等于全部线上行为已验收。</li>
+                                <li>一次长时间断线的根因尚未确定；延迟任务发送后的状态回写、真实环境情绪标签仍待复核。判断模块处于影子模式，未作为正式决策能力启用。</li>
+                            </ul>
+                        </section>
+                            <ul class="keywords">
+                                <li>Node.js</li>
+                                <li>SQLite</li>
+                                <li>WebSocket</li>
+                                <li>状态机</li>
+                            </ul>
+                        </div>
+                        <ul class="case-facts">
+                            <li><span class="k">时间</span><span class="v">2026.10</span></li>
+                            <li><span class="k">状态</span><span class="v">已部署 · 持续验证</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="homehub" aria-labelledby="homehub-title">
+                    <div class="case-body">
+                        <h2 id="homehub-title">HomeHub / KyLina · 家庭服务与监控</h2>
+                        <p class="case-sub">复用旧 Mac 承载个人服务，把监控、维护与恢复纳入同一套工作流。</p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="homehub-0">
+                            <h3 id="homehub-0">解决的问题</h3>
+                            <ul class="list">
+                                <li>为个人服务规划运行环境、访问控制与备份；KyLina 提供硬件和服务状态视图，可选指标按需展开。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="homehub-1">
+                            <h3 id="homehub-1">技术难点与处理</h3>
+                            <ul class="list">
+                                <li>监控中的缺失值容易被误读成零：区分真实采集、模拟、不支持和采集失败，失败显示“未知”；检查服务实际运行状态，避免把入口可访问当成全链路正常。</li>
+                                <li>把备份、完整性校验与回滚快照纳入维护步骤，减少配置变更后难以定位和恢复的问题。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="homehub-2">
+                            <h3 id="homehub-2">已验证与下一步</h3>
+                            <ul class="list">
+                                <li>KyLina v0.3 的记录为 39 项测试通过、7/7 项验收脚本通过；服务已在个人环境部署并保留回滚快照。</li>
+                                <li>Intel Mac 的温度、风扇和电池等指标仍需逐项确认采集支持情况；备份恢复演练和重启后的自动恢复仍待补齐。</li>
+                            </ul>
+                        </section>
+                            <ul class="keywords">
+                                <li>Node.js</li>
+                                <li>macOS</li>
+                                <li>服务监控</li>
+                                <li>SQLite 备份</li>
+                            </ul>
+                        </div>
+                        <ul class="case-facts">
+                            <li><span class="k">时间</span><span class="v">2026.10</span></li>
+                            <li><span class="k">状态</span><span class="v">v0.3 已部署</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="agent-tools" aria-labelledby="agent-tools-title">
+                    <div class="case-body">
+                        <h2 id="agent-tools-title">AI Agent 工具链</h2>
+                        <p class="case-sub">让跨会话经验、工作区管理、用量观察与任务完成通知形成闭环。</p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="agent-tools-0">
+                            <h3 id="agent-tools-0">解决的问题</h3>
+                            <ul class="list">
+                                <li>围绕 DSH 工作流，自建“索引—路由—证据”三层记忆结构，按需读取经验；开发工作区移动插件、会话费用面板和任务完成推送。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="agent-tools-1">
+                            <h3 id="agent-tools-1">技术难点与处理</h3>
+                            <ul class="list">
+                                <li>迁移会话涉及日志与投影缓存的一致性：先备份，保留标题映射与回滚脚本，再同步工作区信息。插件使用正式插槽与设计变量，减少对动态样式类名的依赖。</li>
+                                <li>iOS 推送的打开位置与缓存行为不一致：限定 Service Worker 作用域、使用绝对路径，并用查询参数定位消息；会话费用按当时模型计价规则估算。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="agent-tools-2">
+                            <h3 id="agent-tools-2">已验证与下一步</h3>
+                            <ul class="list">
+                                <li>完成 68 个会话向 6 个主题工作区的重组，交付移动插件与用量面板；任务结束通知及完整消息落地已在个人环境跑通。</li>
+                                <li>记忆维护仍依赖 Agent 主动写入和定期补漏；这些工具目前服务于个人工作流，尚未做通用产品验证。</li>
+                            </ul>
+                        </section>
+                            <ul class="keywords">
+                                <li>JavaScript</li>
+                                <li>插件开发</li>
+                                <li>PWA</li>
+                                <li>文件式记忆</li>
+                            </ul>
+                        </div>
+                        <ul class="case-facts">
+                            <li><span class="k">时间</span><span class="v">2026.09 – 10</span></li>
+                            <li><span class="k">状态</span><span class="v">本地工具已落地</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="psd-svg" aria-labelledby="psd-svg-title">
+                    <div class="case-body">
+                        <h2 id="psd-svg-title">PSD → SVG · 分层矢量化管线</h2>
+                        <p class="case-sub">为平涂插画保留图层、透明度与细笔画，用对照渲染评估还原质量。</p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="psd-svg-0">
+                            <h3 id="psd-svg-0">解决的问题</h3>
+                            <ul class="list">
+                                <li>从 PSD 图层提取颜色与透明度，构造覆盖场、超采样并拟合贝塞尔曲线，保留图层顺序、名称与可见性；另做曲线光顺与体积优化。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="psd-svg-1">
+                            <h3 id="psd-svg-1">技术难点与处理</h3>
+                            <ul class="list">
+                                <li>预模糊会切断细笔画、低占比颜色可能是原画真色：取消预模糊，依据透明度和颜色关系辨别抗锯齿，先核对强制合成图再修正。</li>
+                                <li>不同渲染器的取整差异会造成像素偏差：建立统一对照基准，区分工具伪影与真实色差；需要手工干预时保留可追溯修正。</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="psd-svg-2">
+                            <h3 id="psd-svg-2">已验证与边界</h3>
+                            <ul class="list">
+                                <li>K-蝴蝶样本交付 13 图层、28 路径；对 PSD 合成图的记录指标为 MAE 0.057、SSIM 0.99975、PSNR 50.2 dB。</li>
+                                <li>独立的曲线光顺实验将文件由 765 KB 降至 423 KB。指标分别对应具体样本，尚未做跨画风、复杂纹理或任意 PSD 的系统评测。</li>
+                            </ul>
+                        </section>
+                            <ul class="keywords">
+                                <li>Python</li>
+                                <li>psd-tools</li>
+                                <li>potrace</li>
+                                <li>图像误差评估</li>
+                            </ul>
+                        </div>
+                        <ul class="case-facts">
+                            <li><span class="k">时间</span><span class="v">2026.10</span></li>
+                            <li><span class="k">状态</span><span class="v">样本交付完成</span></li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="case" id="kysoul-site" aria-labelledby="case-kysoul">
                     <div class="case-body">
                         <h2 id="case-kysoul">kysoul.me · 个人网站系统</h2>
                         <p class="case-sub">
@@ -68,10 +263,10 @@
                         <section class="case-section" aria-labelledby="case-redesign">
                             <h3 id="case-redesign">2026.10 改版做了什么</h3>
                             <ul class="list">
-                                <li><b>内容先行</b>：品牌、介绍、导航全部写在 HTML 里，不再等 WebGL 或图片就绪；首屏没有遮罩、没有阻塞脚本</li>
-                                <li><b>特效改为可选</b>：日食与涡流保留在<a href="./work/eclipse.html">交互演示页</a>，只有主动点播放时才运行，并尊重「减少动态效果」偏好</li>
-                                <li><b>图片</b>：91.6 MB 的背景原图不再进入站点，改为 960 / 1600 / 2400 三档 AVIF / WebP / JPEG，单张 20–107 KB，带尺寸信息与懒加载</li>
-                                <li><b>可访问性</b>：原生链接导航（不再靠 SVG 点击）、字号下限、44px 点击区、键盘焦点、可见的深色主题、对比度全部 ≥ 4.5:1</li>
+                                <li><b>内容先行</b>：品牌、介绍、导航全部写在 HTML 里，打开即可阅读；首屏没有遮罩、没有阻塞脚本</li>
+                                <li><b>独立演示</b>：日食与涡流另保留在<a href="./work/eclipse.html">交互演示页</a>，只有主动点播放时才运行，并尊重「减少动态效果」偏好</li>
+                                <li><b>图片</b>：背景摄影使用 AVIF / WebP / JPEG 三种格式的响应式派生图，显式设置尺寸并按需加载</li>
+                                <li><b>可访问性</b>：使用原生链接导航、键盘焦点、适合触控的点击区与跟随系统的深色主题</li>
                                 <li><b>依赖</b>：去掉 Three.js CDN 与第三方字体请求，站点在断网 CDN 的情况下功能完全不受影响</li>
                             </ul>
                         </section>
@@ -117,42 +312,29 @@
                     </div>
                 </article>
 
-                <article class="case" id="godot" aria-labelledby="case-godot">
-                    <div class="case-body">
-                        <h2 id="case-godot">独立游戏开发尝试 · Godot</h2>
-                        <p class="case-sub">自学 · 个人项目，目前处在起步阶段。</p>
-                        <div class="case-main">
-                        <section class="case-section" aria-labelledby="godot-what">
-                            <h3 id="godot-what">现在到哪一步</h3>
-                            <ul class="list">
-                                <li>从零接触 Godot：学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
-                                <li>目标：先独立完成一个可玩的小型游戏原型，把做网页动效时积累的交互与节奏感迁移到游戏里</li>
-                            </ul>
-                        </section>
-                        <ul class="keywords">
-                            <li>Godot</li><li>GDScript</li><li>游戏循环</li><li>交互设计</li>
-                        </ul>
-                        <p class="placeholder-note">
-                            <strong>占位说明：</strong>这个项目还没有可以展示的成品，所以这里不放假截图、不写虚构进度。
-                            做出第一个可玩原型后会补上过程记录。
-                        </p>
-                        </div><!-- /.case-main -->
-
-                        <ul class="case-facts">
-                            <li><span class="k">角色</span><span class="v">自学 / 个人项目</span></li>
-                            <li><span class="k">时间</span><span class="v">2026 – 至今</span></li>
-                            <li><span class="k">状态</span><span class="v">起步阶段</span></li>
+                <section class="block" id="experiments" aria-labelledby="experiments-title">
+                    <h2 id="experiments-title">实验 / Experiments</h2>
+                    <div class="entry" id="pcb">
+                        <div class="entry-head">
+                            <h3 class="entry-title">PCB 视觉识别 · 行业与客户调研</h3>
+                            <span class="entry-when">2026.10 · 调研阶段</span>
+                        </div>
+                        <ul class="list">
+                            <li>搭建抓取、证据留存、去重、分类评分和表格导出的资料管线，梳理描板工作流与潜在需求。</li>
+                            <li>当前交付是调研资料与可复现整理流程；识别模型、精度评测与客户试用尚未完成。普通外观图无法提供多层板内层信息，不承诺多层自动逆向。</li>
                         </ul>
                     </div>
-                </article>
-
-                <section class="block" aria-labelledby="future">
-                    <h2 id="future">还在准备 / Planned</h2>
-                    <p class="placeholder-note">
-                        <strong>Blog 与 Gallery 尚未开放。</strong>
-                        站内目前没有需要按时间线整理的文章，也没有成组的摄影作品可以公开展示，
-                        所以不先建空栏目。等内容真的攒够了，再按独立静态路径加进来。
-                    </p>
+                    <div class="entry" id="ghostbus">
+                        <span id="godot" aria-hidden="true"></span>
+                        <div class="entry-head">
+                            <h3 class="entry-title">GhostBus · 游戏场景实验</h3>
+                            <span class="entry-when">2026.10 · 环境与场景阶段</span>
+                        </div>
+                        <ul class="list">
+                            <li>接入 Unity 与 Blender MCP，初始化开发环境，整理夜路场景中的地形、道路与路灯。</li>
+                            <li>现阶段成果限于环境与基础场景；玩法闭环、植被、美术整合与可玩版本仍待推进。</li>
+                        </ul>
+                    </div>
                 </section>
             </div>
         </div>

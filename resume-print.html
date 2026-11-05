@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>简历（打印版）· Kysoul</title>
     <meta name="robots" content="noindex, follow">
+    <meta name="description" content="杨添富的简历打印版：iPad 课堂 AI、KyLyn、HomeHub / KyLina、Agent 工具链、PSD→SVG 和 Kysoul。更新于 2026 年 10 月 22 日。">
     <meta name="color-scheme" content="light">
     <link rel="canonical" href="https://kysoul.me/resume-print.html">
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon/favicon-32x32.png">
@@ -25,14 +26,14 @@
             color: var(--ink);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
                 "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
-            font-size: 14px;
-            line-height: 1.7;
+            font-size: 13px;
+            line-height: 1.6;
         }
         .sheet {
             max-width: 21cm;
             margin: 24px auto;
             background: #fff;
-            padding: 20mm 18mm;
+            padding: 16mm 17mm;
             box-shadow: 0 2px 6px rgba(0,0,0,.08), 0 24px 48px -28px rgba(0,0,0,.35);
         }
         .hint {
@@ -59,20 +60,35 @@
             padding-bottom: 6px;
             margin: 22px 0 12px;
         }
-        h3 { font-size: 15px; margin: 0 0 2px; }
-        .entry-sub { color: var(--ink-muted); font-size: 13px; margin: 0 0 6px; }
+        h3 { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 12px; font-size: 14px; margin: 0 0 2px; }
+        h3 > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+        .entry-sub { color: var(--ink-muted); font-size: 12px; margin: 0 0 5px; }
         .entry + .entry { margin-top: 14px; }
         ul { margin: 0; padding-left: 18px; }
         li { margin: 2px 0; }
-        .when { float: right; color: var(--ink-muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
-        .keywords { color: var(--ink-muted); font-size: 12.5px; margin: 4px 0 0; }
+        .when { color: var(--ink-muted); font-size: 11.5px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+        .keywords { color: var(--ink-muted); font-size: 11.5px; margin: 4px 0 0; }
+        .updated { color: var(--ink-muted); font-size: 11.5px; margin: 2px 0 8px; }
+        .print-page + .print-page { margin-top: 28px; }
+        .entry { break-inside: avoid; page-break-inside: avoid; }
+        h2, h3 { break-after: avoid; page-break-after: avoid; }
+        a { color: inherit; }
+        @media (max-width: 40rem) {
+            .sheet { margin: 16px 10px; padding: 24px 20px; }
+            .hint, .back { margin-inline: 10px; }
+            h1 { font-size: 23px; letter-spacing: 0; overflow-wrap: anywhere; }
+            .contact { overflow-wrap: anywhere; }
+        }
         .back { max-width: 21cm; margin: 8px auto 40px; font-size: 13px; }
         .back a { color: #8f3f14; }
         @media print {
-            body { background: #fff; }
+            body { background: #fff; font-size: 12px; line-height: 1.55; }
             .sheet { margin: 0; max-width: none; padding: 0; box-shadow: none; }
             .hint, .back { display: none; }
-            @page { margin: 16mm 15mm; }
+            .print-page + .print-page { margin-top: 0; break-before: page; page-break-before: always; }
+            h2 { margin: 17px 0 9px; padding-bottom: 4px; }
+            .entry + .entry { margin-top: 12px; }
+            @page { size: A4; margin: 16mm 15mm; }
         }
     </style>
 </head>
@@ -83,57 +99,90 @@
     </p>
 
     <div class="sheet">
+        <div class="print-page">
         <h1>杨添富 / Yang TianFu</h1>
         <p class="role">重庆邮电大学 · 国际学院 · 软件工程（本科在读）</p>
+        <p class="updated">更新于 2026.10.22 · 项目阶段以本页说明为准</p>
         <p class="contact">
             <span><a href="mailto:1613609692@qq.com">1613609692@qq.com</a></span>
             <span><a href="https://github.com/ysqp6-lang">github.com/ysqp6-lang</a></span>
             <span><a href="https://kysoul.me">kysoul.me</a></span>
-            <span>重庆 · GMT+8</span>
         </p>
 
         <h2>教育经历</h2>
         <div class="entry">
-            <h3>重庆邮电大学 · 国际学院 · 软件工程 <span class="when">本科在读</span></h3>
+            <h3><span>重庆邮电大学 · 国际学院 · 软件工程</span><span class="when">本科在读</span></h3>
             <p class="entry-sub">核心课程：面向对象程序设计（C++ / Java）</p>
         </div>
 
         <h2>项目经历</h2>
         <div class="entry">
-            <h3>基于 WebGL / Three.js 的响应式个人作品集系统 <span class="when">2025 – 至今</span></h3>
-            <p class="entry-sub">独立设计与开发 · kysoul.me</p>
+            <h3><span>iPad 课堂 AI 助手</span><span class="when">2026.10 · 真机原型</span></h3>
+            <p class="entry-sub">Swift / SwiftUI · 语音转写、问题识别与 AI 辅助作答</p>
             <ul>
-                <li>手写 GLSL 片元着色器实现像素化与涡流扭曲：由鼠标位移量、速度差与缓动因子驱动，画面随指针实时流动</li>
-                <li>自研全屏加载动画：把日食进度映射到真实资源加载进度，加载完成即日全食，结束时光圈炸开进场</li>
-                <li>字体自托管与加载策略：脱离第三方字体 CDN，绘制文字纹理前显式等待字体就绪</li>
-                <li>2026.10 改版：特效改为可选演示、内容静态可读，背景摄影从 87.3 MB 原图改为 20–107 KB 响应式派生图</li>
+                <li>接通语音转写、定稿合并、本地问题粗筛、AI 作答与录音历史；以频率和预算闸门控制重复请求。</li>
+                <li>依据崩溃日志修复音频回调隔离、转写对象复用及相机代理签名；阶段真机测试 50 次启停全部成功。</li>
+                <li>60 分钟连续监听尚未完成，识别准确率、答案质量和延迟门槛待系统评测；声纹识别与补图重答仍待实现。</li>
             </ul>
-            <p class="keywords">JavaScript · Three.js · WebGL · GLSL · CSS</p>
         </div>
         <div class="entry">
-            <h3>独立游戏开发尝试 · Godot 引擎 <span class="when">2026 – 至今</span></h3>
-            <p class="entry-sub">自学 · 个人项目（起步阶段）</p>
+            <h3><span>KyLyn · AI 消息助手</span><span class="when">2026.10 · 持续验证</span></h3>
+            <p class="entry-sub">Node.js · SQLite · Adapter / Outbox 架构</p>
             <ul>
-                <li>学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
-                <li>目标：先独立完成一个可玩的小型原型，把网页动效里积累的交互与节奏感迁移到游戏</li>
+                <li>以 Adapter / Outbox 状态机组织消息，修复掉线补回与重复回复；分离自然回复和结构化元数据，加入预算预留及敏感操作二次确认。</li>
+                <li>阶段合并分支记录 564 个测试用例，受控验证文本与图片发送；长时间掉线根因未定，真实情绪标签及延迟任务状态回写仍有缺口。</li>
             </ul>
-            <p class="keywords">Godot · GDScript · 游戏循环 · 交互设计</p>
+        </div>
+        <div class="entry">
+            <h3><span>HomeHub / KyLina · 家庭服务与监控</span><span class="when">2026.10 · 已部署</span></h3>
+            <p class="entry-sub">旧 Mac 服务化 · 硬件监控与访问控制</p>
+            <ul>
+                <li>完成旧 Mac 服务化、远程组网与监控台部署；建立双层认证、凭据管理、备份和回滚流程。</li>
+                <li>区分真实 / 模拟 / 不支持 / 采集失败，未知不显示为 0；监控台阶段记录 39 项测试、7/7 部署验收通过，Intel Mac 部分指标仍待逐项核对，备份恢复演练待补。</li>
+            </ul>
+        </div>
+        </div>
+        <div class="print-page">
+        <h2>项目经历 · 续</h2>
+        <div class="entry">
+            <h3><span>AI Agent 工具链 · 记忆、会话与通知</span><span class="when">2026.09 – 10 · 已实现</span></h3>
+            <p class="entry-sub">围绕 DeepSeek Harness 的个人工作流工具</p>
+            <ul>
+                <li>建立索引、路由、证据三层记忆；编写带备份和回滚的会话迁移工具，将 68 个会话归入 6 个主题，并封装移动插件。</li>
+                <li>实现会话花费 HUD 与任务完成 PWA 推送，修复事件匹配及 iOS 通知落地问题；记忆仍需主动维护，会话花费按模型价格与用量估算。</li>
+            </ul>
+        </div>
+        <div class="entry">
+            <h3><span>PSD → SVG · 分层矢量化管线</span><span class="when">2026.10 · 样本交付</span></h3>
+            <p class="entry-sub">Python · 图层提取、轮廓拟合与误差评估</p>
+            <ul>
+                <li>逐层提取颜色 / alpha，经超采样与贝塞尔拟合生成 SVG；保留图层结构，以强制重合成的 PSD 图层为基准校验。</li>
+                <li>已交付样本含 13 图层、28 路径，SSIM 0.99975、PSNR 50.2 dB；结果限于本次平涂样本，尚未验证任意 PSD 的泛化效果。</li>
+            </ul>
+        </div>
+        <div class="entry">
+            <h3><span>Kysoul · 响应式个人作品集</span><span class="when">2025 – 至今</span></h3>
+            <p class="entry-sub">独立设计与开发 · WebGL / Three.js</p>
+            <ul>
+                <li>手写 GLSL 像素化、涡流交互与日食加载动画；自托管字体，绘制文字纹理前等待字体就绪。</li>
+                <li>2026.10 把特效改为可选演示、正文改为静态 HTML 直接可读，并提供响应式摄影图片；持续维护简洁视觉与移动端体验。</li>
+            </ul>
         </div>
 
-        <h2>技能</h2>
+        <h2>实验探索</h2>
         <ul>
-            <li><b>前端</b>：HTML 基础扎实；正在系统学习 CSS 与 JavaScript；能用 Three.js / GLSL 完成三维场景与着色器效果</li>
-            <li><b>游戏引擎</b>：正在学习 Godot 与 GDScript，能搭建基础场景 / 节点结构</li>
-            <li><b>设计</b>：Photoshop 较熟练；具备版式设计能力与色彩敏感度</li>
-            <li><b>工作方式</b>：善用 AI 工具提升创作与排错效率，习惯边做项目边补基础</li>
+            <li><b>PCB 视觉识别方向</b>：完成客户、工序调研与资料抓取 / 分类 / 表格管线；尚未完成自动识别系统，不承诺从外观图逆向多层板。</li>
+            <li><b>GhostBus</b>：完成 Unity / Blender 环境接入和夜路场景初步整理；尚无完整可玩原型。</li>
         </ul>
 
-        <h2>其他</h2>
+        <h2>技能与工作方法</h2>
         <ul>
-            <li>语言：中文（母语）· 英语（可读写技术文档）</li>
-            <li>古琴：九级</li>
-            <li>兴趣：摄影、骑行</li>
+            <li><b>应用与前端</b>：Swift / SwiftUI、音频与语音原型；HTML、CSS、JavaScript、Three.js / GLSL 交互。</li>
+            <li><b>服务与工具</b>：Node.js、SQLite、WebSocket、PWA、插件与文件记忆；Python 图形处理、数据整理与自动化。</li>
+            <li><b>验证与交付</b>：用崩溃日志、指标和可复现实验排障；区分接线与行为验证，记录未完成项，保留备份和回滚。</li>
+            <li><b>语言与设计</b>：中文母语，能读写英文技术文档；具备 Photoshop、版式设计与色彩处理经验。</li>
         </ul>
+        </div>
     </div>
 
     <p class="back"><a href="./resume.html">← 返回网页版简历</a></p>

@@ -26,9 +26,9 @@ python3 -m http.server 4173 --bind 127.0.0.1
 |---|---|
 | `/index.html` | 首页：品牌、一句介绍、自摄全景、精选作品、关于、联系方式 |
 | `/about.html` | 我是谁、关注什么、这个网站怎么做的 |
-| `/resume.html` | 教育经历、项目经历、技能；附图片版与打印入口 |
+| `/resume.html` | 教育经历、项目经历、技术能力；附同步更新的打印入口 |
 | `/resume-print.html` | 打印 / 导出 PDF 用的干净版本（`noindex`） |
-| `/work.html` | 作品：kysoul.me 系统、Godot 起步项目 |
+| `/work.html` | 作品：五个重点项目、个人网站，以及 PCB / GhostBus 实验 |
 | `/work/eclipse.html` | 两个原创特效的可选交互演示（日食加载动画、涡流着色器） |
 | `/contact.html` | 联系方式与联系用途 |
 | `/404.html` | 自定义 404 |
@@ -43,10 +43,9 @@ css/            tokens.css（设计变量）· base.css（重置/站头尾）· 
 js/             showcase.js（只有特效演示页用）
 fonts/          Blanquotey.woff（自托管，仅用于品牌字与演示画面）
 assets/photos/  响应式派生图（AVIF/WebP/JPEG，960/1600/2400 三档）+ OG 封面
-assets/resume/  简历图片派生图（900/1200/1400 三档）
 assets/favicon/ 图标与 site.webmanifest
 tools/          build-images.py：从站外原图生成上面的派生图
-legacy/         旧版封面存档（基线 5cee5de 原样导出；只把两张原图换成派生图，加 noindex 与返回入口）
+legacy/         旧版封面存档（基于旧版视觉，加 noindex 与返回入口；旧简历图片已撤下）
 ```
 
 ## 图片派生
@@ -68,7 +67,7 @@ python3 tools/build-images.py --report            # 只打印尺寸清单，不�
 
 - **封面是封面，内页是内页**：首页顶端纯黑渐隐到纸白（`--cover-gradient`，线性光插值 + smoothstep），
   站头在首页常驻深色，与封面顶端同色，接缝不可见。
-- **旧版不删除**：旧站原样存进 `legacy/`，首页完全不引用它；想看旧版只有两个入口（页脚与特效页）。
+- **旧版不删除**：旧站视觉保存在 `legacy/`，首页完全不引用它；想看旧版只有两个入口（页脚与特效页）。
 - **内容先行**：品牌、介绍、导航必须直接存在于 HTML，不依赖脚本或 WebGL 才可见。
 - **特效可选**：日食与涡流只在 `/work/eclipse.html` 里由点击触发，不进首屏、不阻塞阅读。
 - **图片按需**：所有照片走 `<picture>` + `srcset` + 明确的 `width/height`，非首屏一律 `loading="lazy"`。
@@ -80,3 +79,10 @@ python3 tools/build-images.py --report            # 只打印尺寸清单，不�
 
 正式发布走 GitHub Pages 的现有流程，**本分支不推送到远端、不触发部署**。
 发布步骤、构建产物核对与回滚方式见 `../docs/04-部署与回滚.md`。
+
+## 2026-10-22 内容更新
+
+首页、About、Work、Resume 与打印版同步整理近期项目。项目状态与数据来自用户提供的近期工作总结及其中记录的测试、运行结果；本次仅验证网站内容与页面，不代表重新验收各项目。工作总结原文含私密信息，不进入站点。
+
+主要项目为 iPad 课堂 AI、KyLyn、HomeHub / KyLina、AI Agent 工具链、PSD→SVG。PCB 仅展示调研管线，GhostBus 仅展示环境与场景进展。旧图片简历已从站点资源中撤下，仅保留在本次修改前备份；旧版简历入口引导到当前版本，图片派生脚本默认不再生成旧简历。
+

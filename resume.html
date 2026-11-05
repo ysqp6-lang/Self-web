@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>简历 · Kysoul</title>
-    <meta name="description" content="杨添富的简历：重庆邮电大学国际学院软件工程，基于 WebGL / Three.js 的个人作品集项目，Godot 游戏开发起步，以及技能与打印版本。">
+    <meta name="description" content="杨添富的项目经历与技术能力：iPad 课堂 AI、KyLyn、HomeHub / KyLina、AI Agent 工具链、PSD→SVG 和 Kysoul。区分阶段成果、实验与待验证部分，更新于 2026 年 10 月 22 日。">
     <link rel="canonical" href="https://kysoul.me/resume.html">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
@@ -12,7 +12,7 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Kysoul">
     <meta property="og:title" content="简历 · Kysoul">
-    <meta property="og:description" content="教育经历、项目经历与技能。">
+    <meta property="og:description" content="iPad 课堂 AI、消息助手、家庭服务、Agent 工具链与图形处理的项目经历，含已验证成果和待完成部分。">
     <meta property="og:url" content="https://kysoul.me/resume.html">
     <meta property="og:image" content="https://kysoul.me/assets/photos/kysoul-cover.jpg">
 
@@ -47,13 +47,13 @@
                     <h1>Resume</h1>
                     <p class="sub">经历与技能</p>
                     <div class="meta-line">
-                        <span>最后更新 2026.09</span>
+                        <span>最后更新 2026.10.22</span>
                         <span class="sep" aria-hidden="true"></span>
                         <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
                         <span class="sep" aria-hidden="true"></span>
                         <a href="https://github.com/ysqp6-lang" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <span class="sep" aria-hidden="true"></span>
-                        <a href="#image">图片版</a>
+                        <a href="#image">简历文件</a>
                         <span class="sep" aria-hidden="true"></span>
                         <a href="./resume-print.html">打印 / 导出 PDF</a>
                     </div>
@@ -75,86 +75,124 @@
 
                     <div class="entry">
                         <div class="entry-head">
-                            <span class="entry-title">基于 WebGL / Three.js 的响应式个人作品集系统</span>
-                            <span class="entry-when">2025 – 至今</span>
+                            <span class="entry-title"><a href="./work.html#ipad-classroom">iPad 课堂 AI 助手</a></span>
+                            <span class="entry-when">2026.10 · 真机原型</span>
                         </div>
-                        <p class="entry-sub">独立设计与开发 · kysoul.me</p>
+                        <p class="entry-sub">Swift / SwiftUI · 语音转写、问题识别与 AI 辅助作答</p>
                         <ul class="list">
-                            <li>手写 GLSL 片元着色器，实现像素化与涡流扭曲效果：由鼠标位移量、速度差与缓动因子（easeFactor）驱动，画面随指针实时流动</li>
-                            <li>自研全屏加载动画：把日食进度映射到真实资源加载进度，加载完成即日全食，结束时光圈炸开进场</li>
-                            <li>字体自托管与加载策略：脱离第三方字体 CDN，绘制文字纹理前显式等待字体就绪，保证首屏文字不回落为系统字体</li>
-                            <li>2026.10 改版：把特效改为可选演示、内容改为静态 HTML 直接可读，背景摄影从 87.3 MB 原图改为 20–107 KB 的响应式派生图</li>
+                            <li>将课堂语音转写、定稿合并、本地问题粗筛与 AI 作答接成链路；加入手动标记、录音与课堂历史。合并句定稿后只评估一次，以频率和本节预算限制重复请求。</li>
+                            <li>根据崩溃日志修复 Swift 6 音频回调隔离、语音对象复用与相机代理签名问题。阶段测试记录中，真机 50 次启停全部成功，未发生崩溃或静默停止。</li>
+                            <li>仍在验证：60 分钟连续监听未完成，课堂识别准确率、答案质量与延迟门槛尚未系统评测；声纹识别和拍照补图重答等能力仍待实现。</li>
                         </ul>
-                        <ul class="keywords">
-                            <li>JavaScript</li><li>Three.js</li><li>WebGL</li><li>GLSL</li><li>CSS</li>
-                        </ul>
+                        <ul class="keywords"><li>Swift</li><li>SwiftUI</li><li>SpeechAnalyzer</li><li>AVFoundation</li><li>成本控制</li></ul>
                     </div>
 
                     <div class="entry">
                         <div class="entry-head">
-                            <span class="entry-title">独立游戏开发尝试 · Godot 引擎</span>
-                            <span class="entry-when">2026 – 至今</span>
+                            <span class="entry-title"><a href="./work.html#kylyn">KyLyn · AI 消息助手</a></span>
+                            <span class="entry-when">2026.10 · 持续验证</span>
                         </div>
-                        <p class="entry-sub">自学 · 个人项目（起步阶段）</p>
+                        <p class="entry-sub">Node.js · SQLite · Adapter / Outbox 架构</p>
                         <ul class="list">
-                            <li>从零接触 Godot：学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
-                            <li>目标：先独立完成一个可玩的小型游戏原型，把做网页动效时积累的交互与节奏感迁移到游戏里</li>
+                            <li>以 Adapter 解耦消息接入，用 Outbox 状态机、连接代次隔离与在途消息保护处理掉线补回及重复回复；采用内置 SQLite 减少不同架构间的原生依赖问题。</li>
+                            <li>将自然回复与结构化元数据分离，增加原子预算预留、真实性约束及敏感操作二次确认。阶段合并分支记录 564 个测试用例，并受控验证了文本和图片发送。</li>
+                            <li>仍在验证：一次长时间掉线的根因未定；真实环境情绪标签与延迟任务状态回写仍有缺口。测试通过不等于长期运行可靠性已经完成验收。</li>
                         </ul>
-                        <ul class="keywords">
-                            <li>Godot</li><li>GDScript</li><li>游戏循环</li><li>交互设计</li>
-                        </ul>
+                        <ul class="keywords"><li>Node.js</li><li>SQLite</li><li>WebSocket</li><li>状态机</li><li>测试与诊断</li></ul>
                     </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title"><a href="./work.html#homehub">HomeHub / KyLina · 家庭服务与监控</a></span>
+                            <span class="entry-when">2026.10 · 已部署</span>
+                        </div>
+                        <p class="entry-sub">旧 Mac 服务化 · 硬件监控与访问控制</p>
+                        <ul class="list">
+                            <li>将旧 Mac 整理为家庭服务主机，完成远程组网、服务托管与 KyLina 监控台部署；用双层认证隔离监控入口，并为凭据、备份和回滚建立管理流程。</li>
+                            <li>区分真实采集、模拟、不支持和采集失败，未知值不伪装成 0。阶段记录包含监控台 39 项测试与 7/7 部署验收通过。</li>
+                            <li>Intel Mac 的温度、风扇和电池等指标仍需逐项核对；备份恢复演练待补，监控台验收不覆盖整个 HomeHub 栈。</li>
+                        </ul>
+                        <ul class="keywords"><li>服务部署</li><li>访问控制</li><li>监控</li><li>SQLite 备份</li><li>回滚</li></ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title"><a href="./work.html#agent-tools">AI Agent 工具链 · 记忆、会话与通知</a></span>
+                            <span class="entry-when">2026.09 – 10 · 已实现</span>
+                        </div>
+                        <p class="entry-sub">围绕 DeepSeek Harness 的个人工作流工具</p>
+                        <ul class="list">
+                            <li>建立“索引—路由—证据”三层文件记忆，按需加载细节；编写带备份和回滚的会话迁移工具，将 68 个会话整理到 6 个主题工作区，并封装为移动插件。</li>
+                            <li>开发会话花费 HUD 与任务结束网页推送；修复事件字段类型、PWA 路径及通知落地刷新问题，保留完整结果供移动端查看。</li>
+                            <li>记忆仍依赖 Agent 主动维护；会话花费按当时模型价格与可获得用量估算，不作为精确账单。</li>
+                        </ul>
+                        <ul class="keywords"><li>JavaScript</li><li>插件开发</li><li>PWA</li><li>Web Push</li><li>文件记忆</li></ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title"><a href="./work.html#psd-svg">PSD → SVG · 分层矢量化管线</a></span>
+                            <span class="entry-when">2026.10 · 样本交付</span>
+                        </div>
+                        <p class="entry-sub">Python · 图层提取、轮廓拟合与误差评估</p>
+                        <ul class="list">
+                            <li>逐层提取颜色和透明度，经过超采样、Potrace 贝塞尔拟合与透明度处理生成 SVG；保留图层顺序、名称和可见性，避免预模糊切断细笔画。</li>
+                            <li>以强制重合成的 PSD 图层为基准排除缓存预览误差。已交付样本含 13 图层、28 路径，对该基准的 SSIM 为 0.99975、PSNR 为 50.2 dB。</li>
+                            <li>结果限于本次平涂插画样本，尚未证明对任意 PSD 同样有效；曲线光顺和可追溯手工修正是独立处理步骤。</li>
+                        </ul>
+                        <ul class="keywords"><li>Python</li><li>PSD</li><li>SVG</li><li>Potrace</li><li>图像误差评估</li></ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title"><a href="./work.html#case-kysoul">Kysoul · 响应式个人作品集</a></span>
+                            <span class="entry-when">2025 – 至今</span>
+                        </div>
+                        <p class="entry-sub">独立设计与开发 · WebGL / Three.js</p>
+                        <ul class="list">
+                            <li>手写 GLSL 片元着色器实现像素化与涡流扭曲，由鼠标位移、速度与缓动驱动画面；将日食加载动画映射到资源加载进度。</li>
+                            <li>自托管字体，绘制文字纹理前等待字体就绪；2026.10 改版把特效改为可选演示、正文改为静态 HTML 直接可读，并提供响应式摄影图片。</li>
+                        </ul>
+                        <ul class="keywords"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li><li>GLSL</li></ul>
+                    </div>
+                </section>
+
+                <section class="block" aria-labelledby="experiments">
+                    <h2 id="experiments">实验探索 / Experiments</h2>
+                    <ul class="list">
+                        <li><b><a href="./work.html#pcb">PCB 视觉识别方向</a></b>：完成客户与工序调研，搭建资料抓取、去重、分类评分和表格生成管线；尚未完成 PCB 自动识别系统，不承诺从外观图自动逆向多层板。</li>
+                        <li><b><a href="./work.html#ghostbus">GhostBus</a></b>：完成 Unity / Blender 开发环境接入与夜路场景初步整理；仍处于环境与场景实验阶段，尚无完整可玩原型。</li>
+                    </ul>
                 </section>
 
                 <section class="block" aria-labelledby="skills">
                     <h2 id="skills">技能 / Skills</h2>
                     <ul class="list">
-                        <li><b>前端</b>：HTML 基础扎实；正在系统学习 CSS 与 JavaScript；能用 Three.js / GLSL 完成三维场景与着色器效果</li>
-                        <li><b>游戏引擎</b>：正在学习 Godot 与 GDScript，能搭建基础场景 / 节点结构，独立往小型游戏原型推进</li>
-                        <li><b>设计</b>：Photoshop 较熟练；具备版式设计能力与色彩敏感度</li>
-                        <li><b>工作方式</b>：善用 AI 工具提升创作与排错效率，习惯边做项目边补基础</li>
+                        <li><b>应用开发</b>：以 Swift / SwiftUI 构建 iPad 原型，围绕音频、语音转写、网络请求与界面状态排障；使用 HTML、CSS、JavaScript、Three.js / GLSL 开发网站与交互。</li>
+                        <li><b>服务与 Agent</b>：使用 Node.js、SQLite 和 WebSocket 组织消息链路；实践插件开发、PWA 推送、文件记忆、预算闸门与结构化元数据提取。</li>
+                        <li><b>图形与自动化</b>：使用 Python 处理 PSD 图层、SVG 路径与误差评估；具备 Photoshop 与版式设计经验，可编写资料整理和表格生成管线。</li>
+                        <li><b>工程验证</b>：结合崩溃日志、运行指标、受控真机测试与回归用例定位问题；交付时说明验证范围、未完成项及回滚方法。</li>
                     </ul>
                     <ul class="keywords">
-                        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li><li>GLSL</li><li>Godot</li><li>Photoshop</li>
+                        <li>Swift</li><li>SwiftUI</li><li>JavaScript</li><li>Node.js</li><li>Python</li><li>SQLite</li><li>Three.js</li><li>SVG</li>
                     </ul>
                 </section>
 
-                <section class="block" aria-labelledby="other">
-                    <h2 id="other">其他 / Other</h2>
+                <section class="block" aria-labelledby="methods">
+                    <h2 id="methods">工作方法 / Approach</h2>
                     <ul class="list">
-                        <li>语言：中文（母语）· 英语（可读写技术文档）</li>
-                        <li>古琴：九级</li>
-                        <li>兴趣：摄影、骑行</li>
+                        <li>先明确目标与验收范围，再选工具；以日志和可复现实验核对判断，区分“代码已接入”与“行为已验证”。</li>
+                        <li>将预算、权限和敏感操作的约束落实到状态机与确认流程；重要修改保留备份，未知数据明确标注。</li>
+                        <li>中文为母语，能读写英文技术文档；在项目中持续补足基础，并把可复用经验整理成工具与文档。</li>
                     </ul>
                 </section>
 
                 <section class="block" aria-labelledby="image">
-                    <h2 id="image">图片版 / Visual</h2>
-                    <figure class="resume-figure">
-                        <picture>
-                            <source type="image/avif"
-                                    srcset="./assets/resume/kysoul-resume-900.avif 900w,
-                                            ./assets/resume/kysoul-resume-1200.avif 1200w,
-                                            ./assets/resume/kysoul-resume-1400.avif 1400w"
-                                    sizes="(max-width: 40rem) 92vw, 34rem">
-                            <source type="image/webp"
-                                    srcset="./assets/resume/kysoul-resume-900.webp 900w,
-                                            ./assets/resume/kysoul-resume-1200.webp 1200w,
-                                            ./assets/resume/kysoul-resume-1400.webp 1400w"
-                                    sizes="(max-width: 40rem) 92vw, 34rem">
-                            <img src="./assets/resume/kysoul-resume-900.jpg"
-                                 srcset="./assets/resume/kysoul-resume-900.jpg 900w,
-                                         ./assets/resume/kysoul-resume-1200.jpg 1200w,
-                                         ./assets/resume/kysoul-resume-1400.jpg 1400w"
-                                 sizes="(max-width: 40rem) 92vw, 34rem"
-                                 width="1400" height="1964"
-                                 loading="lazy" decoding="async"
-                                 alt="图片版简历：左侧为大字姓名与专业信息，右侧为经历、教育与技能，下方附个人照片。">
-                        </picture>
-                        <figcaption>
-                            图片版简历（由本地派生图提供，按需懒加载）。网页版内容与它一致，需要文件时用上面的「打印 / 导出 PDF」。
-                        </figcaption>
-                    </figure>
+                    <h2 id="image">简历文件 / Resume file</h2>
+                    <div class="prose">
+                        <p>本页与打印版均已更新至 2026.10.22。打开打印版后，可通过浏览器打印功能保存为 PDF。</p>
+                        <p><a href="./resume-print.html">打开打印版 / 导出 PDF →</a></p>
+                    </div>
                 </section>
             </article>
         </div>

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Kysoul · 杨添富的个人网站</title>
-    <meta name="description" content="杨添富（Kysoul），重庆邮电大学国际学院软件工程在读。用 WebGL、着色器与版式做网页视觉，这里是我的作品、经历与联系方式。">
+    <meta name="description" content="杨添富（Kysoul），重庆邮电大学国际学院软件工程在读。围绕课堂 AI、对话服务、Agent 工具链与图形处理做项目，这里记录作品、经历与技术实践。">
     <link rel="canonical" href="https://kysoul.me/">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
@@ -13,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Kysoul">
     <meta property="og:title" content="Kysoul · 杨添富的个人网站">
-    <meta property="og:description" content="用 WebGL、着色器与版式做网页视觉。作品、经历与联系方式。">
+    <meta property="og:description" content="课堂 AI、对话服务、Agent 工具链与图形处理。作品、经历与技术实践。">
     <meta property="og:url" content="https://kysoul.me/">
     <meta property="og:image" content="https://kysoul.me/assets/photos/kysoul-cover.jpg">
     <meta property="og:image:width" content="1200">
@@ -33,6 +34,7 @@
     <link rel="stylesheet" href="./css/home.css">
 </head>
 <body class="page-home">
+
     <header class="site-header">
         <div class="shell header-inner">
             <a class="wordmark" href="./index.html">Kysoul</a>
@@ -51,12 +53,12 @@
                 <h1 class="display" id="hero-title">Kysoul</h1>
                 <p class="lede">
                     我是杨添富，重庆邮电大学国际学院软件工程在读。
-                    这个站是我用手写代码做的练习场——WebGL、着色器与版式，都在这儿试。
+                    我把学习和生活里的真实问题，做成 AI 应用、自动化工具与图形实验。
                 </p>
                 <ul class="where" aria-label="基本情况">
                     <li>重庆 · GMT+8</li>
                     <li>软件工程在读</li>
-                    <li>前端视觉 / WebGL</li>
+                    <li>AI 应用 / 工具开发</li>
                 </ul>
                 <div class="actions">
                     <a class="btn" href="./work.html">查看作品</a>
@@ -88,7 +90,7 @@
             </picture>
             <figcaption>
                 <span>富士山 · 自摄</span>
-                <span>原图 87.3 MB，这里按 960 / 1600 / 2400 三档派生，单张 20–107 KB</span>
+                <span>以作品记录想法</span>
             </figcaption>
         </figure>
 
@@ -100,39 +102,45 @@
                 </div>
                 <ul class="work-list">
                     <li class="work-item">
-                        <a href="./work.html">
-                            <span class="title">
-                                kysoul.me · 个人网站系统
-                                <span class="tag tag--progress">持续迭代</span>
-                            </span>
+                        <a href="./work.html#ipad-classroom">
+                            <span class="title">iPad 课堂 AI 助手<span class="tag">真机迭代中</span></span>
+                            <span class="year">2026.10</span>
+                            <span class="desc">实时转写、提问识别与辅助作答。真机 50 次启停测试通过，长时监听与课堂质量评测仍在推进。</span>
+                        </a>
+                    </li>
+                    <li class="work-item">
+                        <a href="./work.html#kylyn">
+                            <span class="title">KyLyn · 对话式 AI 助手<span class="tag">已部署 · 持续验证</span></span>
+                            <span class="year">2026.10</span>
+                            <span class="desc">用状态机处理断线补回、消息去重与工具调用；合并版本记录 564 个测试用例，部分线上行为仍待复核。</span>
+                        </a>
+                    </li>
+                    <li class="work-item">
+                        <a href="./work.html#homehub">
+                            <span class="title">HomeHub / KyLina · 家庭服务与监控<span class="tag">v0.3 已部署</span></span>
+                            <span class="year">2026.10</span>
+                            <span class="desc">复用旧 Mac 搭建服务与监控；区分真实采集、未知与不支持，逐步补齐恢复验证。</span>
+                        </a>
+                    </li>
+                    <li class="work-item">
+                        <a href="./work.html#agent-tools">
+                            <span class="title">AI Agent 工具链<span class="tag">本地工具已落地</span></span>
+                            <span class="year">2026.09 – 10</span>
+                            <span class="desc">分层记忆、工作区移动、用量面板与任务推送，让跨会话工作更容易延续和追踪。</span>
+                        </a>
+                    </li>
+                    <li class="work-item">
+                        <a href="./work.html#psd-svg">
+                            <span class="title">PSD → SVG · 分层矢量化管线<span class="tag">样本交付完成</span></span>
+                            <span class="year">2026.10</span>
+                            <span class="desc">保留图层与透明度的矢量化管线。以具体样本对照渲染，处理细笔画、色差与曲线光顺。</span>
+                        </a>
+                    </li>
+                    <li class="work-item">
+                        <a href="./work.html#case-kysoul">
+                            <span class="title">kysoul.me · 个人网站</span>
                             <span class="year">2025 – 至今</span>
-                            <span class="desc">
-                                手写 Three.js 场景与 GLSL 涡流着色器，把加载进度映射成一场日食。
-                                本次改版把它重做成打开即可阅读的静态站，原来的特效保留为可选演示。
-                            </span>
-                        </a>
-                    </li>
-                    <li class="work-item">
-                        <a href="./work/eclipse.html">
-                            <span class="title">日食加载动画与涡流着色器</span>
-                            <span class="year">交互演示 →</span>
-                            <span class="desc">
-                                日食随真实资源加载推进，指针移动驱动背景像素涡流。
-                                只有你主动点播放时动画才会运行，不影响任何人在首页的阅读。
-                            </span>
-                        </a>
-                    </li>
-                    <li class="work-item">
-                        <a href="./work.html#godot">
-                            <span class="title">
-                                Godot 独立游戏尝试
-                                <span class="tag">起步阶段</span>
-                            </span>
-                            <span class="year">2026 – 至今</span>
-                            <span class="desc">
-                                正在学节点 / 场景的组织方式与 GDScript。目标是先独立做出一个可玩的小原型，
-                                目前还没有可展示的成品。
-                            </span>
+                            <span class="desc">原生 HTML / CSS 的内容站点；日食与涡流作为独立交互演示保留。</span>
                         </a>
                     </li>
                 </ul>
@@ -143,13 +151,12 @@
                     <h2 id="about-title">关于</h2>
                     <div class="body">
                         <p>
-                            我关注前端的前沿视觉、WebGL 三维交互，以及一个常被忽略的地方——等待的体验。
-                            网站加载要花时间，那段时间就不该是白屏，所以我做的第一件事是把加载过程变成一场日食。
+                            我是软件工程在读学生，近期围绕课堂 AI、对话服务和 Agent 工具链做开发，
+                            也在探索图形处理与前端交互。项目从自己的需求出发，在实际使用中找问题、补验证。
                         </p>
                         <p>
-                            摄影和骑行是我看世界的方式，雪翼那张封面是我亲手拍的。
-                            古琴过了九级——练琴教会我的事很直接：再复杂的段落，也是一句一句磨出来的。
-                            这件事和我写代码的方式其实是同一回事。
+                            我使用 AI 协作推进实现，把需求拆解、日志排障、测试与回滚作为交付的一部分。
+                            已经跑通的链路与仍待完成的部分，都写在项目里。
                         </p>
                         <div class="link-row">
                             <a class="btn btn--ghost" href="./about.html">关于我</a>
@@ -165,7 +172,7 @@
                     <a class="mail" href="mailto:1613609692@qq.com">1613609692@qq.com</a>
                 </div>
                 <p class="aside">
-                    对前端视觉、WebGL 或这个网站有想法，直接发邮件就行，我基本都会回。
+                    欢迎交流 AI 应用、自动化工具与前端交互。
                 </p>
             </section>
         </div>
