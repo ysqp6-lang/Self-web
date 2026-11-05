@@ -3,6 +3,9 @@
    演示区是一块带框的画布：默认显示静态照片，脚本就绪后才接管为可交互画面。
    ============================================================ */
 
+/* 演示画布用整站宽度，不跟内页阅读栏走 */
+body:not(.page-home) .shell { max-width: var(--container); }
+
 .exhibit-head {
     display: flex;
     flex-wrap: wrap;

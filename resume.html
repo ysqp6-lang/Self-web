@@ -45,17 +45,13 @@
             <article class="page">
                 <div class="page-head">
                     <h1>Resume</h1>
-                    <p class="sub">经历与技能</p>
                     <div class="meta-line">
-                        <span>最后更新 2026.10.22</span>
-                        <span class="sep" aria-hidden="true"></span>
+                        <span>更新于 2026.10.22</span>
                         <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
-                        <span class="sep" aria-hidden="true"></span>
                         <a href="https://github.com/ysqp6-lang" target="_blank" rel="noopener noreferrer">GitHub</a>
-                        <span class="sep" aria-hidden="true"></span>
-                        <a href="#image">简历文件</a>
-                        <span class="sep" aria-hidden="true"></span>
-                        <a href="./resume-print.html">打印 / 导出 PDF</a>
+                    </div>
+                    <div class="page-action">
+                        <a class="btn" href="./resume-print.html">打印 / 导出 PDF</a>
                     </div>
                 </div>
 
@@ -73,88 +69,106 @@
                 <section class="block" aria-labelledby="projects">
                     <h2 id="projects">项目经历 / Projects</h2>
 
-                    <div class="entry">
-                        <div class="entry-head">
-                            <span class="entry-title"><a href="./work.html#ipad-classroom">iPad 课堂 AI 助手</a></span>
+                    <details class="entry">
+                        <summary>
+                            <span class="entry-title">iPad 课堂 AI 助手</span>
                             <span class="entry-when">2026.10 · 真机原型</span>
+                            <span class="entry-sub">Swift / SwiftUI · 语音转写、问题识别与 AI 辅助作答</span>
+                        </summary>
+                        <div class="entry-body">
+                            <ul class="list">
+                                <li>将课堂语音转写、定稿合并、本地问题粗筛与 AI 作答接成链路；加入手动标记、录音与课堂历史。合并句定稿后只评估一次，以频率和本节预算限制重复请求。</li>
+                                <li>根据崩溃日志修复 Swift 6 音频回调隔离、语音对象复用与相机代理签名问题。阶段测试记录中，真机 50 次启停全部成功，未发生崩溃或静默停止。</li>
+                                <li>仍在验证：60 分钟连续监听未完成，课堂识别准确率、答案质量与延迟门槛尚未系统评测；声纹识别和拍照补图重答等能力仍待实现。</li>
+                            </ul>
+                            <ul class="keywords"><li>Swift</li><li>SwiftUI</li><li>SpeechAnalyzer</li><li>AVFoundation</li><li>成本控制</li></ul>
+                            <p class="entry-more"><a href="./work.html#ipad-classroom">作品页</a></p>
                         </div>
-                        <p class="entry-sub">Swift / SwiftUI · 语音转写、问题识别与 AI 辅助作答</p>
-                        <ul class="list">
-                            <li>将课堂语音转写、定稿合并、本地问题粗筛与 AI 作答接成链路；加入手动标记、录音与课堂历史。合并句定稿后只评估一次，以频率和本节预算限制重复请求。</li>
-                            <li>根据崩溃日志修复 Swift 6 音频回调隔离、语音对象复用与相机代理签名问题。阶段测试记录中，真机 50 次启停全部成功，未发生崩溃或静默停止。</li>
-                            <li>仍在验证：60 分钟连续监听未完成，课堂识别准确率、答案质量与延迟门槛尚未系统评测；声纹识别和拍照补图重答等能力仍待实现。</li>
-                        </ul>
-                        <ul class="keywords"><li>Swift</li><li>SwiftUI</li><li>SpeechAnalyzer</li><li>AVFoundation</li><li>成本控制</li></ul>
-                    </div>
+                    </details>
 
-                    <div class="entry">
-                        <div class="entry-head">
-                            <span class="entry-title"><a href="./work.html#kylyn">KyLyn · AI 消息助手</a></span>
+                    <details class="entry">
+                        <summary>
+                            <span class="entry-title">KyLyn · AI 消息助手</span>
                             <span class="entry-when">2026.10 · 持续验证</span>
+                            <span class="entry-sub">Node.js · SQLite · Adapter / Outbox 架构</span>
+                        </summary>
+                        <div class="entry-body">
+                            <ul class="list">
+                                <li>以 Adapter 解耦消息接入，用 Outbox 状态机、连接代次隔离与在途消息保护处理掉线补回及重复回复；采用内置 SQLite 减少不同架构间的原生依赖问题。</li>
+                                <li>将自然回复与结构化元数据分离，增加原子预算预留、真实性约束及敏感操作二次确认。阶段合并分支记录 564 个测试用例，并受控验证了文本和图片发送。</li>
+                                <li>仍在验证：一次长时间掉线的根因未定；真实环境情绪标签与延迟任务状态回写仍有缺口。测试通过不等于长期运行可靠性已经完成验收。</li>
+                            </ul>
+                            <ul class="keywords"><li>Node.js</li><li>SQLite</li><li>WebSocket</li><li>状态机</li><li>测试与诊断</li></ul>
+                            <p class="entry-more"><a href="./work.html#kylyn">作品页</a></p>
                         </div>
-                        <p class="entry-sub">Node.js · SQLite · Adapter / Outbox 架构</p>
-                        <ul class="list">
-                            <li>以 Adapter 解耦消息接入，用 Outbox 状态机、连接代次隔离与在途消息保护处理掉线补回及重复回复；采用内置 SQLite 减少不同架构间的原生依赖问题。</li>
-                            <li>将自然回复与结构化元数据分离，增加原子预算预留、真实性约束及敏感操作二次确认。阶段合并分支记录 564 个测试用例，并受控验证了文本和图片发送。</li>
-                            <li>仍在验证：一次长时间掉线的根因未定；真实环境情绪标签与延迟任务状态回写仍有缺口。测试通过不等于长期运行可靠性已经完成验收。</li>
-                        </ul>
-                        <ul class="keywords"><li>Node.js</li><li>SQLite</li><li>WebSocket</li><li>状态机</li><li>测试与诊断</li></ul>
-                    </div>
+                    </details>
 
-                    <div class="entry">
-                        <div class="entry-head">
-                            <span class="entry-title"><a href="./work.html#homehub">HomeHub / KyLina · 家庭服务与监控</a></span>
+                    <details class="entry">
+                        <summary>
+                            <span class="entry-title">HomeHub / KyLina · 家庭服务与监控</span>
                             <span class="entry-when">2026.10 · 已部署</span>
+                            <span class="entry-sub">旧 Mac 服务化 · 硬件监控与访问控制</span>
+                        </summary>
+                        <div class="entry-body">
+                            <ul class="list">
+                                <li>将旧 Mac 整理为家庭服务主机，完成远程组网、服务托管与 KyLina 监控台部署；用双层认证隔离监控入口，并为凭据、备份和回滚建立管理流程。</li>
+                                <li>区分真实采集、模拟、不支持和采集失败，未知值不伪装成 0。阶段记录包含监控台 39 项测试与 7/7 部署验收通过。</li>
+                                <li>Intel Mac 的温度、风扇和电池等指标仍需逐项核对；备份恢复演练待补，监控台验收不覆盖整个 HomeHub 栈。</li>
+                            </ul>
+                            <ul class="keywords"><li>服务部署</li><li>访问控制</li><li>监控</li><li>SQLite 备份</li><li>回滚</li></ul>
+                            <p class="entry-more"><a href="./work.html#homehub">作品页</a></p>
                         </div>
-                        <p class="entry-sub">旧 Mac 服务化 · 硬件监控与访问控制</p>
-                        <ul class="list">
-                            <li>将旧 Mac 整理为家庭服务主机，完成远程组网、服务托管与 KyLina 监控台部署；用双层认证隔离监控入口，并为凭据、备份和回滚建立管理流程。</li>
-                            <li>区分真实采集、模拟、不支持和采集失败，未知值不伪装成 0。阶段记录包含监控台 39 项测试与 7/7 部署验收通过。</li>
-                            <li>Intel Mac 的温度、风扇和电池等指标仍需逐项核对；备份恢复演练待补，监控台验收不覆盖整个 HomeHub 栈。</li>
-                        </ul>
-                        <ul class="keywords"><li>服务部署</li><li>访问控制</li><li>监控</li><li>SQLite 备份</li><li>回滚</li></ul>
-                    </div>
+                    </details>
 
-                    <div class="entry">
-                        <div class="entry-head">
-                            <span class="entry-title"><a href="./work.html#agent-tools">AI Agent 工具链 · 记忆、会话与通知</a></span>
+                    <details class="entry">
+                        <summary>
+                            <span class="entry-title">AI Agent 工具链 · 记忆、会话与通知</span>
                             <span class="entry-when">2026.09 – 10 · 已实现</span>
+                            <span class="entry-sub">围绕 DeepSeek Harness 的个人工作流工具</span>
+                        </summary>
+                        <div class="entry-body">
+                            <ul class="list">
+                                <li>建立“索引—路由—证据”三层文件记忆，按需加载细节；编写带备份和回滚的会话迁移工具，将 68 个会话整理到 6 个主题工作区，并封装为移动插件。</li>
+                                <li>开发会话花费 HUD 与任务结束网页推送；修复事件字段类型、PWA 路径及通知落地刷新问题，保留完整结果供移动端查看。</li>
+                                <li>记忆仍依赖 Agent 主动维护；会话花费按当时模型价格与可获得用量估算，不作为精确账单。</li>
+                            </ul>
+                            <ul class="keywords"><li>JavaScript</li><li>插件开发</li><li>PWA</li><li>Web Push</li><li>文件记忆</li></ul>
+                            <p class="entry-more"><a href="./work.html#agent-tools">作品页</a></p>
                         </div>
-                        <p class="entry-sub">围绕 DeepSeek Harness 的个人工作流工具</p>
-                        <ul class="list">
-                            <li>建立“索引—路由—证据”三层文件记忆，按需加载细节；编写带备份和回滚的会话迁移工具，将 68 个会话整理到 6 个主题工作区，并封装为移动插件。</li>
-                            <li>开发会话花费 HUD 与任务结束网页推送；修复事件字段类型、PWA 路径及通知落地刷新问题，保留完整结果供移动端查看。</li>
-                            <li>记忆仍依赖 Agent 主动维护；会话花费按当时模型价格与可获得用量估算，不作为精确账单。</li>
-                        </ul>
-                        <ul class="keywords"><li>JavaScript</li><li>插件开发</li><li>PWA</li><li>Web Push</li><li>文件记忆</li></ul>
-                    </div>
+                    </details>
 
-                    <div class="entry">
-                        <div class="entry-head">
-                            <span class="entry-title"><a href="./work.html#psd-svg">PSD → SVG · 分层矢量化管线</a></span>
+                    <details class="entry">
+                        <summary>
+                            <span class="entry-title">PSD → SVG · 分层矢量化管线</span>
                             <span class="entry-when">2026.10 · 样本交付</span>
+                            <span class="entry-sub">Python · 图层提取、轮廓拟合与误差评估</span>
+                        </summary>
+                        <div class="entry-body">
+                            <ul class="list">
+                                <li>逐层提取颜色和透明度，经过超采样、Potrace 贝塞尔拟合与透明度处理生成 SVG；保留图层顺序、名称和可见性，避免预模糊切断细笔画。</li>
+                                <li>以强制重合成的 PSD 图层为基准排除缓存预览误差。已交付样本含 13 图层、28 路径，对该基准的 SSIM 为 0.99975、PSNR 为 50.2 dB。</li>
+                                <li>结果限于本次平涂插画样本，尚未证明对任意 PSD 同样有效；曲线光顺和可追溯手工修正是独立处理步骤。</li>
+                            </ul>
+                            <ul class="keywords"><li>Python</li><li>PSD</li><li>SVG</li><li>Potrace</li><li>图像误差评估</li></ul>
+                            <p class="entry-more"><a href="./work.html#psd-svg">作品页</a></p>
                         </div>
-                        <p class="entry-sub">Python · 图层提取、轮廓拟合与误差评估</p>
-                        <ul class="list">
-                            <li>逐层提取颜色和透明度，经过超采样、Potrace 贝塞尔拟合与透明度处理生成 SVG；保留图层顺序、名称和可见性，避免预模糊切断细笔画。</li>
-                            <li>以强制重合成的 PSD 图层为基准排除缓存预览误差。已交付样本含 13 图层、28 路径，对该基准的 SSIM 为 0.99975、PSNR 为 50.2 dB。</li>
-                            <li>结果限于本次平涂插画样本，尚未证明对任意 PSD 同样有效；曲线光顺和可追溯手工修正是独立处理步骤。</li>
-                        </ul>
-                        <ul class="keywords"><li>Python</li><li>PSD</li><li>SVG</li><li>Potrace</li><li>图像误差评估</li></ul>
-                    </div>
+                    </details>
 
-                    <div class="entry">
-                        <div class="entry-head">
-                            <span class="entry-title"><a href="./work.html#case-kysoul">Kysoul · 响应式个人作品集</a></span>
+                    <details class="entry">
+                        <summary>
+                            <span class="entry-title">Kysoul · 响应式个人作品集</span>
                             <span class="entry-when">2025 – 至今</span>
+                            <span class="entry-sub">独立设计与开发 · WebGL / Three.js</span>
+                        </summary>
+                        <div class="entry-body">
+                            <ul class="list">
+                                <li>手写 GLSL 片元着色器实现像素化与涡流扭曲，由鼠标位移、速度与缓动驱动画面；将日食加载动画映射到资源加载进度。</li>
+                                <li>自托管字体，绘制文字纹理前等待字体就绪；2026.10 改版把特效改为可选演示、正文改为静态 HTML 直接可读，并提供响应式摄影图片。</li>
+                            </ul>
+                            <ul class="keywords"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li><li>GLSL</li></ul>
+                            <p class="entry-more"><a href="./work.html#case-kysoul">作品页</a></p>
                         </div>
-                        <p class="entry-sub">独立设计与开发 · WebGL / Three.js</p>
-                        <ul class="list">
-                            <li>手写 GLSL 片元着色器实现像素化与涡流扭曲，由鼠标位移、速度与缓动驱动画面；将日食加载动画映射到资源加载进度。</li>
-                            <li>自托管字体，绘制文字纹理前等待字体就绪；2026.10 改版把特效改为可选演示、正文改为静态 HTML 直接可读，并提供响应式摄影图片。</li>
-                        </ul>
-                        <ul class="keywords"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li><li>GLSL</li></ul>
-                    </div>
+                    </details>
                 </section>
 
                 <section class="block" aria-labelledby="experiments">
@@ -187,13 +201,6 @@
                     </ul>
                 </section>
 
-                <section class="block" aria-labelledby="image">
-                    <h2 id="image">简历文件 / Resume file</h2>
-                    <div class="prose">
-                        <p>本页与打印版均已更新至 2026.10.22。打开打印版后，可通过浏览器打印功能保存为 PDF。</p>
-                        <p><a href="./resume-print.html">打开打印版 / 导出 PDF →</a></p>
-                    </div>
-                </section>
             </article>
         </div>
     </main>
@@ -209,5 +216,6 @@
             </ul>
         </div>
     </footer>
+    <script src="./js/disclose.js"></script>
 </body>
 </html>

@@ -36,17 +36,36 @@
             padding: 16mm 17mm;
             box-shadow: 0 2px 6px rgba(0,0,0,.08), 0 24px 48px -28px rgba(0,0,0,.35);
         }
-        .hint {
+        .toolbar {
             max-width: 21cm;
-            margin: 24px auto -8px;
-            padding: 12px 16px;
-            background: #fff8e6;
-            border: 1px solid #e8d9a8;
-            border-radius: 8px;
-            font-size: 13px;
-            color: #5a4a1e;
+            margin: 24px auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 20px;
         }
-        .hint a { color: #8f3f14; }
+        .print-btn {
+            min-height: 44px;
+            padding: 0 18px;
+            border: 0;
+            border-radius: 999px;
+            background: #b4521f;
+            color: #fffdf9;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .print-btn:hover { background: #8f3f14; }
+        .print-btn:focus-visible {
+            outline: 2px solid #8f3f14;
+            outline-offset: 3px;
+        }
+        .toolbar a {
+            color: #8f3f14;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+        }
         h1 { font-size: 26px; letter-spacing: 2px; margin: 0 0 4px; }
         .role { color: var(--ink-muted); margin: 0 0 2px; }
         .contact { color: var(--ink-muted); font-size: 13px; margin: 0 0 18px; }
@@ -75,7 +94,7 @@
         a { color: inherit; }
         @media (max-width: 40rem) {
             .sheet { margin: 16px 10px; padding: 24px 20px; }
-            .hint, .back { margin-inline: 10px; }
+            .toolbar, .back { margin-inline: 10px; }
             h1 { font-size: 23px; letter-spacing: 0; overflow-wrap: anywhere; }
             .contact { overflow-wrap: anywhere; }
         }
@@ -84,7 +103,7 @@
         @media print {
             body { background: #fff; font-size: 12px; line-height: 1.55; }
             .sheet { margin: 0; max-width: none; padding: 0; box-shadow: none; }
-            .hint, .back { display: none; }
+            .toolbar, .back { display: none; }
             .print-page + .print-page { margin-top: 0; break-before: page; page-break-before: always; }
             h2 { margin: 17px 0 9px; padding-bottom: 4px; }
             .entry + .entry { margin-top: 12px; }
@@ -93,16 +112,16 @@
     </style>
 </head>
 <body>
-    <p class="hint">
-        这是打印 / 导出 PDF 用的干净版本：按 <b>⌘P</b>（macOS）或 <b>Ctrl+P</b>（Windows）后选择「另存为 PDF」即可。
-        网页版在 <a href="./resume.html">/resume.html</a>。
-    </p>
+    <div class="toolbar">
+        <button type="button" class="print-btn" id="print-resume">打印 / 存成 PDF</button>
+        <a href="./resume.html">网页版</a>
+    </div>
 
     <div class="sheet">
         <div class="print-page">
         <h1>杨添富 / Yang TianFu</h1>
         <p class="role">重庆邮电大学 · 国际学院 · 软件工程（本科在读）</p>
-        <p class="updated">更新于 2026.10.22 · 项目阶段以本页说明为准</p>
+        <p class="updated">更新于 2026.10.22</p>
         <p class="contact">
             <span><a href="mailto:1613609692@qq.com">1613609692@qq.com</a></span>
             <span><a href="https://github.com/ysqp6-lang">github.com/ysqp6-lang</a></span>
@@ -186,5 +205,10 @@
     </div>
 
     <p class="back"><a href="./resume.html">← 返回网页版简历</a></p>
+    <script>
+        document.getElementById("print-resume").addEventListener("click", function () {
+            window.print();
+        });
+    </script>
 </body>
 </html>
