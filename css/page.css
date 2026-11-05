@@ -6,8 +6,17 @@
     padding-block: clamp(var(--space-7), 8vh, var(--space-9)) 0;
 }
 
+/* 内页收成一条阅读栏，站头与正文对齐。首页封面保持宽栏。 */
+body:not(.page-home) .shell {
+    max-width: 46rem;
+}
+
 /* 站头是 sticky 的：锚点跳转要给它留出高度，否则目标标题会被盖住 */
 [id] { scroll-margin-top: calc(64px + var(--space-4)); }
+
+@media (max-width: 30rem) {
+    [id] { scroll-margin-top: 7.5rem; }
+}
 
 .page-head { margin-bottom: var(--space-6); }
 
@@ -32,16 +41,20 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--space-2) var(--space-4);
+    column-gap: 0;
+    row-gap: var(--space-1);
     font-size: var(--text-sm);
     color: var(--ink-muted);
 }
 
-.page-head .meta-line .sep {
+.page-head .meta-line > * + *::before {
+    content: "";
     width: 3px;
     height: 3px;
+    margin-inline: var(--space-4);
     border-radius: 50%;
     background: var(--line-strong);
+    flex: none;
 }
 
 .page-head .meta-line a {
@@ -49,6 +62,40 @@
     align-items: center;
     min-height: 44px;
 }
+
+@media (max-width: 40rem) {
+    .page-head .meta-line {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .page-head .meta-line > * + *::before { display: none; }
+}
+
+.page-action { margin-top: var(--space-5); }
+
+.page-head .mail-lg {
+    display: inline-block;
+    margin-top: var(--space-5);
+}
+
+.reply-note {
+    margin-top: var(--space-4);
+    max-width: 36rem;
+    color: var(--ink-muted);
+    font-size: var(--text-sm);
+}
+
+.page-close {
+    margin-top: var(--space-8);
+    max-width: var(--measure);
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: var(--ink);
+}
+
+.band { margin-top: var(--space-7); }
+
+.list + .prose { margin-top: var(--space-4); }
 
 /* ---------- 正文 ---------- */
 .prose > p {
@@ -115,7 +162,7 @@
 
 /* ---------- 经历条目 ---------- */
 .entry {
-    max-width: var(--measure);
+    max-width: none;
 }
 
 .entry + .entry {
@@ -152,6 +199,101 @@
 }
 
 .entry .list { margin-top: var(--space-3); }
+
+/* 简历里的项目：标题行始终可见，过程与边界折进同一行 */
+details.entry {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.entry + details.entry,
+details.entry + details.entry {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid var(--line);
+}
+
+.block > details.entry:last-child { border-bottom: 1px solid var(--line); }
+
+details.entry > summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: var(--space-4);
+    row-gap: var(--space-1);
+    align-items: baseline;
+    padding-block: var(--space-5);
+    cursor: pointer;
+    list-style: none;
+    color: inherit;
+}
+
+details.entry > summary::-webkit-details-marker { display: none; }
+
+details.entry > summary::marker { content: ""; }
+
+details.entry .entry-title {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+}
+
+details.entry .entry-when {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+}
+
+details.entry .entry-sub {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: block;
+    margin-top: 0;
+}
+
+details.entry > summary::after {
+    content: "";
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+    width: .5rem;
+    height: .5rem;
+    margin-inline-start: var(--space-2);
+    border-right: 1.5px solid var(--ink-muted);
+    border-bottom: 1.5px solid var(--ink-muted);
+    transform: translateY(-.12rem) rotate(45deg);
+    transition: transform var(--duration-2) var(--ease-out);
+}
+
+details.entry[open] > summary::after {
+    transform: translateY(.1rem) rotate(225deg);
+}
+
+details.entry > summary:hover .entry-title { color: var(--accent-ink); }
+
+details.entry .entry-body { padding-bottom: var(--space-5); }
+
+.entry-more {
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+}
+
+.entry-more a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+@media (max-width: 42rem) {
+    details.entry > summary { grid-template-columns: minmax(0, 1fr) auto; }
+    details.entry .entry-when {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: start;
+        white-space: normal;
+    }
+    details.entry .entry-sub { grid-row: 3; }
+    details.entry > summary::after { grid-column: 2; grid-row: 1; }
+}
 
 /* ---------- 关键词 ---------- */
 .keywords {
@@ -223,110 +365,123 @@
 
 .mail-lg:hover { color: var(--accent-ink); border-color: var(--accent); }
 
-/* ---------- 案例卡片（作品页只有一个，做成真正的整块） ---------- */
+/* ---------- 作品：一行一个项目，记录折在标题下 ---------- */
+.case-list {
+    border-top: 1px solid var(--line);
+}
+
 .case {
-    margin-top: var(--space-5);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-3);
-    background: var(--bg-elev);
-    box-shadow: var(--shadow-1);
-    /* 注意：这里不能写 overflow: hidden —— 会成为滚动容器，
-       让 Chromium 忽略锚点上的 scroll-margin-top，跳转后被站头挡住。
-       圆角裁剪交给 .case-media 自己处理。 */
+    border-bottom: 1px solid var(--line);
+    background: transparent;
 }
 
-.case-body {
-    padding: clamp(var(--space-5), 3vw, var(--space-7));
+.case details > summary {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-5) var(--space-7);
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: var(--space-5);
+    row-gap: var(--space-2);
+    align-items: baseline;
+    padding-block: var(--space-5);
+    cursor: pointer;
+    list-style: none;
+    color: inherit;
 }
 
-.case-main { min-width: 0; }
+.case details > summary::-webkit-details-marker { display: none; }
 
-.case-main > * { max-width: var(--measure); }
+.case details > summary::marker { content: ""; }
 
 .case h2 {
-    font-size: var(--text-2xl);
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    font-size: var(--text-xl);
     font-weight: 600;
-    letter-spacing: -.02em;
-    line-height: 1.2;
-    max-width: 40rem;
+    letter-spacing: -.015em;
+    line-height: 1.25;
 }
 
-.case .case-sub {
-    margin-top: var(--space-2);
-    color: var(--ink-muted);
-    font-size: var(--text-md);
-}
-
-/* 事实栏：宽屏放到右栏，窄屏落回正文上方 */
-.case .case-facts {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2) var(--space-6);
+.case .case-when {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
     font-size: var(--text-sm);
     color: var(--ink-muted);
-    align-content: start;
-}
-
-.case .case-facts li {
-    display: flex;
-    gap: var(--space-2);
-}
-
-.case .case-facts .k {
-    color: var(--ink-muted);
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
-.case .case-facts .v { color: var(--ink-2); }
-
-@media (min-width: 62rem) {
-    .case-body {
-        grid-template-columns: minmax(0, 1fr) 13rem;
-        align-items: start;
-    }
-    .case-body > h2,
-    .case-body > .case-sub,
-    .case-body > .case-main { grid-column: 1; }
-    .case .case-facts {
-        grid-column: 2;
-        grid-row: 1 / span 3;
-        flex-direction: column;
-        gap: var(--space-3);
-        padding-top: var(--space-1);
-    }
-    .case .case-facts li {
-        flex-direction: column;
-        gap: 2px;
-    }
-    .case .case-facts .k {
-        font-size: var(--text-xs);
-        letter-spacing: .1em;
-        text-transform: uppercase;
-    }
+.case .case-sub {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: block;
+    color: var(--ink-2);
+    font-size: var(--text-md);
+    line-height: 1.65;
 }
 
-.case .case-section { margin-top: var(--space-6); }
+.case details > summary::after {
+    content: "";
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+    width: .5rem;
+    height: .5rem;
+    margin-inline-start: var(--space-2);
+    border-right: 1.5px solid var(--ink-muted);
+    border-bottom: 1.5px solid var(--ink-muted);
+    transform: translateY(-.12rem) rotate(45deg);
+    transition: transform var(--duration-2) var(--ease-out);
+}
+
+.case details[open] > summary::after {
+    transform: translateY(.1rem) rotate(225deg);
+}
+
+.case details > summary:hover h2 { color: var(--accent-ink); }
+
+.case-body {
+    padding-bottom: var(--space-6);
+}
+
+.case .case-section { margin-top: var(--space-5); }
+
+.case .case-section:first-child { margin-top: 0; }
 
 .case .case-section > h3 {
     font-size: var(--text-sm);
     font-weight: 600;
-    letter-spacing: .14em;
-    text-transform: uppercase;
+    letter-spacing: .08em;
     color: var(--ink-muted);
     margin-bottom: var(--space-3);
 }
 
+.case .list li + li { margin-top: var(--space-2); }
+
 .case .link-row {
-    margin-top: var(--space-6);
+    margin-top: var(--space-5);
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
+    align-items: center;
+    gap: var(--space-3) var(--space-5);
+}
+
+.case .link-row a:not(.btn) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+
+@media (max-width: 42rem) {
+    .case details > summary { grid-template-columns: minmax(0, 1fr) auto; }
+    .case .case-when {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: start;
+        white-space: normal;
+    }
+    .case .case-sub { grid-row: 3; }
+    .case details > summary::after { grid-column: 2; grid-row: 1; }
 }
 
 .case-media {
@@ -416,9 +571,21 @@
 /* ---------- 打印 ---------- */
 @media print {
     .page { padding-block: 0; }
-    .case { border-color: #ddd; box-shadow: none; }
-    .case-media { display: none; }
-    .resume-figure { display: none; }
-    .entry + .entry { padding-top: var(--space-4); }
+    .page-action,
+    .case-media,
+    .resume-figure,
     .placeholder-note { display: none; }
+    .case { border-color: #ddd; box-shadow: none; }
+    details.case > .case-body,
+    details.entry > .entry-body { display: block !important; }
+    details.case > summary,
+    details.entry > summary {
+        cursor: default;
+        break-after: avoid;
+        page-break-after: avoid;
+    }
+    details.case > summary::after,
+    details.entry > summary::after { display: none; }
+    .entry + .entry,
+    details.entry + details.entry { padding-top: var(--space-4); }
 }

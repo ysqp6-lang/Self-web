@@ -45,13 +45,8 @@ PHOTO_SPECS = [
     ("fujim-1600", "fujim.original.png", 1600),
     ("fujim-2400", "fujim.original.png", 2400),
 ]
-RESUME_SPECS = [
-    # 文档类图片多给一档 1200：移动端 3x DPR 下正好落在这一档，
-    # 不必为了 1077px 的需求去取 1400 那张（省约 120 KB）。
-    ("kysoul-resume-900",  "ytf-resume-1.original.png", 900),
-    ("kysoul-resume-1200", "ytf-resume-1.original.png", 1200),
-    ("kysoul-resume-1400", "ytf-resume-1.original.png", 1400),
-]
+# 旧图片简历已撤下；默认不再生成含个人资料的历史简历资源。
+RESUME_SPECS = []
 
 # 编码参数：照片用较低质量的 AVIF（视觉无损域），文档图适当提高
 ENCODERS = {
