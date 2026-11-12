@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>作品 · Kysoul</title>
-    <meta name="description" content="杨添富已经做出来的项目：KyFold 与 Color Studio、iPad 课堂助手、KyRemote，以及对话服务、手写字体、内部记忆引擎、本地凭证库和 kysoul.me。">
+    <meta name="description" content="杨添富已经做出来的项目：KyFold 与 Color Studio、iPad 课堂助手、KyRemote、KyUIStudio，以及 kysoul.me。">
     <link rel="canonical" href="https://kysoul.me/work.html">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
@@ -160,111 +160,6 @@
                     </div>
                 </article>
 
-                <article class="case" id="kylyn" aria-labelledby="case-kylyn">
-                    <div class="case-body">
-                        <h2 id="case-kylyn">KyLyn · 对话式助手</h2>
-                        <p class="case-sub">
-                            围绕消息可靠性、上下文和可控回复，做一套持续运行的对话服务。
-                        </p>
-                        <div class="case-main">
-                        <section class="case-section" aria-labelledby="kylyn-done">
-                            <h3 id="kylyn-done">做到哪一步</h3>
-                            <ul class="list">
-                                <li><b>部署</b>：修复版本已部署上线，服务已重启</li>
-                                <li><b>线上冒烟</b>：4/4 通过。覆盖长主题下仍能发送原件、换话题后不再退回旧文件、彩蛋冷却不挡住正常提问、原件限额会持久保存</li>
-                                <li><b>更早的测试</b>：合并测试记录包含 564 个用例；受控的真实发送链路验证过文本、图片和原生表情。测试覆盖不等于全部线上行为已经验收</li>
-                            </ul>
-                        </section>
-                        <section class="case-section" aria-labelledby="kylyn-bound">
-                            <h3 id="kylyn-bound">边界</h3>
-                            <ul class="list">
-                                <li>线上冒烟已经通过。真实群聊里的效果仍待观察，测试覆盖不等于全部线上行为已经验收</li>
-                            </ul>
-                        </section>
-                        <ul class="keywords">
-                            <li>Node.js</li><li>消息队列</li><li>状态机</li><li>审核与限流</li>
-                        </ul>
-                        </div><!-- /.case-main -->
-
-                        <ul class="case-facts">
-                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
-                            <li><span class="k">时间</span><span class="v">2026</span></li>
-                            <li><span class="k">状态</span><span class="v">已部署，持续验证</span></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="case" id="kyhand" aria-labelledby="case-kyhand">
-                    <div class="case-body">
-                        <h2 id="case-kyhand">KyHand · 手写字体</h2>
-                        <p class="case-sub">
-                            把书写变成可安装的字体。KyMath 不是另一个项目，是这条管线里的数学字体实验。
-                        </p>
-                        <div class="case-main">
-                        <section class="case-section" aria-labelledby="kyhand-done">
-                            <h3 id="kyhand-done">KyHand 做到哪一步</h3>
-                            <ul class="list">
-                                <li><b>字体流水线</b>：模板、裁切、墨迹分离、矢量化、组装 TTF、质检和预览已经打通</li>
-                                <li><b>122 字原型</b>：Natural 与 Neat 两套模板，已有真实手写字体。四份单变体 TTF 质检 122/122、0 个错误，IoU 约 0.96</li>
-                                <li><b>同字异形</b>：演示字体 246 个字形。浏览器里重复出现的字会呈现不同写法</li>
-                            </ul>
-                        </section>
-                        <section class="case-section" aria-labelledby="kymath-done">
-                            <h3 id="kymath-done">KyMath · 管线里的数学字体实验</h3>
-                            <ul class="list">
-                                <li><b>阶段 A 已交付</b>：149 格的可打印采样模板（5 页），字符表 343 条。用已有的 82 个手写字形跑通「基底 + 替换 + 数学变体重算」，PoC 字体在 Chrome 的 MathML 里六组公式全部正确排版</li>
-                                <li><b>回归</b>：模板的 10 项回归检查全部通过</li>
-                                <li><b>阶段 B</b>：还在等新的手写样本，数学符号还不是已经全部完成的字体</li>
-                            </ul>
-                        </section>
-                        <ul class="keywords">
-                            <li>Python</li><li>fontTools</li><li>矢量化</li><li>MathML</li>
-                        </ul>
-                        </div><!-- /.case-main -->
-
-                        <ul class="case-facts">
-                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
-                            <li><span class="k">时间</span><span class="v">2026</span></li>
-                            <li><span class="k">状态</span><span class="v">字体原型已交付；数学实验停在阶段 A</span></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="case" id="psd-svg" aria-labelledby="case-psd">
-                    <div class="case-body">
-                        <h2 id="case-psd">PSD → SVG · K-蝴蝶标志样本</h2>
-                        <p class="case-sub">
-                            这是品牌标志 K-蝴蝶的一份已交付样本：为这张平涂插画保留图层、透明度和细笔画。它不是能转换任意 PSD 的通用产品。
-                        </p>
-                        <div class="case-main">
-                        <section class="case-section" aria-labelledby="psd-done">
-                            <h3 id="psd-done">做到哪一步</h3>
-                            <ul class="list">
-                                <li><b>图层</b>：从 PSD 图层提取颜色和透明度，构造覆盖场、做超采样并拟合贝塞尔曲线，保留图层顺序、名称和可见性</li>
-                                <li><b>细笔画</b>：取消预模糊，以免切断细笔画；用统一的对照基准区分工具伪影和真实色差</li>
-                                <li><b>K-蝴蝶样本</b>：13 个图层、28 条路径。相对 PSD 合成图，MAE 0.057、SSIM 0.99975、PSNR 50.2 dB</li>
-                                <li><b>曲线光顺</b>：另一项独立实验把文件从 765 KB 降到 423 KB</li>
-                            </ul>
-                        </section>
-                        <section class="case-section" aria-labelledby="psd-bound">
-                            <h3 id="psd-bound">边界</h3>
-                            <ul class="list">
-                                <li>这些指标只属于 K-蝴蝶这一份标志样本，还没有做跨画风或任意 PSD 的系统评测</li>
-                            </ul>
-                        </section>
-                        <ul class="keywords">
-                            <li>Python</li><li>psd-tools</li><li>potrace</li><li>图像误差评估</li>
-                        </ul>
-                        </div><!-- /.case-main -->
-
-                        <ul class="case-facts">
-                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
-                            <li><span class="k">时间</span><span class="v">2026.10</span></li>
-                            <li><span class="k">状态</span><span class="v">标志样本已交付</span></li>
-                        </ul>
-                    </div>
-                </article>
-
                 <article class="case" id="kyuistudio" aria-labelledby="case-kyuistudio">
                     <div class="case-body">
                         <h2 id="case-kyuistudio">KyUIStudio · 界面组件库</h2>
@@ -386,71 +281,6 @@
                             <li><span class="k">角色</span><span class="v">个人项目</span></li>
                             <li><span class="k">时间</span><span class="v">2026.09–10</span></li>
                             <li><span class="k">状态</span><span class="v">本地已落地，服务个人工作流</span></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="case" id="kymemory" aria-labelledby="case-kymemory">
-                    <div class="case-body">
-                        <h2 id="case-kymemory">KyMemory V1.0 · 内部长期记忆引擎</h2>
-                        <p class="case-sub">
-                            给自己的工作流用的长期记忆引擎，已经能用。它是内部引擎，不是公开产品；和前面的个人工作流插件也是两件事。
-                        </p>
-                        <div class="case-main">
-                        <section class="case-section" aria-labelledby="kymemory-done">
-                            <h3 id="kymemory-done">做到哪一步</h3>
-                            <ul class="list">
-                                <li><b>版本</b>：V1.0。P0 到 P6 已全部完成</li>
-                                <li><b>验收</b>：2026-11-02 已在实机部署并验收</li>
-                            </ul>
-                        </section>
-                        <section class="case-section" aria-labelledby="kymemory-bound">
-                            <h3 id="kymemory-bound">边界</h3>
-                            <ul class="list">
-                                <li>这是内部引擎，没有公开站点。之后说的「可以优化一下」，是能用之后的优化，不是完成度还含糊</li>
-                            </ul>
-                        </section>
-                        <ul class="keywords">
-                            <li>长期记忆</li><li>内部工具</li><li>V1.0</li>
-                        </ul>
-                        </div><!-- /.case-main -->
-
-                        <ul class="case-facts">
-                            <li><span class="k">角色</span><span class="v">个人项目 · 内部</span></li>
-                            <li><span class="k">时间</span><span class="v">2026.11.02 验收</span></li>
-                            <li><span class="k">状态</span><span class="v">V1.0 已验收，不是公开产品</span></li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="case" id="kyvault" aria-labelledby="case-kyvault">
-                    <div class="case-body">
-                        <h2 id="case-kyvault">KyVault · 本地加密凭证库</h2>
-                        <p class="case-sub">
-                            把凭证放在自己机器上的加密库。macOS 和 Windows 还不是同一个版本，也还不是收尾完成的跨平台产品。
-                        </p>
-                        <div class="case-main">
-                        <section class="case-section" aria-labelledby="kyvault-done">
-                            <h3 id="kyvault-done">做到哪一步</h3>
-                            <ul class="list">
-                                <li><b>macOS</b>：源码和已安装的服务是 1.2.4</li>
-                                <li><b>Windows</b>：仍是 1.2.1</li>
-                            </ul>
-                        </section>
-                        <section class="case-section" aria-labelledby="kyvault-bound">
-                            <h3 id="kyvault-bound">边界</h3>
-                            <ul class="list">
-                                <li>签名、公证和完整界面还没做完，所以它还不是已经收尾的跨平台正式产品</li>
-                            </ul>
-                        </section>
-                        <ul class="keywords">
-                            <li>本地加密</li><li>凭证库</li><li>macOS 1.2.4</li><li>Windows 1.2.1</li>
-                        </ul>
-                        </div><!-- /.case-main -->
-
-                        <ul class="case-facts">
-                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
-                            <li><span class="k">状态</span><span class="v">macOS 1.2.4，Windows 1.2.1</span></li>
                         </ul>
                     </div>
                 </article>
