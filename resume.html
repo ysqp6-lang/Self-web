@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>简历 · Kysoul</title>
-    <meta name="description" content="杨添富的简历：重庆邮电大学国际学院软件工程，基于 WebGL / Three.js 的个人作品集项目，Godot 游戏开发起步，以及技能与打印版本。">
+    <meta name="description" content="杨添富的简历：重庆邮电大学国际学院软件工程本科在读。项目包括 KyFold、课堂 AI、KyRemote、KyUIStudio，以及 kysoul.me。">
     <link rel="canonical" href="https://kysoul.me/resume.html">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
@@ -47,7 +47,7 @@
                     <h1>Resume</h1>
                     <p class="sub">经历与技能</p>
                     <div class="meta-line">
-                        <span>最后更新 2026.09</span>
+                        <span>最后更新 2026.11</span>
                         <span class="sep" aria-hidden="true"></span>
                         <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
                         <span class="sep" aria-hidden="true"></span>
@@ -75,15 +75,73 @@
 
                     <div class="entry">
                         <div class="entry-head">
-                            <span class="entry-title">基于 WebGL / Three.js 的响应式个人作品集系统</span>
+                            <span class="entry-title">KyFold · 在线站点与 Color Studio</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 已公开上线，持续迭代 · <a href="https://kyfold.com" target="_blank" rel="noopener noreferrer">kyfold.com</a></p>
+                        <ul class="list">
+                            <li>静态站和账户服务 0.1.0 已在 kyfold.com 运行：邮件、GitHub 登录和 KyRemote 合作方登录都在。客户端 1.0.0（build 14）已装到自己的 iPad 和 iPhone</li>
+                            <li>Color Studio 新版已上线，桌面端是整屏三栏调色工作台。Google / Apple 登录还没做</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>JavaScript</li><li>账户服务</li><li>邮件</li><li>GitHub 登录</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">课堂 AI</span>
+                            <span class="entry-when">2026.10–11</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 真机迭代中，核心链路已打通。跑在 iPad 上，用来回看听不清的内容</p>
+                        <ul class="list">
+                            <li>实时转写已经打到界面。后台录音和回放在真机上验证过，断线重连后还能继续出字</li>
+                            <li>这不是课堂上的验收，也还没有给同学用。更长课时和识别质量的系统评测还没做完</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>Swift</li><li>SwiftUI</li><li>语音转写</li><li>AVFoundation</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">KyRemote · iPad 远程工作台</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · iOS 1.0.0 · 几乎完成，外审尚未完成</p>
+                        <ul class="list">
+                            <li>原生界面、极光背景和设置已完成。TestFlight 上的 1.0.0（12）已上传，Apple 处理状态为 VALID，并装在自己的 iPad 上</li>
+                            <li>公网加密读写已验证通过。外审尚未完成，还没有上架；完整交互和多线路验收还没做完</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>Swift</li><li>SwiftUI</li><li>加密通信</li><li>中继</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">KyUIStudio · 界面组件库</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 停在 V0.5.2，不是公开站点</p>
+                        <ul class="list">
+                            <li>四个模块：术语图鉴、组件探索、收藏、页面编排。V0.5.2 的本地资源工作台验收已经写完</li>
+                            <li>之后只加了未接真实接口的登录壳。产品仍停在这一版</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>React</li><li>TypeScript</li><li>Storybook</li><li>无障碍</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">kysoul.me · 个人网站系统</span>
                             <span class="entry-when">2025 – 至今</span>
                         </div>
-                        <p class="entry-sub">独立设计与开发 · kysoul.me</p>
+                        <p class="entry-sub">独立设计与开发 · <a href="https://kysoul.me">kysoul.me</a></p>
                         <ul class="list">
-                            <li>手写 GLSL 片元着色器，实现像素化与涡流扭曲效果：由鼠标位移量、速度差与缓动因子（easeFactor）驱动，画面随指针实时流动</li>
-                            <li>自研全屏加载动画：把日食进度映射到真实资源加载进度，加载完成即日全食，结束时光圈炸开进场</li>
-                            <li>字体自托管与加载策略：脱离第三方字体 CDN，绘制文字纹理前显式等待字体就绪，保证首屏文字不回落为系统字体</li>
-                            <li>2026.10 改版：把特效改为可选演示、内容改为静态 HTML 直接可读，背景摄影从 87.3 MB 原图改为 20–107 KB 的响应式派生图</li>
+                            <li>手写 Three.js 场景和 GLSL 涡流着色器，并把加载进度做成全屏日食动画；字体自托管，不用框架模板</li>
+                            <li>正文打开即可阅读。日食和涡流留在可选的<a href="./work/eclipse.html">特效演示页</a>，主动播放才运行</li>
                         </ul>
                         <ul class="keywords">
                             <li>JavaScript</li><li>Three.js</li><li>WebGL</li><li>GLSL</li><li>CSS</li>
@@ -92,16 +150,16 @@
 
                     <div class="entry">
                         <div class="entry-head">
-                            <span class="entry-title">独立游戏开发尝试 · Godot 引擎</span>
-                            <span class="entry-when">2026 – 至今</span>
+                            <span class="entry-title">AI Agent 工具链</span>
+                            <span class="entry-when">2026.09–10</span>
                         </div>
-                        <p class="entry-sub">自学 · 个人项目（起步阶段）</p>
+                        <p class="entry-sub">个人项目 · 本地已落地，服务个人工作流</p>
                         <ul class="list">
-                            <li>从零接触 Godot：学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
-                            <li>目标：先独立完成一个可玩的小型游戏原型，把做网页动效时积累的交互与节奏感迁移到游戏里</li>
+                            <li>补上记忆结构、工作区整理、会话费用面板和任务完成推送；68 个会话重组进 6 个主题工作区</li>
+                            <li>记忆仍依赖主动写入和定期补漏，这些工具还没有做通用产品验证</li>
                         </ul>
                         <ul class="keywords">
-                            <li>Godot</li><li>GDScript</li><li>游戏循环</li><li>交互设计</li>
+                            <li>JavaScript</li><li>插件</li><li>PWA</li><li>文件式记忆</li>
                         </ul>
                     </div>
                 </section>
@@ -109,13 +167,13 @@
                 <section class="block" aria-labelledby="skills">
                     <h2 id="skills">技能 / Skills</h2>
                     <ul class="list">
-                        <li><b>前端</b>：HTML 基础扎实；正在系统学习 CSS 与 JavaScript；能用 Three.js / GLSL 完成三维场景与着色器效果</li>
-                        <li><b>游戏引擎</b>：正在学习 Godot 与 GDScript，能搭建基础场景 / 节点结构，独立往小型游戏原型推进</li>
+                        <li><b>前端</b>：能手写静态站点，也能写 GLSL / WebGL，用 Three.js 做三维场景和着色器</li>
+                        <li><b>iPad</b>：能用 Swift / SwiftUI 做 iPad 应用，并把语音转写做到切到后台仍然继续出字</li>
                         <li><b>设计</b>：Photoshop 较熟练；具备版式设计能力与色彩敏感度</li>
-                        <li><b>工作方式</b>：善用 AI 工具提升创作与排错效率，习惯边做项目边补基础</li>
+                        <li><b>工作方式</b>：用 AI 工具辅助个人工作流，习惯边做项目边补基础</li>
                     </ul>
                     <ul class="keywords">
-                        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li><li>GLSL</li><li>Godot</li><li>Photoshop</li>
+                        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Swift</li><li>GLSL</li><li>Photoshop</li>
                     </ul>
                 </section>
 
