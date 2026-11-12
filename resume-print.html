@@ -104,8 +104,8 @@
             <h3>KyFold · 在线站点与 Color Studio <span class="when">2026</span></h3>
             <p class="entry-sub">个人项目 · 已公开上线，持续迭代 · <a href="https://kyfold.com">kyfold.com</a></p>
             <ul>
-                <li>账户服务已在线上运行：邮件验证码、注册欢迎信和 GitHub 登录可用，并与 KyRemote 的合作方登录跑通</li>
-                <li>Color Studio 新版已上线，桌面端是整屏三栏调色工作台。搜索引擎收录和 Google / Apple 登录还没做</li>
+                <li>静态站和账户服务 0.1.0 已在 kyfold.com 运行：邮件、GitHub 登录和 KyRemote 合作方登录都在。客户端 1.0.0（build 14）已装到自己的 iPad 和 iPhone</li>
+                <li>Color Studio 新版已上线，桌面端是整屏三栏调色工作台。Google / Apple 登录还没做</li>
             </ul>
             <p class="keywords">JavaScript · 账户服务 · 邮件 · GitHub 登录</p>
         </div>
@@ -113,17 +113,17 @@
             <h3>iPad 课堂 AI 助手 <span class="when">2026.10–11</span></h3>
             <p class="entry-sub">个人项目 · 真机迭代中，核心链路已打通</p>
             <ul>
-                <li>把实时转写和提问识别送到 iPad，方便回看课堂上听不清、跟不上的内容</li>
-                <li>麦克风模式切到后台仍继续转写，断线重连后还能继续出字。更长课时和识别质量的系统评测还没做完</li>
+                <li>实时转写已经打到界面。后台录音和回放在真机上验证过，断线重连后还能继续出字</li>
+                <li>这不是课堂上的验收，也还没有给同学用。更长课时和识别质量的系统评测还没做完</li>
             </ul>
             <p class="keywords">Swift · SwiftUI · 语音转写 · AVFoundation</p>
         </div>
         <div class="entry">
             <h3>KyRemote · iPad 远程工作台 <span class="when">2026</span></h3>
-            <p class="entry-sub">个人项目 · 本机可用，外审尚未开始</p>
+            <p class="entry-sub">个人项目 · iOS 1.0.0 · 几乎完成，外审尚未完成</p>
             <ul>
-                <li>原生界面、极光背景和设置已完成。公开渠道版本 1.0.0（12）已装到自己的 iPad，Apple 处理状态为 VALID</li>
-                <li>公网加密读写已验证通过。应用商店外审还没排队，完整交互和多线路验收还没做完</li>
+                <li>原生界面、极光背景和设置已完成。TestFlight 上的 1.0.0（12）已上传，Apple 处理状态为 VALID，并装在自己的 iPad 上</li>
+                <li>公网加密读写已验证通过。外审尚未完成，还没有上架；完整交互和多线路验收还没做完</li>
             </ul>
             <p class="keywords">Swift · SwiftUI · 加密通信 · 中继</p>
         </div>
@@ -132,34 +132,34 @@
             <p class="entry-sub">个人项目 · 已部署，持续验证</p>
             <ul>
                 <li>围绕消息可靠性、上下文和可控回复。修复版本已上线，线上冒烟 4/4 通过</li>
-                <li>受控发送验证过文本、图片和表情。还在等待更多真实对话样本，测试覆盖不等于全部线上行为已验收</li>
+                <li>受控发送验证过文本、图片和表情。真实群聊效果仍待观察，测试覆盖不等于全部线上行为已验收</li>
             </ul>
             <p class="keywords">Node.js · 消息队列 · 状态机 · 审核与限流</p>
         </div>
         <div class="entry">
-            <h3>KyHand / KyMath · 手写字体与数学符号 <span class="when">2026</span></h3>
-            <p class="entry-sub">个人项目 · 主字体已交付；数学符号完成阶段 A</p>
+            <h3>KyHand · 手写字体 <span class="when">2026</span></h3>
+            <p class="entry-sub">个人项目 · 122 字原型已交付；KyMath 是其中的数学字体实验</p>
             <ul>
                 <li>手写字体流水线已打通：两套模板、122 个字原型，单变体 TTF 质检 122/122</li>
-                <li>KyMath 用已有手写字形，在 Chrome MathML 里排通六组公式。更大范围的符号采集还没开始</li>
+                <li>KyMath 不是独立项目。阶段 A 已交付 149 格模板和 PoC 字体，并在 Chrome MathML 里排通六组公式；阶段 B 还在等手写</li>
             </ul>
             <p class="keywords">Python · fontTools · 矢量化 · MathML</p>
         </div>
         <div class="entry">
-            <h3>PSD → SVG · 分层矢量化 <span class="when">2026.10</span></h3>
-            <p class="entry-sub">个人项目 · 样本交付完成</p>
+            <h3>PSD → SVG · K-蝴蝶标志样本 <span class="when">2026.10</span></h3>
+            <p class="entry-sub">个人项目 · 品牌标志样本已交付，不是通用转换器</p>
             <ul>
-                <li>为平涂插画保留图层、透明度和细笔画，用对照渲染评估还原质量</li>
-                <li>K-蝴蝶样本相对合成图 MAE 0.057、SSIM 0.99975、PSNR 50.2 dB。这些数字只对应该样本</li>
+                <li>为 K-蝴蝶这张平涂标志保留图层、透明度和细笔画，用对照渲染评估还原质量</li>
+                <li>相对合成图 MAE 0.057、SSIM 0.99975、PSNR 50.2 dB。这些数字只属于这一份标志</li>
             </ul>
             <p class="keywords">Python · psd-tools · potrace</p>
         </div>
         <div class="entry">
             <h3>KyUIStudio · 界面组件库 <span class="when">2026</span></h3>
-            <p class="entry-sub">个人项目 · V0.5.2，尚未独立公开发布</p>
+            <p class="entry-sub">个人项目 · 停在 V0.5.2，不是公开站点</p>
             <ul>
-                <li>四个模块：术语图鉴、组件探索、收藏、页面编排。先把导航和登录卡片做扎实</li>
-                <li>登录卡片用 Storybook、Playwright 和 axe-core 验收 16/16 通过，没有严重无障碍问题</li>
+                <li>四个模块：术语图鉴、组件探索、收藏、页面编排。V0.5.2 的本地资源工作台验收已经写完</li>
+                <li>之后只加了未接真实接口的登录壳。产品仍停在这一版</li>
             </ul>
             <p class="keywords">React · TypeScript · Storybook · 无障碍</p>
         </div>
@@ -177,16 +177,35 @@
             <p class="entry-sub">个人项目 · 本地已落地，服务个人工作流</p>
             <ul>
                 <li>补上记忆结构、工作区整理、会话费用面板和任务完成推送；68 个会话重组进 6 个主题工作区</li>
-                <li>记忆仍依赖主动写入和定期补漏，这些工具还没有做通用产品验证</li>
+                <li>记忆仍依赖主动写入和定期补漏，这些工具还没有做通用产品验证。它和 KyMemory 不是同一个引擎</li>
             </ul>
             <p class="keywords">JavaScript · 插件 · PWA · 文件式记忆</p>
+        </div>
+        <div class="entry">
+            <h3>KyMemory V1.0 · 内部长期记忆引擎 <span class="when">2026.11.02</span></h3>
+            <p class="entry-sub">个人项目 · 内部使用，不是公开产品</p>
+            <ul>
+                <li>P0 到 P6 已全部完成，2026-11-02 已实机部署并验收</li>
+                <li>之后的「可以优化一下」是能用之后的优化，不是完成度还含糊</li>
+            </ul>
+            <p class="keywords">长期记忆 · 内部工具 · V1.0</p>
+        </div>
+        <div class="entry">
+            <h3>KyVault · 本地加密凭证库 <span class="when">macOS 1.2.4</span></h3>
+            <p class="entry-sub">个人项目 · Windows 仍是 1.2.1，尚未收尾</p>
+            <ul>
+                <li>macOS 的源码和已安装服务是 1.2.4，Windows 仍是 1.2.1</li>
+                <li>签名、公证和完整界面还没做完，还不是跨平台的正式产品</li>
+            </ul>
+            <p class="keywords">本地加密 · 凭证库</p>
         </div>
 
         <h2>技能</h2>
         <ul>
             <li><b>前端</b>：能手写静态站点，也能写 GLSL / WebGL，用 Three.js 做三维场景和着色器</li>
             <li><b>iPad</b>：能用 Swift / SwiftUI 做 iPad 应用，并把语音转写做到切到后台仍然继续出字</li>
-            <li><b>服务</b>：能部署 Node.js 服务，处理消息可靠性、上下文、审核和限流</li>
+            <li><b>服务</b>：能部署 Node.js 服务，处理消息可靠性、上下文、审核和限流；内部长期记忆引擎已做到实机验收</li>
+            <li><b>本地软件</b>：在做本地加密凭证库，macOS 与 Windows 还不是同一版本，签名和完整界面尚未收尾</li>
             <li><b>字体与图像</b>：能用 Python 做手写字体管线，以及从 PSD 图层到 SVG 的矢量化</li>
             <li><b>设计</b>：Photoshop 较熟练；具备版式设计能力与色彩敏感度</li>
             <li><b>工作方式</b>：用 AI 工具辅助个人工作流，习惯边做项目边补基础</li>
