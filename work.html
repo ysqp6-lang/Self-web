@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>作品 · Kysoul</title>
-    <meta name="description" content="Kysoul 的作品：从零手写的个人网站系统（WebGL / GLSL / 全屏日食动画），以及仍在起步阶段的 Godot 游戏开发尝试。">
+    <meta name="description" content="杨添富已经做出来的项目：KyFold 与 Color Studio、iPad 课堂助手、KyRemote，以及对话服务、手写字体、矢量化管线和 kysoul.me。">
     <link rel="canonical" href="https://kysoul.me/work.html">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
@@ -48,31 +48,269 @@
                     <p class="sub">做出来的东西，以及怎么做出来的</p>
                 </div>
 
-                <article class="case" aria-labelledby="case-kysoul">
+                <article class="case" id="kyfold" aria-labelledby="case-kyfold">
+                    <div class="case-body">
+                        <h2 id="case-kyfold">KyFold · 在线站点与 Color Studio</h2>
+                        <p class="case-sub">
+                            从本地练习走到公开站点，账户、邮件和调色工作台都已经在线上跑。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="kyfold-done">
+                            <h3 id="kyfold-done">做到哪一步</h3>
+                            <ul class="list">
+                                <li><b>公开站点</b>：<a href="https://kyfold.com" target="_blank" rel="noopener noreferrer">kyfold.com</a> 可以访问，已解除 noindex，并提供 robots.txt 与 sitemap</li>
+                                <li><b>账户与邮件</b>：真实邮件验证码、注册欢迎信、GitHub 登录可用；与 KyRemote 的合作方登录已在线上跑通</li>
+                                <li><b>Color Studio</b>：新版已上线。桌面端是整屏三栏工作台，入口在 <a href="https://kyfold.com/color-studio/" target="_blank" rel="noopener noreferrer">kyfold.com/color-studio/</a></li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="kyfold-bound">
+                            <h3 id="kyfold-bound">边界</h3>
+                            <ul class="list">
+                                <li>搜索引擎收录，以及 Google / Apple 登录，仍是可选项，目前还没做</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>JavaScript</li><li>账户服务</li><li>邮件</li><li>GitHub 登录</li><li>Color Studio</li>
+                        </ul>
+                        <div class="link-row">
+                            <a class="btn" href="https://kyfold.com" target="_blank" rel="noopener noreferrer">打开 kyfold.com</a>
+                            <a class="btn btn--ghost" href="https://kyfold.com/color-studio/" target="_blank" rel="noopener noreferrer">Color Studio</a>
+                        </div>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026</span></li>
+                            <li><span class="k">状态</span><span class="v">已上线，持续迭代</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="classroom" aria-labelledby="case-classroom">
+                    <div class="case-body">
+                        <h2 id="case-classroom">iPad 课堂 AI 助手</h2>
+                        <p class="case-sub">
+                            把实时转写、提问识别送到 iPad 界面，让课堂里听不清、跟不上的内容可以回看。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="classroom-done">
+                            <h3 id="classroom-done">做到哪一步</h3>
+                            <ul class="list">
+                                <li><b>出字链路</b>：实时出字已经从引擎打到界面</li>
+                                <li><b>后台麦克风</b>：切到后台仍继续转写。一次记录是 69 条转写，两次心跳正常</li>
+                                <li><b>文件回放</b>：补上静音保活之后，切到后台 5 分钟仍完整跑完：31 行、4 个问题、0 次重复；云端 definite 延迟的 P50 是 0.38 秒</li>
+                                <li><b>断线</b>：云端断线看门狗和重连已经修好，重连之后仍能继续出字</li>
+                                <li><b>启停</b>：另有启停稳定性测试 50/50 成功的记录。它只覆盖启停，不能当成课堂效果已经全面验收</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="classroom-bound">
+                            <h3 id="classroom-bound">边界</h3>
+                            <ul class="list">
+                                <li>更长课时的连续听课，以及课堂识别和答案质量的系统评测，还没做完</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>Swift</li><li>SwiftUI</li><li>语音转写</li><li>AVFoundation</li>
+                        </ul>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026.10–11</span></li>
+                            <li><span class="k">状态</span><span class="v">真机迭代中，核心链路已打通</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="kyremote" aria-labelledby="case-kyremote">
+                    <div class="case-body">
+                        <h2 id="case-kyremote">KyRemote · iPad 远程工作台</h2>
+                        <p class="case-sub">
+                            在 iPad 上做远程工作台，把界面、中继和加密通信先跑通，再推进应用商店审核。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="kyremote-done">
+                            <h3 id="kyremote-done">做到哪一步</h3>
+                            <ul class="list">
+                                <li><b>界面</b>：原生界面、极光背景、设置和多组透明度已经完成</li>
+                                <li><b>构建</b>：公开渠道版本 1.0.0（12）已安装到自己的 iPad；这一构建已上传，Apple 处理状态为 VALID</li>
+                                <li><b>联调条件</b>：审核账号、中继、示例主机和固定域名已经就绪</li>
+                                <li><b>通信</b>：真实公网下的加密读写，以及演示回复，已经验证通过</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="kyremote-bound">
+                            <h3 id="kyremote-bound">边界</h3>
+                            <ul class="list">
+                                <li>应用商店外审仍未排队，也还没有通知外部测试者</li>
+                                <li>完整交互和多线路验收还没做完</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>Swift</li><li>SwiftUI</li><li>iPad</li><li>加密通信</li><li>中继</li>
+                        </ul>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026</span></li>
+                            <li><span class="k">状态</span><span class="v">本机可用，外审尚未开始</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="kylyn" aria-labelledby="case-kylyn">
+                    <div class="case-body">
+                        <h2 id="case-kylyn">KyLyn · 对话式助手</h2>
+                        <p class="case-sub">
+                            围绕消息可靠性、上下文和可控回复，做一套持续运行的对话服务。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="kylyn-done">
+                            <h3 id="kylyn-done">做到哪一步</h3>
+                            <ul class="list">
+                                <li><b>部署</b>：修复版本已部署上线，服务已重启</li>
+                                <li><b>线上冒烟</b>：4/4 通过。覆盖长主题下仍能发送原件、换话题后不再退回旧文件、彩蛋冷却不挡住正常提问、原件限额会持久保存</li>
+                                <li><b>更早的测试</b>：合并测试记录包含 564 个用例；受控的真实发送链路验证过文本、图片和原生表情。测试覆盖不等于全部线上行为已经验收</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="kylyn-bound">
+                            <h3 id="kylyn-bound">边界</h3>
+                            <ul class="list">
+                                <li>还在等待更多真实对话样本，用来做下一步验收</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>Node.js</li><li>消息队列</li><li>状态机</li><li>审核与限流</li>
+                        </ul>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026</span></li>
+                            <li><span class="k">状态</span><span class="v">已部署，持续验证</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="kyhand" aria-labelledby="case-kyhand">
+                    <div class="case-body">
+                        <h2 id="case-kyhand">KyHand / KyMath · 手写字体与数学符号</h2>
+                        <p class="case-sub">
+                            把书写变成可安装的字体，并用同一套管线试做更自然的数学符号。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="kyhand-done">
+                            <h3 id="kyhand-done">做到哪一步</h3>
+                            <ul class="list">
+                                <li><b>字体流水线</b>：模板、裁切、墨迹分离、矢量化、组装 TTF、质检和预览已经打通</li>
+                                <li><b>已交付的字体</b>：Natural 与 Neat 两套模板，122 个字原型。四份单变体 TTF 质检 122/122、0 个错误，IoU 约 0.96</li>
+                                <li><b>同字异形</b>：演示字体 246 个字形。浏览器里重复出现的字会呈现不同写法</li>
+                                <li><b>KyMath Natural v0.1 阶段 A</b>：5 页、149 格的可打印采样模板，字符表 343 条。用已有的 82 个手写字形跑通「基底 + 替换 + 数学变体重算」，产物在 Chrome 的 MathML 里六组公式全部正确排版</li>
+                                <li><b>回归</b>：模板的 10 项回归检查全部通过</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="kyhand-bound">
+                            <h3 id="kyhand-bound">边界</h3>
+                            <ul class="list">
+                                <li>更大范围的数学符号手写采集还没开始。主字体可以安装使用，数学符号还不是已经全部完成的字体产品</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>Python</li><li>fontTools</li><li>矢量化</li><li>MathML</li>
+                        </ul>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026</span></li>
+                            <li><span class="k">状态</span><span class="v">主字体已交付；数学符号完成阶段 A</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="psd-svg" aria-labelledby="case-psd">
+                    <div class="case-body">
+                        <h2 id="case-psd">PSD → SVG · 分层矢量化</h2>
+                        <p class="case-sub">
+                            为平涂插画保留图层、透明度和细笔画，用对照渲染评估还原质量。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="psd-done">
+                            <h3 id="psd-done">做到哪一步</h3>
+                            <ul class="list">
+                                <li><b>图层</b>：从 PSD 图层提取颜色和透明度，构造覆盖场、做超采样并拟合贝塞尔曲线，保留图层顺序、名称和可见性</li>
+                                <li><b>细笔画</b>：取消预模糊，以免切断细笔画；用统一的对照基准区分工具伪影和真实色差</li>
+                                <li><b>K-蝴蝶样本</b>：13 个图层、28 条路径。相对 PSD 合成图，MAE 0.057、SSIM 0.99975、PSNR 50.2 dB</li>
+                                <li><b>曲线光顺</b>：另一项独立实验把文件从 765 KB 降到 423 KB</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="psd-bound">
+                            <h3 id="psd-bound">边界</h3>
+                            <ul class="list">
+                                <li>这些指标只对应具体样本，还没有做跨画风或任意 PSD 的系统评测</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>Python</li><li>psd-tools</li><li>potrace</li><li>图像误差评估</li>
+                        </ul>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026.10</span></li>
+                            <li><span class="k">状态</span><span class="v">样本交付完成</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="kyuistudio" aria-labelledby="case-kyuistudio">
+                    <div class="case-body">
+                        <h2 id="case-kyuistudio">KyUIStudio · 界面组件库</h2>
+                        <p class="case-sub">
+                            为界面探索做一套可验收的组件库，先把导航和登录卡片做扎实。
+                        </p>
+                        <div class="case-main">
+                        <section class="case-section" aria-labelledby="kyui-done">
+                            <h3 id="kyui-done">做到哪一步</h3>
+                            <ul class="list">
+                                <li><b>模块</b>：术语图鉴、组件探索、收藏、页面编排。技术栈是 Vite、React 19 和 Tailwind 4</li>
+                                <li><b>版本</b>：产品代码停在 V0.5.2。导航相关工作已提交，并有验收指引</li>
+                                <li><b>登录卡片</b>：修复之后，用 Storybook、Playwright 和 axe-core 实测 16/16 通过，0 个严重无障碍问题</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="kyui-bound">
+                            <h3 id="kyui-bound">边界</h3>
+                            <ul class="list">
+                                <li>目前是可验收的组件库，还没有作为独立站点公开发布</li>
+                            </ul>
+                        </section>
+                        <ul class="keywords">
+                            <li>React</li><li>TypeScript</li><li>Storybook</li><li>无障碍</li>
+                        </ul>
+                        </div><!-- /.case-main -->
+
+                        <ul class="case-facts">
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026</span></li>
+                            <li><span class="k">状态</span><span class="v">V0.5.2，登录组件已验收</span></li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="case" id="kysoul" aria-labelledby="case-kysoul">
                     <div class="case-body">
                         <h2 id="case-kysoul">kysoul.me · 个人网站系统</h2>
                         <p class="case-sub">
-                            从零手写的个人站点：三维场景 + 着色器动效 + 全屏加载动画，没有使用任何框架或模板。
+                            用手写的三维场景、着色器和全屏日食动画做个人站点，不依赖框架或模板。
                         </p>
                         <div class="case-main">
                         <section class="case-section" aria-labelledby="case-original">
-                            <h3 id="case-original">原来的实现</h3>
+                            <h3 id="case-original">站点本身</h3>
                             <ul class="list">
-                                <li><b>涡流像素化着色器</b>：自定义 GLSL 片元着色器，基于鼠标位移量、速度差与缓动因子（easeFactor）驱动画面扭曲，指针移动时背景如流体般跟随</li>
-                                <li><b>全屏日食加载动画</b>：把加载进度映射为日食进程——资源就绪的那一刻正好是日全食，停留 1 秒后白色光圈炸开扩散，穿过光圈直接看到网站</li>
-                                <li><b>字体与首屏策略</b>：Blanquotey 自托管 + 预加载 + 绘制纹理前显式等待字体就绪，避免首屏文字回落成系统字体</li>
-                                <li><b>工程整理</b>：JS 按职责拆分为 config / shaders / texture / nav / scene / main，目录分层为 js / css / fonts</li>
-                            </ul>
-                        </section>
-
-                        <section class="case-section" aria-labelledby="case-redesign">
-                            <h3 id="case-redesign">2026.10 改版做了什么</h3>
-                            <ul class="list">
-                                <li><b>内容先行</b>：品牌、介绍、导航全部写在 HTML 里，不再等 WebGL 或图片就绪；首屏没有遮罩、没有阻塞脚本</li>
-                                <li><b>特效改为可选</b>：日食与涡流保留在<a href="./work/eclipse.html">交互演示页</a>，只有主动点播放时才运行，并尊重「减少动态效果」偏好</li>
-                                <li><b>图片</b>：91.6 MB 的背景原图不再进入站点，改为 960 / 1600 / 2400 三档 AVIF / WebP / JPEG，单张 20–107 KB，带尺寸信息与懒加载</li>
-                                <li><b>可访问性</b>：原生链接导航（不再靠 SVG 点击）、字号下限、44px 点击区、键盘焦点、可见的深色主题、对比度全部 ≥ 4.5:1</li>
-                                <li><b>依赖</b>：去掉 Three.js CDN 与第三方字体请求，站点在断网 CDN 的情况下功能完全不受影响</li>
+                                <li><b>涡流着色器</b>：手写 Three.js 场景，并用自定义 GLSL 片元着色器做涡流。鼠标位移、速度差和缓动因子（easeFactor）驱动画面扭曲，指针移动时背景跟着流动</li>
+                                <li><b>全屏日食</b>：把加载进度映射为日食进程。资源就绪的那一刻正好是日全食，停留 1 秒后白色光圈扩散，穿过光圈看到网站</li>
+                                <li><b>字体</b>：Blanquotey 自托管并预加载。绘制文字纹理前显式等待字体就绪，避免首屏退回系统字体</li>
+                                <li><b>现在的阅读方式</b>：介绍和导航直接写在 HTML 里，打开就能读。日食和涡流留在<a href="./work/eclipse.html">特效演示页</a>，只有主动播放才运行，并尊重「减少动态效果」</li>
                             </ul>
                         </section>
 
@@ -117,43 +355,38 @@
                     </div>
                 </article>
 
-                <article class="case" id="godot" aria-labelledby="case-godot">
+                <article class="case" id="agent-tools" aria-labelledby="case-agent">
                     <div class="case-body">
-                        <h2 id="case-godot">独立游戏开发尝试 · Godot</h2>
-                        <p class="case-sub">自学 · 个人项目，目前处在起步阶段。</p>
+                        <h2 id="case-agent">AI Agent 工具链</h2>
+                        <p class="case-sub">
+                            为个人的 AI 工作流补上记忆、工作区整理、用量观察和任务完成通知。
+                        </p>
                         <div class="case-main">
-                        <section class="case-section" aria-labelledby="godot-what">
-                            <h3 id="godot-what">现在到哪一步</h3>
+                        <section class="case-section" aria-labelledby="agent-done">
+                            <h3 id="agent-done">做到哪一步</h3>
                             <ul class="list">
-                                <li>从零接触 Godot：学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
-                                <li>目标：先独立完成一个可玩的小型游戏原型，把做网页动效时积累的交互与节奏感迁移到游戏里</li>
+                                <li><b>本地工具</b>：自建记忆结构、工作区移动插件、会话费用面板，以及任务完成推送，都已经在个人环境落地</li>
+                                <li><b>整理</b>：把 68 个会话重组进 6 个主题工作区。完成通知已在个人环境跑通</li>
+                            </ul>
+                        </section>
+                        <section class="case-section" aria-labelledby="agent-bound">
+                            <h3 id="agent-bound">边界</h3>
+                            <ul class="list">
+                                <li>记忆仍依赖主动写入和定期补漏。这些工具服务个人工作流，还没有做通用产品验证</li>
                             </ul>
                         </section>
                         <ul class="keywords">
-                            <li>Godot</li><li>GDScript</li><li>游戏循环</li><li>交互设计</li>
+                            <li>JavaScript</li><li>插件</li><li>PWA</li><li>文件式记忆</li>
                         </ul>
-                        <p class="placeholder-note">
-                            <strong>占位说明：</strong>这个项目还没有可以展示的成品，所以这里不放假截图、不写虚构进度。
-                            做出第一个可玩原型后会补上过程记录。
-                        </p>
                         </div><!-- /.case-main -->
 
                         <ul class="case-facts">
-                            <li><span class="k">角色</span><span class="v">自学 / 个人项目</span></li>
-                            <li><span class="k">时间</span><span class="v">2026 – 至今</span></li>
-                            <li><span class="k">状态</span><span class="v">起步阶段</span></li>
+                            <li><span class="k">角色</span><span class="v">个人项目</span></li>
+                            <li><span class="k">时间</span><span class="v">2026.09–10</span></li>
+                            <li><span class="k">状态</span><span class="v">本地已落地，服务个人工作流</span></li>
                         </ul>
                     </div>
                 </article>
-
-                <section class="block" aria-labelledby="future">
-                    <h2 id="future">还在准备 / Planned</h2>
-                    <p class="placeholder-note">
-                        <strong>Blog 与 Gallery 尚未开放。</strong>
-                        站内目前没有需要按时间线整理的文章，也没有成组的摄影作品可以公开展示，
-                        所以不先建空栏目。等内容真的攒够了，再按独立静态路径加进来。
-                    </p>
-                </section>
             </div>
         </div>
     </main>

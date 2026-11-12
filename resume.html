@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>简历 · Kysoul</title>
-    <meta name="description" content="杨添富的简历：重庆邮电大学国际学院软件工程，基于 WebGL / Three.js 的个人作品集项目，Godot 游戏开发起步，以及技能与打印版本。">
+    <meta name="description" content="杨添富的简历：重庆邮电大学国际学院软件工程本科在读。项目包括 KyFold、iPad 应用、对话服务、字体与图像管线，以及 kysoul.me。">
     <link rel="canonical" href="https://kysoul.me/resume.html">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
@@ -47,7 +47,7 @@
                     <h1>Resume</h1>
                     <p class="sub">经历与技能</p>
                     <div class="meta-line">
-                        <span>最后更新 2026.09</span>
+                        <span>最后更新 2026.11</span>
                         <span class="sep" aria-hidden="true"></span>
                         <a href="mailto:1613609692@qq.com">1613609692@qq.com</a>
                         <span class="sep" aria-hidden="true"></span>
@@ -75,15 +75,118 @@
 
                     <div class="entry">
                         <div class="entry-head">
-                            <span class="entry-title">基于 WebGL / Three.js 的响应式个人作品集系统</span>
+                            <span class="entry-title">KyFold · 在线站点与 Color Studio</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 已公开上线，持续迭代 · <a href="https://kyfold.com" target="_blank" rel="noopener noreferrer">kyfold.com</a></p>
+                        <ul class="list">
+                            <li>账户服务已在线上运行：邮件验证码、注册欢迎信和 GitHub 登录可用，并与 KyRemote 的合作方登录跑通</li>
+                            <li>Color Studio 新版已上线，桌面端是整屏三栏调色工作台。搜索引擎收录和 Google / Apple 登录还没做</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>JavaScript</li><li>账户服务</li><li>邮件</li><li>GitHub 登录</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">iPad 课堂 AI 助手</span>
+                            <span class="entry-when">2026.10–11</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 真机迭代中，核心链路已打通</p>
+                        <ul class="list">
+                            <li>把实时转写和提问识别送到 iPad，方便回看课堂上听不清、跟不上的内容</li>
+                            <li>麦克风模式切到后台仍继续转写，断线重连后还能继续出字。更长课时和识别质量的系统评测还没做完</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>Swift</li><li>SwiftUI</li><li>语音转写</li><li>AVFoundation</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">KyRemote · iPad 远程工作台</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 本机可用，外审尚未开始</p>
+                        <ul class="list">
+                            <li>原生界面、极光背景和设置已完成。公开渠道版本 1.0.0（12）已装到自己的 iPad，Apple 处理状态为 VALID</li>
+                            <li>公网加密读写已验证通过。应用商店外审还没排队，完整交互和多线路验收还没做完</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>Swift</li><li>SwiftUI</li><li>加密通信</li><li>中继</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">KyLyn · 对话式助手</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 已部署，持续验证</p>
+                        <ul class="list">
+                            <li>围绕消息可靠性、上下文和可控回复。修复版本已上线，线上冒烟 4/4 通过</li>
+                            <li>受控发送验证过文本、图片和表情。还在等待更多真实对话样本，测试覆盖不等于全部线上行为已验收</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>Node.js</li><li>消息队列</li><li>状态机</li><li>审核与限流</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">KyHand / KyMath · 手写字体与数学符号</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 主字体已交付；数学符号完成阶段 A</p>
+                        <ul class="list">
+                            <li>手写字体流水线已打通：两套模板、122 个字原型，单变体 TTF 质检 122/122</li>
+                            <li>KyMath 用已有手写字形，在 Chrome MathML 里排通六组公式。更大范围的符号采集还没开始</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>Python</li><li>fontTools</li><li>矢量化</li><li>MathML</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">PSD → SVG · 分层矢量化</span>
+                            <span class="entry-when">2026.10</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · 样本交付完成</p>
+                        <ul class="list">
+                            <li>为平涂插画保留图层、透明度和细笔画，用对照渲染评估还原质量</li>
+                            <li>K-蝴蝶样本相对合成图 MAE 0.057、SSIM 0.99975、PSNR 50.2 dB。这些数字只对应该样本</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>Python</li><li>psd-tools</li><li>potrace</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">KyUIStudio · 界面组件库</span>
+                            <span class="entry-when">2026</span>
+                        </div>
+                        <p class="entry-sub">个人项目 · V0.5.2，尚未独立公开发布</p>
+                        <ul class="list">
+                            <li>四个模块：术语图鉴、组件探索、收藏、页面编排。先把导航和登录卡片做扎实</li>
+                            <li>登录卡片用 Storybook、Playwright 和 axe-core 验收 16/16 通过，没有严重无障碍问题</li>
+                        </ul>
+                        <ul class="keywords">
+                            <li>React</li><li>TypeScript</li><li>Storybook</li><li>无障碍</li>
+                        </ul>
+                    </div>
+
+                    <div class="entry">
+                        <div class="entry-head">
+                            <span class="entry-title">kysoul.me · 个人网站系统</span>
                             <span class="entry-when">2025 – 至今</span>
                         </div>
-                        <p class="entry-sub">独立设计与开发 · kysoul.me</p>
+                        <p class="entry-sub">独立设计与开发 · <a href="https://kysoul.me">kysoul.me</a></p>
                         <ul class="list">
-                            <li>手写 GLSL 片元着色器，实现像素化与涡流扭曲效果：由鼠标位移量、速度差与缓动因子（easeFactor）驱动，画面随指针实时流动</li>
-                            <li>自研全屏加载动画：把日食进度映射到真实资源加载进度，加载完成即日全食，结束时光圈炸开进场</li>
-                            <li>字体自托管与加载策略：脱离第三方字体 CDN，绘制文字纹理前显式等待字体就绪，保证首屏文字不回落为系统字体</li>
-                            <li>2026.10 改版：把特效改为可选演示、内容改为静态 HTML 直接可读，背景摄影从 87.3 MB 原图改为 20–107 KB 的响应式派生图</li>
+                            <li>手写 Three.js 场景和 GLSL 涡流着色器，并把加载进度做成全屏日食动画；字体自托管，不用框架模板</li>
+                            <li>正文打开即可阅读。日食和涡流留在可选的<a href="./work/eclipse.html">特效演示页</a>，主动播放才运行</li>
                         </ul>
                         <ul class="keywords">
                             <li>JavaScript</li><li>Three.js</li><li>WebGL</li><li>GLSL</li><li>CSS</li>
@@ -92,16 +195,16 @@
 
                     <div class="entry">
                         <div class="entry-head">
-                            <span class="entry-title">独立游戏开发尝试 · Godot 引擎</span>
-                            <span class="entry-when">2026 – 至今</span>
+                            <span class="entry-title">AI Agent 工具链</span>
+                            <span class="entry-when">2026.09–10</span>
                         </div>
-                        <p class="entry-sub">自学 · 个人项目（起步阶段）</p>
+                        <p class="entry-sub">个人项目 · 本地已落地，服务个人工作流</p>
                         <ul class="list">
-                            <li>从零接触 Godot：学习节点 / 场景的组织方式与 GDScript 脚本，理解引擎如何驱动游戏循环</li>
-                            <li>目标：先独立完成一个可玩的小型游戏原型，把做网页动效时积累的交互与节奏感迁移到游戏里</li>
+                            <li>补上记忆结构、工作区整理、会话费用面板和任务完成推送；68 个会话重组进 6 个主题工作区</li>
+                            <li>记忆仍依赖主动写入和定期补漏，这些工具还没有做通用产品验证</li>
                         </ul>
                         <ul class="keywords">
-                            <li>Godot</li><li>GDScript</li><li>游戏循环</li><li>交互设计</li>
+                            <li>JavaScript</li><li>插件</li><li>PWA</li><li>文件式记忆</li>
                         </ul>
                     </div>
                 </section>
@@ -109,13 +212,15 @@
                 <section class="block" aria-labelledby="skills">
                     <h2 id="skills">技能 / Skills</h2>
                     <ul class="list">
-                        <li><b>前端</b>：HTML 基础扎实；正在系统学习 CSS 与 JavaScript；能用 Three.js / GLSL 完成三维场景与着色器效果</li>
-                        <li><b>游戏引擎</b>：正在学习 Godot 与 GDScript，能搭建基础场景 / 节点结构，独立往小型游戏原型推进</li>
+                        <li><b>前端</b>：能手写静态站点，也能写 GLSL / WebGL，用 Three.js 做三维场景和着色器</li>
+                        <li><b>iPad</b>：能用 Swift / SwiftUI 做 iPad 应用，并把语音转写做到切到后台仍然继续出字</li>
+                        <li><b>服务</b>：能部署 Node.js 服务，处理消息可靠性、上下文、审核和限流</li>
+                        <li><b>字体与图像</b>：能用 Python 做手写字体管线，以及从 PSD 图层到 SVG 的矢量化</li>
                         <li><b>设计</b>：Photoshop 较熟练；具备版式设计能力与色彩敏感度</li>
-                        <li><b>工作方式</b>：善用 AI 工具提升创作与排错效率，习惯边做项目边补基础</li>
+                        <li><b>工作方式</b>：用 AI 工具辅助个人工作流，习惯边做项目边补基础</li>
                     </ul>
                     <ul class="keywords">
-                        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>Three.js</li><li>GLSL</li><li>Godot</li><li>Photoshop</li>
+                        <li>HTML</li><li>CSS</li><li>JavaScript</li><li>TypeScript</li><li>React</li><li>Swift</li><li>Node.js</li><li>Python</li><li>GLSL</li><li>Photoshop</li>
                     </ul>
                 </section>
 
